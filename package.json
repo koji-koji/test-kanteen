@@ -18,7 +18,14 @@
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "format": "prettier --write \"src/**/*.ts\"",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "kanteen": "node dist/cli/index.js",
+    "kanteen:analyze": "node dist/cli/index.js analyze",
+    "kanteen:analyze:simple": "node dist/cli/index.js analyze --mode simple",
+    "kanteen:coverage-gap": "node dist/cli/index.js coverage-gap",
+    "kanteen:self-analyze": "node dist/cli/index.js analyze \"tests/unit/**/*.test.ts\" --output ./self-catalog --format json,markdown",
+    "kanteen:self-analyze:simple": "node dist/cli/index.js analyze \"tests/unit/**/*.test.ts\" --output ./self-catalog --format json,markdown --mode simple",
+    "kanteen:self-coverage": "node dist/cli/index.js coverage-gap \"src/**/*.ts\" \"tests/unit/**/*.test.ts\" --output ./self-catalog"
   },
   "keywords": [
     "ast",
@@ -28,10 +35,27 @@
     "estree",
     "llm",
     "specification",
-    "test-analysis"
+    "test-analysis",
+    "coverage",
+    "test-gap",
+    "typescript",
+    "jest"
   ],
-  "author": "",
+  "author": "Koji Koyama",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/test-kanteen.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/test-kanteen/issues"
+  },
+  "homepage": "https://github.com/your-username/test-kanteen#readme",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "engines": {
     "node": ">=18.0.0"
   },

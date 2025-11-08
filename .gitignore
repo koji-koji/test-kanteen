@@ -40,6 +40,9 @@ lerna-debug.log*
 test-catalog/
 catalog/
 self-catalog/
+aaa_test_kanteen/
+coverage-gap/
+coverage-gap-demo/
 
 # Temporary files
 tmp/

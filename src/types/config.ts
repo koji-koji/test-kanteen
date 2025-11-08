@@ -126,7 +126,7 @@ export const defaultConfig: KanteenConfig = {
   exclude: ['**/node_modules/**', '**/dist/**', '**/build/**'],
   framework: 'auto',
   reporters: ['json'],
-  output: './test-catalog',
+  output: './aaa_test_kanteen',
   llm: {
     enabled: false,
   },

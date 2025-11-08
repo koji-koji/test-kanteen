@@ -1,0 +1,41 @@
+# ソースファイル（distだけ公開）
+src/
+tests/
+*.test.ts
+*.spec.ts
+tsconfig.json
+
+# 設定ファイル
+jest.config.js
+.eslintrc.js
+.prettierrc
+
+# 開発用
+.git/
+.github/
+node_modules/
+coverage/
+.DS_Store
+*.log
+
+# ドキュメント（README以外）
+docs/
+examples/
+demo/
+JSCONF_READY.md
+
+# Python関連
+python/
+*.pyc
+__pycache__/
+venv/
+
+# 出力ディレクトリ
+aaa_test_kanteen/
+test-kanteen/
+*_output*/
+test_*/
+check_output*/
+
+# Claude Code設定
+.claude/
