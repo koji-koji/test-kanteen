@@ -219,7 +219,6 @@ export class TestAnalyzer {
     return {
       id: uuidv4(),
       name: block.name,
-      aspects: [], // aspect分類機能を削除
       assertions: assertions.map((a) => this.convertToAssertion(a)),
       dependencies: [],
       tags: [],

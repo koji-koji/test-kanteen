@@ -37,11 +37,6 @@ export class MarkdownReporter extends BaseReporter {
       markdown += '```\n\n';
     }
 
-    // テスト数サマリー（describe毎）
-    if (catalog.testSuites && catalog.testSuites.length > 0) {
-      markdown += this.generateTestCountSummary(catalog);
-    }
-
     return markdown;
   }
 
@@ -78,45 +73,5 @@ export class MarkdownReporter extends BaseReporter {
   private generateTestHierarchy(test: TestCase, depth: number): string {
     const indent = '  '.repeat(depth);
     return `${indent}✓ ${test.name}\n`;
-  }
-
-  /**
-   * describe毎のテスト数サマリーを生成
-   */
-  private generateTestCountSummary(catalog: TestCatalog): string {
-    let md = '\n## Test Count by Describe\n\n';
-    md += '| Describe | Test Count |\n';
-    md += '|----------|------------|\n';
-
-    const collectSuiteInfo = (suite: TestSuite, parentName = ''): Array<{name: string; count: number}> => {
-      const fullName = parentName ? `${parentName} > ${suite.name}` : suite.name;
-      const result: Array<{name: string; count: number}> = [];
-
-      // 現在のsuiteのテスト数を追加（ネストされたsuiteのテストは含まない）
-      if (suite.tests && suite.tests.length > 0) {
-        result.push({ name: fullName, count: suite.tests.length });
-      }
-
-      // ネストされたsuiteを再帰的に処理
-      if (suite.nestedSuites && suite.nestedSuites.length > 0) {
-        suite.nestedSuites.forEach(nested => {
-          result.push(...collectSuiteInfo(nested, fullName));
-        });
-      }
-
-      return result;
-    };
-
-    const allSuites: Array<{name: string; count: number}> = [];
-    catalog.testSuites.forEach(suite => {
-      allSuites.push(...collectSuiteInfo(suite));
-    });
-
-    allSuites.forEach(suite => {
-      md += `| ${suite.name} | ${suite.count} |\n`;
-    });
-    md += '\n';
-
-    return md;
   }
 }

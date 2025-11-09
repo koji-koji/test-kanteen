@@ -1,5 +1,4 @@
 import { JSONFormatter, YAMLFormatter, MarkdownFormatter } from '../../../src/generator/formatters';
-import { AspectCategory } from '../../../src/types';
 import type { TestCatalog } from '../../../src/types';
 
 describe('Formatters', () => {
@@ -23,7 +22,6 @@ describe('Formatters', () => {
             {
               id: 'test-1',
               name: 'should work',
-              aspects: [AspectCategory.Functionality],
               assertions: [],
               dependencies: [],
               tags: [],
@@ -32,20 +30,9 @@ describe('Formatters', () => {
           ],
         },
       ],
-      aspects: [
-        {
-          id: 'aspect-1',
-          category: AspectCategory.Functionality,
-          description: 'Test description',
-          examples: ['example 1'],
-          testCases: ['test-1'],
-          priority: 'medium',
-        },
-      ],
       coverage: {
         totalTests: 1,
-        totalAspects: 1,
-        aspectCategories: { functionality: 1 },
+        totalSuites: 1,
       },
     };
   });
@@ -90,7 +77,6 @@ describe('Formatters', () => {
 
         expect(parsed).toHaveProperty('metadata');
         expect(parsed).toHaveProperty('testSuites');
-        expect(parsed).toHaveProperty('aspects');
         expect(parsed).toHaveProperty('coverage');
       });
     });
@@ -207,8 +193,8 @@ describe('Formatters', () => {
       it('should include coverage summary', () => {
         const result = formatter.format(mockCatalog);
 
-        expect(result).toContain('## Aspects Distribution');
-        expect(result).toContain('**functionality**: 1 tests');
+        expect(result).toContain('## Metadata');
+        expect(result).toContain('Total Tests');
       });
 
       it('should include test suites', () => {
@@ -219,33 +205,14 @@ describe('Formatters', () => {
         expect(result).toContain('✓ should work');
       });
 
-      it('should include aspects summary', () => {
-        const result = formatter.format(mockCatalog);
-
-        expect(result).toContain('## Test Aspects Summary');
-        expect(result).toContain('### functionality');
-      });
 
       it('should format test information', () => {
         const result = formatter.format(mockCatalog);
 
         expect(result).toContain('Test Suite');
         expect(result).toContain('✓ should work');
-        expect(result).toContain('functionality');
       });
 
-      it('should show aspect priority', () => {
-        const result = formatter.format(mockCatalog);
-
-        expect(result).toContain('MEDIUM');
-      });
-
-      it('should show aspect examples', () => {
-        const result = formatter.format(mockCatalog);
-
-        expect(result).toContain('Example Tests');
-        expect(result).toContain('example 1');
-      });
 
       it('should use proper Markdown syntax', () => {
         const result = formatter.format(mockCatalog);
@@ -253,10 +220,9 @@ describe('Formatters', () => {
         // Should have proper headings
         expect(result).toMatch(/^#\s+/m);
         expect(result).toMatch(/^##\s+/m);
-        expect(result).toMatch(/^###\s+/m);
 
-        // Should have lists
-        expect(result).toMatch(/^- /m);
+        // Should have test suites
+        expect(result).toContain('Test Suite');
       });
     });
 
@@ -271,7 +237,6 @@ describe('Formatters', () => {
               {
                 id: 'nested-test',
                 name: 'nested test',
-                aspects: [AspectCategory.EdgeCase],
                 assertions: [],
                 dependencies: [],
                 tags: [],

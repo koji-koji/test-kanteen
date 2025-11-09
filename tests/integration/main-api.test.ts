@@ -36,13 +36,6 @@ describe('Main API Integration Tests', () => {
       expect(['jest', 'vitest', 'mocha']).toContain(catalog.metadata.framework);
     });
 
-    it('should extract test aspects', async () => {
-      const pattern = path.join(fixturesDir, 'edge-cases.test.ts');
-      const catalog = await parseTests(pattern);
-
-      expect(catalog.aspects).toBeDefined();
-      expect(catalog.aspects.length).toBeGreaterThan(0);
-    });
 
     it('should calculate coverage', async () => {
       const pattern = path.join(fixturesDir, 'edge-cases.test.ts');
@@ -50,7 +43,6 @@ describe('Main API Integration Tests', () => {
 
       expect(catalog.coverage).toBeDefined();
       expect(catalog.coverage.totalTests).toBeGreaterThan(0);
-      expect(catalog.coverage.totalAspects).toBeGreaterThan(0);
     });
 
     it('should include source file paths', async () => {
@@ -165,7 +157,6 @@ describe('Main API Integration Tests', () => {
 
       expect(catalog.metadata).toBeDefined();
       expect(catalog.testSuites).toBeDefined();
-      expect(catalog.aspects).toBeDefined();
       expect(catalog.coverage).toBeDefined();
     });
   });
@@ -182,9 +173,6 @@ describe('Main API Integration Tests', () => {
       // Verify catalog structure
       expect(catalog.testSuites.length).toBeGreaterThan(0);
       expect(catalog.coverage.totalTests).toBeGreaterThan(0);
-
-      // Verify aspects were classified
-      expect(catalog.aspects.length).toBeGreaterThan(0);
 
       // Verify file output
       const jsonPath = path.join(outputDir, 'catalog.json');
@@ -211,17 +199,15 @@ describe('Main API Integration Tests', () => {
       expect(files).toContain('catalog.md');
     });
 
-    it('Scenario 3: Aspect categorization accuracy', async () => {
+    it('Scenario 3: Test catalog structure', async () => {
       const pattern = path.join(fixturesDir, 'edge-cases.test.ts');
       const catalog = await parseTests(pattern);
 
-      // Check that edge case aspects were identified
-      const edgeCaseAspects = catalog.aspects.filter((a) => a.category === 'edge-case');
-      expect(edgeCaseAspects.length).toBeGreaterThan(0);
-
-      // Check that performance aspects were identified
-      const perfAspects = catalog.aspects.filter((a) => a.category === 'performance');
-      expect(perfAspects.length).toBeGreaterThan(0);
+      // Check catalog has required structure
+      expect(catalog.metadata).toBeDefined();
+      expect(catalog.testSuites).toBeDefined();
+      expect(catalog.coverage).toBeDefined();
+      expect(catalog.testSuites.length).toBeGreaterThan(0);
     });
   });
 });

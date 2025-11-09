@@ -1,5 +1,4 @@
 import { MarkdownReporter } from '../../../src/reporter/built-in-reporters/markdown-reporter';
-import { AspectCategory } from '../../../src/types';
 import type { TestCatalog } from '../../../src/types';
 import * as fs from 'fs/promises';
 import * as path from 'path';
@@ -28,7 +27,6 @@ describe('MarkdownReporter', () => {
             {
               id: 'test-1',
               name: 'should work correctly',
-              aspects: [AspectCategory.Functionality],
               assertions: [
                 {
                   type: 'expect-matcher',
@@ -44,20 +42,9 @@ describe('MarkdownReporter', () => {
           ],
         },
       ],
-      aspects: [
-        {
-          id: 'aspect-1',
-          category: AspectCategory.Functionality,
-          description: 'Functional test',
-          examples: ['example test 1', 'example test 2'],
-          testCases: ['test-1'],
-          priority: 'medium',
-        },
-      ],
       coverage: {
+        totalSuites: 1,
         totalTests: 1,
-        totalAspects: 1,
-        aspectCategories: { functionality: 1 },
       },
     };
   });
@@ -92,8 +79,8 @@ describe('MarkdownReporter', () => {
       reporter.onComplete(mockCatalog);
       const result = reporter.generate();
 
-      expect(result).toContain('## Aspects Distribution');
-      expect(result).toContain('**functionality**: 1 tests');
+      expect(result).toContain('## Metadata');
+      expect(result).toContain('Total Tests');
     });
 
     it('should include test suites section', () => {
@@ -105,28 +92,12 @@ describe('MarkdownReporter', () => {
       expect(result).toContain('✓ should work correctly');
     });
 
-    it('should include aspects section', () => {
+    it('should include test structure', () => {
       reporter.onComplete(mockCatalog);
       const result = reporter.generate();
 
-      expect(result).toContain('## Test Aspects Summary');
-      expect(result).toContain('functionality');
-      expect(result).toContain('Functional test');
-    });
-
-    it('should include aspect priority', () => {
-      reporter.onComplete(mockCatalog);
-      const result = reporter.generate();
-
-      expect(result).toContain('MEDIUM');
-    });
-
-    it('should include aspect examples', () => {
-      reporter.onComplete(mockCatalog);
-      const result = reporter.generate();
-
-      expect(result).toContain('example test 1');
-      expect(result).toContain('example test 2');
+      expect(result).toContain('Test Suite');
+      expect(result).toContain('should work correctly');
     });
 
     it('should use Jest-style hierarchical format', () => {
@@ -151,7 +122,6 @@ describe('MarkdownReporter', () => {
             {
               id: 'nested-test-1',
               name: 'nested test',
-              aspects: [AspectCategory.EdgeCase],
               assertions: [],
               dependencies: [],
               tags: [],
@@ -235,7 +205,6 @@ describe('MarkdownReporter', () => {
     it('should respect include aspects option', () => {
       const customReporter = new MarkdownReporter({
         include: {
-          aspects: false,
         },
       });
 

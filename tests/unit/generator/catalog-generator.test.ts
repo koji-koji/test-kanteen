@@ -1,5 +1,4 @@
 import { CatalogGenerator } from '../../../src/generator/catalog-generator';
-import { AspectCategory } from '../../../src/types';
 import type { TestSuite } from '../../../src/types';
 
 describe('CatalogGenerator', () => {
@@ -17,7 +16,6 @@ describe('CatalogGenerator', () => {
       {
         id: 'test-1',
         name: 'should work',
-        aspects: [AspectCategory.Functionality],
         assertions: [],
         dependencies: [],
         tags: [],
@@ -26,7 +24,6 @@ describe('CatalogGenerator', () => {
       {
         id: 'test-2',
         name: 'should handle errors',
-        aspects: [AspectCategory.ErrorHandling],
         assertions: [],
         dependencies: [],
         tags: [],
@@ -49,19 +46,6 @@ describe('CatalogGenerator', () => {
       expect(catalog.metadata.generatedAt).toBeDefined();
     });
 
-    it('should extract aspects from test suites', () => {
-      const testSuites = [createMockTestSuite()];
-      const catalog = generator.generate(testSuites);
-
-      expect(catalog.aspects).toBeDefined();
-      expect(catalog.aspects.length).toBeGreaterThan(0);
-
-      const functionalityAspect = catalog.aspects.find(
-        (a) => a.category === AspectCategory.Functionality
-      );
-      expect(functionalityAspect).toBeDefined();
-      expect(functionalityAspect?.testCases).toContain('test-1');
-    });
 
     it('should calculate coverage information', () => {
       const testSuites = [createMockTestSuite()];
@@ -69,8 +53,7 @@ describe('CatalogGenerator', () => {
 
       expect(catalog.coverage).toBeDefined();
       expect(catalog.coverage.totalTests).toBe(2);
-      expect(catalog.coverage.totalAspects).toBeGreaterThan(0);
-      expect(catalog.coverage.aspectCategories).toBeDefined();
+      expect(catalog.coverage.totalSuites).toBe(1);
     });
 
     it('should handle nested test suites', () => {
@@ -91,24 +74,5 @@ describe('CatalogGenerator', () => {
       expect(catalog.coverage.totalTests).toBe(4); // 2 from parent + 2 from nested
     });
 
-    it('should assign priorities to aspects', () => {
-      const testSuites = [createMockTestSuite()];
-      const catalog = generator.generate(testSuites);
-
-      const errorHandlingAspect = catalog.aspects.find(
-        (a) => a.category === AspectCategory.ErrorHandling
-      );
-
-      expect(errorHandlingAspect?.priority).toBe('high');
-    });
-
-    it('should include examples for aspects', () => {
-      const testSuites = [createMockTestSuite()];
-      const catalog = generator.generate(testSuites);
-
-      const aspect = catalog.aspects[0];
-      expect(aspect.examples).toBeDefined();
-      expect(aspect.examples.length).toBeGreaterThan(0);
-    });
   });
 });

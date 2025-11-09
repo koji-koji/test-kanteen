@@ -1,5 +1,4 @@
 import { JSONReporter } from '../../../src/reporter/built-in-reporters/json-reporter';
-import { AspectCategory } from '../../../src/types';
 import type { TestCatalog } from '../../../src/types';
 import * as fs from 'fs/promises';
 import * as path from 'path';
@@ -28,7 +27,6 @@ describe('JSONReporter', () => {
             {
               id: 'test-1',
               name: 'should work',
-              aspects: [AspectCategory.Functionality],
               assertions: [],
               dependencies: [],
               tags: [],
@@ -37,20 +35,9 @@ describe('JSONReporter', () => {
           ],
         },
       ],
-      aspects: [
-        {
-          id: 'aspect-1',
-          category: AspectCategory.Functionality,
-          description: 'Test description',
-          examples: ['example 1'],
-          testCases: ['test-1'],
-          priority: 'medium',
-        },
-      ],
       coverage: {
+        totalSuites: 1,
         totalTests: 1,
-        totalAspects: 1,
-        aspectCategories: { functionality: 1 },
       },
     };
   });
@@ -64,7 +51,6 @@ describe('JSONReporter', () => {
       expect(typeof result).toBe('object');
       expect(result).toHaveProperty('metadata');
       expect(result).toHaveProperty('testSuites');
-      expect(result).toHaveProperty('aspects');
       expect(result).toHaveProperty('coverage');
     });
 
@@ -74,7 +60,6 @@ describe('JSONReporter', () => {
 
       expect(result.metadata.framework).toBe('jest');
       expect(result.testSuites).toHaveLength(1);
-      expect(result.aspects).toHaveLength(1);
       expect(result.coverage.totalTests).toBe(1);
     });
   });
@@ -166,7 +151,6 @@ describe('JSONReporter', () => {
       const filteredReporter = new JSONReporter({
         include: {
           metadata: true,
-          aspects: false,
           assertions: false,
           location: false,
         },

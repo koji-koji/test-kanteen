@@ -15,8 +15,6 @@ export interface CatalogMetadata {
 export interface CoverageInfo {
   totalTests: number;
   totalSuites: number;
-  totalAspects: number;
-  aspectCategories: Record<string, number>;
 }
 
 /**
@@ -25,7 +23,6 @@ export interface CoverageInfo {
 export interface TestCatalog {
   metadata: CatalogMetadata;
   testSuites: TestSuite[];
-  aspects: TestAspect[];
   coverage: CoverageInfo;
 }
 
@@ -88,7 +85,6 @@ export interface Assertion {
 export interface TestCase {
   id: string;
   name: string;
-  aspects: string[];
   assertions: Assertion[];
   dependencies: string[];
   tags: string[];
@@ -97,32 +93,3 @@ export interface TestCase {
   only?: boolean;
 }
 
-/**
- * テスト観点のカテゴリ
- */
-export enum AspectCategory {
-  Functionality = 'functionality',
-  EdgeCase = 'edge-case',
-  ErrorHandling = 'error-handling',
-  Performance = 'performance',
-  Security = 'security',
-  Integration = 'integration',
-  UnitBehavior = 'unit-behavior',
-  DataValidation = 'data-validation',
-  StateManagement = 'state-management',
-  Accessibility = 'accessibility',
-  Custom = 'custom',
-}
-
-/**
- * テスト観点
- */
-export interface TestAspect {
-  id: string;
-  category: AspectCategory;
-  description: string;
-  examples: string[];
-  testCases: string[];
-  priority?: 'high' | 'medium' | 'low';
-  metadata?: Record<string, unknown>;
-}

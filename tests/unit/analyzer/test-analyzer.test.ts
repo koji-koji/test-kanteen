@@ -162,22 +162,6 @@ describe('TestAnalyzer', () => {
       expect(suites[0].tests[0].name).toContain('should work with');
     });
 
-    it('should classify test aspects', () => {
-      const source = `
-        describe('Error Handling', () => {
-          it('should throw error when invalid', () => {
-            expect(() => throwError()).toThrow();
-          });
-        });
-      `;
-
-      const parseResult = parser.parse(source, 'test.ts');
-      const framework = detector.getFramework('jest')!;
-      const suites = analyzer.analyze(parseResult, framework);
-
-      expect(suites[0].tests[0].aspects).toBeDefined();
-      expect(suites[0].tests[0].aspects.length).toBeGreaterThan(0);
-    });
 
     it('should handle empty test suite', () => {
       const source = `

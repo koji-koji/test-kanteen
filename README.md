@@ -8,7 +8,7 @@ Test Kanteenは、テストコードを解析して自動的に「テスト観�
 
 ## 特徴
 
-- **自動観点抽出**: テストコードから自動的にテスト観点を抽出
+- **テスト構造の可視化**: テストコードの構造を自動的に抽出
 - **カバレッジギャップ検出**: テストされていない関数を自動検出 🆕
 - **ESTree準拠**: 標準的なJavaScript ASTフォーマットを使用
 - **柔軟なReporter**: カスタマイズ可能なReporterパターン
@@ -132,21 +132,6 @@ export class MyCustomReporter extends BaseReporter {
 }
 ```
 
-## 観点カテゴリ
-
-Test Kanteenは以下のような観点カテゴリを自動的に識別します:
-
-- **Functionality**: 機能の動作確認
-- **EdgeCase**: エッジケース・境界値テスト
-- **ErrorHandling**: エラーハンドリング
-- **Performance**: パフォーマンステスト
-- **Security**: セキュリティテスト
-- **Integration**: 統合テスト
-- **UnitBehavior**: ユニット単位の振る舞い
-- **DataValidation**: データバリデーション
-- **StateManagement**: 状態管理
-- **Custom**: カスタムカテゴリ
-
 ## 出力例
 
 ### JSON形式
@@ -164,13 +149,15 @@ Test Kanteenは以下のような観点カテゴリを自動的に識別しま�
       "tests": [
         {
           "name": "should login with valid credentials",
-          "aspects": ["functionality", "integration"],
           "assertions": [...]
         }
       ]
     }
   ],
-  "aspects": [...]
+  "coverage": {
+    "totalTests": 10,
+    "totalSuites": 3
+  }
 }
 ```
 

@@ -27,7 +27,6 @@ export class CatalogGenerator {
     return {
       metadata,
       testSuites,
-      aspects: [], // aspect分類機能を削除
       coverage,
     };
   }
@@ -83,8 +82,6 @@ export class CatalogGenerator {
     return {
       totalTests,
       totalSuites,
-      totalAspects: 0, // aspect機能削除
-      aspectCategories: {}, // aspect機能削除
     };
   }
 

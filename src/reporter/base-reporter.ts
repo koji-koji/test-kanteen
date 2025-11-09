@@ -18,7 +18,6 @@ export abstract class BaseReporter implements IReporter {
       },
       include: {
         metadata: true,
-        aspects: true,
         assertions: true,
         location: true,
       },

@@ -52,7 +52,6 @@ export interface ReporterOptions {
    */
   include?: {
     metadata?: boolean;
-    aspects?: boolean;
     assertions?: boolean;
     location?: boolean;
   };

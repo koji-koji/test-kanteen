@@ -1,4 +1,3 @@
-import { AspectCategory } from './catalog';
 
 /**
  * テストフレームワークの種類
@@ -27,13 +26,6 @@ export interface LLMConfig {
 }
 
 /**
- * カスタム観点カテゴリの設定
- */
-export interface CustomAspectConfig {
-  [key: string]: string[];
-}
-
-/**
  * Reporterの設定
  */
 export interface ReporterConfig {
@@ -42,21 +34,6 @@ export interface ReporterConfig {
   options?: Record<string, unknown>;
 }
 
-/**
- * 観点抽出のルール設定
- */
-export interface AspectExtractionRules {
-  keywords?: Record<string, AspectCategory>;
-  patterns?: Array<{
-    pattern: RegExp | string;
-    category: AspectCategory;
-  }>;
-  custom?: Array<{
-    name: string;
-    matcher: (testName: string, code: string) => boolean;
-    category: AspectCategory;
-  }>;
-}
 
 /**
  * Test Kanteenの設定
@@ -86,16 +63,6 @@ export interface KanteenConfig {
    * 出力先ディレクトリ
    */
   output?: string;
-
-  /**
-   * カスタム観点カテゴリ
-   */
-  aspectCategories?: CustomAspectConfig;
-
-  /**
-   * 観点抽出のルール
-   */
-  extractionRules?: AspectExtractionRules;
 
   /**
    * LLM統合の設定

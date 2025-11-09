@@ -95,7 +95,6 @@ program
         console.log('📊 Summary:');
         console.log(`  - Total test suites: ${catalog.testSuites.length}`);
         console.log(`  - Total tests: ${catalog.coverage.totalTests}`);
-        console.log(`  - Total aspects: ${catalog.coverage.totalAspects}`);
         console.log(`  - Framework: ${catalog.metadata.framework}`);
         console.log(`  - Mode: detailed`);
         console.log(`\n📁 Output: ${options.output}`);
