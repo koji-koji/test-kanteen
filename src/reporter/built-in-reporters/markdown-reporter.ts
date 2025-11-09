@@ -1,5 +1,6 @@
 import { BaseReporter } from '../base-reporter';
 import type { TestCatalog, TestSuite, TestCase } from '../../types';
+import * as path from 'path';
 
 /**
  * Markdown形式でレポートを出力するReporter
@@ -47,8 +48,14 @@ export class MarkdownReporter extends BaseReporter {
     let markdown = '';
     const indent = '  '.repeat(depth);
 
-    // スイート名
-    markdown += `${indent}${suite.name}\n`;
+    // スイート名（トップレベルのみファイルパスを表示）
+    if (depth === 0 && suite.filePath) {
+      // 相対パスに変換
+      const relativePath = path.relative(process.cwd(), suite.filePath);
+      markdown += `${indent}${suite.name} (${relativePath})\n`;
+    } else {
+      markdown += `${indent}${suite.name}\n`;
+    }
 
     // テストケース
     if (suite.tests && suite.tests.length > 0) {

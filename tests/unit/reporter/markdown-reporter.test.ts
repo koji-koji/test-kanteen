@@ -144,8 +144,8 @@ describe('MarkdownReporter', () => {
       reporter.onComplete(mockCatalog);
       const result = reporter.generate();
 
-      // Parent suite at level 0 (no indent)
-      expect(result).toContain('Test Suite\n');
+      // Parent suite at level 0 (no indent) with relative file path
+      expect(result).toMatch(/Test Suite \(.+test\.ts\)/);
       // Nested suite at level 1 (2 spaces)
       expect(result).toContain('  Nested Suite');
       // Nested test at level 2 (4 spaces)
