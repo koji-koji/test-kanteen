@@ -1,0 +1,96 @@
+name: Coverage Gap Check
+
+on:
+  push:
+    branches: [main, feat/**]
+  pull_request:
+    branches: [main]
+
+jobs:
+  coverage-gap:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Analyze Coverage Gap
+        run: |
+          npx kanteen coverage-gap "src/**/*.ts" "tests/**/*.test.ts" \
+            --output ./coverage-gap \
+            --format json,markdown
+
+      - name: Display Summary
+        run: |
+          echo "## Coverage Gap Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          cat coverage-gap/coverage-gap.md >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload Coverage Gap Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-gap-report
+          path: coverage-gap/
+
+      - name: Check Coverage Threshold
+        run: |
+          COVERAGE=$(node -e "const report = require('./coverage-gap/coverage-gap.json'); console.log(report.summary.coverageRate);")
+          echo "Coverage Rate: $COVERAGE%"
+
+          if (( $(echo "$COVERAGE < 80" | bc -l) )); then
+            echo "⚠️ Coverage is below 80%"
+            # exit 1  # コメントアウト: 警告のみ、失敗させない
+          else
+            echo "✅ Coverage is above 80%"
+          fi
+
+      - name: Comment on PR (if PR)
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const report = JSON.parse(fs.readFileSync('./coverage-gap/coverage-gap.json', 'utf8'));
+
+            const untestedCount = report.summary.untested;
+            const coverageRate = report.summary.coverageRate;
+            const highPriorityUntested = report.summary.byImpact.high;
+
+            let body = `## 📊 Coverage Gap Report\n\n`;
+            body += `- **Coverage Rate**: ${coverageRate}%\n`;
+            body += `- **Untested Exports**: ${untestedCount}\n`;
+            body += `- **High Priority Untested**: ${highPriorityUntested}\n\n`;
+
+            if (highPriorityUntested > 0) {
+              body += `⚠️ **Warning**: ${highPriorityUntested} high-priority export(s) are not tested.\n\n`;
+
+              const highPriorityGaps = report.gaps
+                .filter(g => g.impact === 'high' && g.status === 'untested')
+                .slice(0, 5);
+
+              body += `### Untested High Priority Exports:\n\n`;
+              for (const gap of highPriorityGaps) {
+                body += `- \`${gap.export.name}\` (${gap.export.type}) - ${gap.export.filePath}:${gap.export.location.line}\n`;
+              }
+            } else {
+              body += `✅ All high-priority exports are tested!\n`;
+            }
+
+            body += `\n[Full Report](${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID})`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });

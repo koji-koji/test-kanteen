@@ -12,7 +12,6 @@ import {
   type TeardownInfo,
 } from '../types';
 import { AssertionExtractor } from './assertion-extractor';
-import { AspectClassifier } from './aspect-classifier';
 import { v4 as uuidv4 } from 'uuid';
 
 /**
@@ -20,11 +19,9 @@ import { v4 as uuidv4 } from 'uuid';
  */
 export class TestAnalyzer {
   private assertionExtractor: AssertionExtractor;
-  private aspectClassifier: AspectClassifier;
 
   constructor() {
     this.assertionExtractor = new AssertionExtractor();
-    this.aspectClassifier = new AspectClassifier();
   }
 
   /**
@@ -218,19 +215,11 @@ export class TestAnalyzer {
    */
   private buildTestCase(block: TestBlock, _source: string): TestCase {
     const assertions = this.assertionExtractor.extract(block.node);
-    const assertionTypes = assertions.map((a) =>
-      this.assertionExtractor.classifyAssertion(a.matcher)
-    );
-
-    const aspects = this.aspectClassifier.classifyFromContext({
-      testName: block.name,
-      assertions: assertionTypes,
-    });
 
     return {
       id: uuidv4(),
       name: block.name,
-      aspects: aspects,
+      aspects: [], // aspect分類機能を削除
       assertions: assertions.map((a) => this.convertToAssertion(a)),
       dependencies: [],
       tags: [],

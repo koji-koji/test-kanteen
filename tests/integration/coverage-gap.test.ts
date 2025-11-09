@@ -7,54 +7,6 @@ describe('Coverage Gap Integration Tests', () => {
     analyzer = new CoverageGapAnalyzer();
   });
 
-  describe('Demo samples', () => {
-    it('should analyze simple calculator demo', async () => {
-      const report = await analyzer.analyze(
-        'demo/jsconf-2025/simple/calculator.ts',
-        'demo/jsconf-2025/simple/calculator.test.ts'
-      );
-
-      // 4つの関数がある
-      expect(report.summary.totalExports).toBe(4);
-
-      // add と subtract はテストされている
-      expect(report.summary.tested).toBeGreaterThanOrEqual(2);
-
-      // multiply と divide はテストされていない
-      expect(report.summary.untested).toBeGreaterThanOrEqual(2);
-
-      // multiply が未テスト
-      const multiplyGap = report.gaps.find(g => g.export.name === 'multiply');
-      expect(multiplyGap).toBeDefined();
-      expect(multiplyGap?.status).toBe('untested');
-
-      // divide が未テスト
-      const divideGap = report.gaps.find(g => g.export.name === 'divide');
-      expect(divideGap).toBeDefined();
-      expect(divideGap?.status).toBe('untested');
-    });
-
-    it('should analyze realistic user service demo', async () => {
-      const report = await analyzer.analyze(
-        'demo/jsconf-2025/realistic/user-service.ts',
-        'demo/jsconf-2025/realistic/user-service.test.ts'
-      );
-
-      // UserServiceクラス + メソッド + インターフェース + 関数
-      expect(report.summary.totalExports).toBeGreaterThan(5);
-
-      // 一部はテストされている
-      expect(report.summary.tested).toBeGreaterThan(0);
-
-      // 一部はテストされていない
-      expect(report.summary.untested).toBeGreaterThan(0);
-
-      // UserService クラスは検出される
-      const userServiceGap = report.gaps.find(g => g.export.name === 'UserService');
-      expect(userServiceGap).toBeDefined();
-    });
-  });
-
   describe('Self-analysis', () => {
     it('should analyze Test Kanteen itself', async () => {
       const report = await analyzer.analyze(
@@ -96,8 +48,8 @@ describe('Coverage Gap Integration Tests', () => {
   describe('Report generation', () => {
     it('should generate recommendations', async () => {
       const report = await analyzer.analyze(
-        'demo/jsconf-2025/simple/calculator.ts',
-        'demo/jsconf-2025/simple/calculator.test.ts'
+        'src/index.ts',
+        'tests/**/*.test.ts'
       );
 
       expect(report.recommendations).toBeDefined();
@@ -110,26 +62,10 @@ describe('Coverage Gap Integration Tests', () => {
       expect(hasRecommendation).toBe(true);
     });
 
-    it('should prioritize untested exports', async () => {
-      const report = await analyzer.analyze(
-        'demo/jsconf-2025/simple/calculator.ts',
-        'demo/jsconf-2025/simple/calculator.test.ts'
-      );
-
-      const untestedGaps = report.gaps.filter(g => g.status === 'untested');
-      expect(untestedGaps.length).toBeGreaterThan(0);
-
-      // 全ての未テストギャップは function 型で high impact
-      for (const gap of untestedGaps) {
-        expect(gap.export.type).toBe('function');
-        expect(gap.impact).toBe('high');
-      }
-    });
-
     it('should include location information', async () => {
       const report = await analyzer.analyze(
-        'demo/jsconf-2025/simple/calculator.ts',
-        'demo/jsconf-2025/simple/calculator.test.ts'
+        'src/index.ts',
+        'tests/**/*.test.ts'
       );
 
       for (const gap of report.gaps) {

@@ -16,14 +16,11 @@ export class MarkdownFormatter {
     // メタデータ
     markdown += this.generateMetadata(catalog);
 
-    // カバレッジ
-    markdown += this.generateCoverage(catalog);
-
     // テストスイート（Jest風の階層構造）
     markdown += this.generateTestSuitesHierarchy(catalog);
 
-    // 観点サマリー
-    markdown += this.generateAspectsSummary(catalog);
+    // テスト数サマリー（describe毎）
+    markdown += this.generateTestCountSummary(catalog);
 
     return markdown;
   }
@@ -48,20 +45,6 @@ export class MarkdownFormatter {
     return md;
   }
 
-  /**
-   * カバレッジセクションを生成
-   */
-  private generateCoverage(catalog: TestCatalog): string {
-    let md = '## Aspects Distribution\n\n';
-
-    for (const [category, count] of Object.entries(catalog.coverage.aspectCategories)) {
-      const percentage = ((count / catalog.coverage.totalTests) * 100).toFixed(1);
-      md += `- **${category}**: ${count} tests (${percentage}%)\n`;
-    }
-    md += '\n';
-
-    return md;
-  }
 
   /**
    * Jest風の階層構造でテストスイートを生成
@@ -112,29 +95,41 @@ export class MarkdownFormatter {
   }
 
   /**
-   * 観点サマリーを生成
+   * describe毎のテスト数サマリーを生成
    */
-  private generateAspectsSummary(catalog: TestCatalog): string {
-    let md = '\n## Test Aspects Summary\n\n';
+  private generateTestCountSummary(catalog: TestCatalog): string {
+    let md = '\n## Test Count by Describe\n\n';
+    md += '| Describe | Test Count |\n';
+    md += '|----------|------------|\n';
 
-    catalog.aspects.forEach((aspect) => {
-      md += `### ${aspect.category}\n\n`;
-      md += `${aspect.description}\n\n`;
+    const collectSuiteInfo = (suite: TestSuite, parentName = ''): Array<{name: string; count: number}> => {
+      const fullName = parentName ? `${parentName} > ${suite.name}` : suite.name;
+      const result: Array<{name: string; count: number}> = [];
 
-      if (aspect.priority) {
-        md += `**Priority**: ${aspect.priority.toUpperCase()}\n\n`;
+      // 現在のsuiteのテスト数を追加（ネストされたsuiteのテストは含まない）
+      if (suite.tests && suite.tests.length > 0) {
+        result.push({ name: fullName, count: suite.tests.length });
       }
 
-      md += `**Test Count**: ${aspect.testCases.length}\n\n`;
-
-      if (aspect.examples && aspect.examples.length > 0) {
-        md += '**Example Tests**:\n\n';
-        aspect.examples.slice(0, 3).forEach((example) => {
-          md += `- ${example}\n`;
+      // ネストされたsuiteを再帰的に処理
+      if (suite.nestedSuites && suite.nestedSuites.length > 0) {
+        suite.nestedSuites.forEach(nested => {
+          result.push(...collectSuiteInfo(nested, fullName));
         });
-        md += '\n';
       }
+
+      return result;
+    };
+
+    const allSuites: Array<{name: string; count: number}> = [];
+    catalog.testSuites.forEach(suite => {
+      allSuites.push(...collectSuiteInfo(suite));
     });
+
+    allSuites.forEach(suite => {
+      md += `| ${suite.name} | ${suite.count} |\n`;
+    });
+    md += '\n';
 
     return md;
   }

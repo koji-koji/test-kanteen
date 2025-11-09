@@ -14,6 +14,7 @@ export interface CatalogMetadata {
  */
 export interface CoverageInfo {
   totalTests: number;
+  totalSuites: number;
   totalAspects: number;
   aspectCategories: Record<string, number>;
 }

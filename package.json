@@ -1,5 +1,5 @@
 {
-  "name": "test-kanteen",
+  "name": "@koji-koji/test-kanteen",
   "version": "0.1.0",
   "description": "AST×Reporterでテストから観点カタログを自動生成し、LLMと人間の共通Specにするライブラリ",
   "main": "dist/index.js",
@@ -45,12 +45,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/your-username/test-kanteen.git"
+    "url": "git+https://github.com/koji-koji/test-kanteen.git"
   },
   "bugs": {
-    "url": "https://github.com/your-username/test-kanteen/issues"
+    "url": "https://github.com/koji-koji/test-kanteen/issues"
   },
-  "homepage": "https://github.com/your-username/test-kanteen#readme",
+  "homepage": "https://github.com/koji-koji/test-kanteen#readme",
   "files": [
     "dist",
     "README.md",

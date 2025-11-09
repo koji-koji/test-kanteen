@@ -27,16 +27,6 @@ export class MarkdownReporter extends BaseReporter {
       markdown += `- **Total Tests**: ${catalog.coverage.totalTests}\n\n`;
     }
 
-    // 観点分布
-    if (catalog.coverage && catalog.coverage.aspectCategories) {
-      markdown += '## Aspects Distribution\n\n';
-      for (const [category, count] of Object.entries(catalog.coverage.aspectCategories)) {
-        const percentage = ((count / catalog.coverage.totalTests) * 100).toFixed(1);
-        markdown += `- **${category}**: ${count} tests (${percentage}%)\n`;
-      }
-      markdown += '\n';
-    }
-
     // テストスイート（Jest風の階層構造）
     if (catalog.testSuites && catalog.testSuites.length > 0) {
       markdown += '## Test Suites\n\n';
@@ -47,24 +37,9 @@ export class MarkdownReporter extends BaseReporter {
       markdown += '```\n\n';
     }
 
-    // 観点サマリー
-    if (this.options.include?.aspects && catalog.aspects && catalog.aspects.length > 0) {
-      markdown += '## Test Aspects Summary\n\n';
-      catalog.aspects.forEach((aspect) => {
-        markdown += `### ${aspect.category}\n\n`;
-        markdown += `${aspect.description}\n\n`;
-        if (aspect.priority) {
-          markdown += `**Priority**: ${aspect.priority.toUpperCase()}\n\n`;
-        }
-        markdown += `**Test Count**: ${aspect.testCases.length}\n\n`;
-        if (aspect.examples && aspect.examples.length > 0) {
-          markdown += '**Example Tests**:\n\n';
-          aspect.examples.slice(0, 3).forEach((example) => {
-            markdown += `- ${example}\n`;
-          });
-          markdown += '\n';
-        }
-      });
+    // テスト数サマリー（describe毎）
+    if (catalog.testSuites && catalog.testSuites.length > 0) {
+      markdown += this.generateTestCountSummary(catalog);
     }
 
     return markdown;
@@ -103,5 +78,45 @@ export class MarkdownReporter extends BaseReporter {
   private generateTestHierarchy(test: TestCase, depth: number): string {
     const indent = '  '.repeat(depth);
     return `${indent}✓ ${test.name}\n`;
+  }
+
+  /**
+   * describe毎のテスト数サマリーを生成
+   */
+  private generateTestCountSummary(catalog: TestCatalog): string {
+    let md = '\n## Test Count by Describe\n\n';
+    md += '| Describe | Test Count |\n';
+    md += '|----------|------------|\n';
+
+    const collectSuiteInfo = (suite: TestSuite, parentName = ''): Array<{name: string; count: number}> => {
+      const fullName = parentName ? `${parentName} > ${suite.name}` : suite.name;
+      const result: Array<{name: string; count: number}> = [];
+
+      // 現在のsuiteのテスト数を追加（ネストされたsuiteのテストは含まない）
+      if (suite.tests && suite.tests.length > 0) {
+        result.push({ name: fullName, count: suite.tests.length });
+      }
+
+      // ネストされたsuiteを再帰的に処理
+      if (suite.nestedSuites && suite.nestedSuites.length > 0) {
+        suite.nestedSuites.forEach(nested => {
+          result.push(...collectSuiteInfo(nested, fullName));
+        });
+      }
+
+      return result;
+    };
+
+    const allSuites: Array<{name: string; count: number}> = [];
+    catalog.testSuites.forEach(suite => {
+      allSuites.push(...collectSuiteInfo(suite));
+    });
+
+    allSuites.forEach(suite => {
+      md += `| ${suite.name} | ${suite.count} |\n`;
+    });
+    md += '\n';
+
+    return md;
   }
 }
