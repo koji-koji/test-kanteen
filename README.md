@@ -42,6 +42,22 @@ npx kanteen analyze "tests/**/*.test.ts" --output ./custom-output
 npx kanteen analyze --config kanteen.config.js
 ```
 
+#### 関数・クラスの抽出 🆕
+
+```bash
+# ソースコードから関数・クラス一覧を抽出（デフォルト出力先: ./aaa_test_kanteen/exports）
+npx kanteen extract "src/**/*.ts"
+
+# 出力先を指定
+npx kanteen extract "src/**/*.ts" --output ./exports
+
+# JSON形式のみで出力
+npx kanteen extract "src/**/*.ts" --format json
+
+# 詳細出力モード
+npx kanteen extract "src/**/*.ts" --verbose
+```
+
 #### カバレッジギャップ検出 🆕
 
 ```bash

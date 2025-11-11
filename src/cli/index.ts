@@ -221,6 +221,153 @@ program
     }
   });
 
+// extract コマンド
+program
+  .command('extract')
+  .description('ソースコードから関数・クラスを抽出')
+  .argument('<pattern>', 'ソースファイルのパターン (例: src/**/*.ts)')
+  .option('-o, --output <path>', '出力先ディレクトリ', './aaa_test_kanteen/exports')
+  .option(
+    '-f, --format <formats>',
+    '出力フォーマット (json,markdown)',
+    'json,markdown'
+  )
+  .option('-v, --verbose', '詳細な出力を表示')
+  .action(async (pattern: string, options) => {
+    try {
+      const { SourceLoader } = await import('../parser/source-loader');
+      const { ASTParser } = await import('../parser/ast-parser');
+      const { ExportExtractor } = await import('../analyzer/export-extractor');
+
+      console.log('🔍 Extracting exports...\n');
+
+      // ソースファイルを読み込み
+      const loader = new SourceLoader();
+      const sources = await loader.loadByPattern([pattern]);
+
+      if (sources.size === 0) {
+        console.log('⚠️  No source files found');
+        return;
+      }
+
+      // ASTをパース
+      const parser = new ASTParser();
+      const extractor = new ExportExtractor();
+
+      const allExports: any[] = [];
+      const exportsByFile = new Map<string, any[]>();
+
+      for (const [filePath, content] of sources.entries()) {
+        try {
+          const parseResult = parser.parse(content, filePath);
+          const exports = extractor.extract(parseResult);
+
+          allExports.push(...exports);
+          exportsByFile.set(filePath, exports);
+
+          if (options.verbose) {
+            console.log(`✓ ${filePath}: ${exports.length} exports`);
+          }
+        } catch (error) {
+          if (options.verbose) {
+            console.error(`✗ ${filePath}: ${error instanceof Error ? error.message : error}`);
+          }
+        }
+      }
+
+      console.log('\n📊 Summary:');
+      console.log(`  - Total files: ${sources.size}`);
+      console.log(`  - Total exports: ${allExports.length}`);
+
+      // タイプ別の集計
+      const byType = allExports.reduce((acc, exp) => {
+        acc[exp.type] = (acc[exp.type] || 0) + 1;
+        return acc;
+      }, {} as Record<string, number>);
+
+      console.log('\n  By type:');
+      for (const [type, count] of Object.entries(byType)) {
+        console.log(`    - ${type}: ${count}`);
+      }
+
+      // 出力
+      const outputPath = path.resolve(process.cwd(), options.output);
+      await fs.mkdir(outputPath, { recursive: true });
+
+      const formats = options.format.split(',');
+
+      for (const format of formats) {
+        if (format === 'json') {
+          const jsonPath = path.join(outputPath, 'exports.json');
+          const jsonData = {
+            summary: {
+              totalFiles: sources.size,
+              totalExports: allExports.length,
+              byType,
+              generatedAt: new Date().toISOString(),
+            },
+            exports: allExports,
+            byFile: Object.fromEntries(exportsByFile),
+          };
+          await fs.writeFile(jsonPath, JSON.stringify(jsonData, null, 2), 'utf-8');
+          console.log(`\n📄 JSON: ${jsonPath}`);
+        } else if (format === 'markdown') {
+          const mdPath = path.join(outputPath, 'exports.md');
+          let markdown = '# Exported Functions and Classes\n\n';
+          markdown += `> Generated at ${new Date().toISOString()}\n\n`;
+          markdown += '## Summary\n\n';
+          markdown += `- **Total Files**: ${sources.size}\n`;
+          markdown += `- **Total Exports**: ${allExports.length}\n\n`;
+          markdown += '### By Type\n\n';
+          for (const [type, count] of Object.entries(byType)) {
+            markdown += `- **${type}**: ${count}\n`;
+          }
+          markdown += '\n## Exports by File\n\n';
+
+          for (const [filePath, exports] of exportsByFile.entries()) {
+            if (exports.length === 0) continue;
+
+            const relativePath = path.relative(process.cwd(), filePath);
+            markdown += `### ${relativePath}\n\n`;
+
+            for (const exp of exports) {
+              const icon = exp.type === 'function' ? '📦' :
+                          exp.type === 'class' ? '🏛️' :
+                          exp.type === 'interface' ? '📋' :
+                          exp.type === 'type' ? '🏷️' : '📤';
+              markdown += `- ${icon} **${exp.name}** (${exp.type})`;
+              if (exp.signature) {
+                markdown += `\n  \`\`\`typescript\n  ${exp.signature}\n  \`\`\``;
+              }
+              markdown += `\n  - Location: line ${exp.location.line}\n`;
+
+              // クラスのメソッドを表示
+              if (exp.type === 'class' && exp.methods && exp.methods.length > 0) {
+                markdown += `  - Methods:\n`;
+                for (const method of exp.methods) {
+                  markdown += `    - ${method.name}()`;
+                  if (method.signature) {
+                    markdown += ` - \`${method.signature}\``;
+                  }
+                  markdown += '\n';
+                }
+              }
+              markdown += '\n';
+            }
+          }
+
+          await fs.writeFile(mdPath, markdown, 'utf-8');
+          console.log(`📄 Markdown: ${mdPath}`);
+        }
+      }
+
+      console.log('\n✅ Extraction complete!\n');
+    } catch (error) {
+      console.error('❌ Error:', error instanceof Error ? error.message : error);
+      process.exit(1);
+    }
+  });
+
 // list-frameworks コマンド
 program
   .command('list-frameworks')
