@@ -262,8 +262,15 @@ program
           const parseResult = parser.parse(content, filePath);
           const exports = extractor.extract(parseResult);
 
-          allExports.push(...exports);
-          exportsByFile.set(filePath, exports);
+          // 関数とクラス（メソッド含む）のみにフィルタ
+          const filtered = exports.filter(exp =>
+            exp.type === 'function' ||
+            exp.type === 'class' ||
+            exp.type === 'method'
+          );
+
+          allExports.push(...filtered);
+          exportsByFile.set(filePath, filtered);
 
           if (options.verbose) {
             console.log(`✓ ${filePath}: ${exports.length} exports`);
@@ -313,43 +320,64 @@ program
           console.log(`\n📄 JSON: ${jsonPath}`);
         } else if (format === 'markdown') {
           const mdPath = path.join(outputPath, 'exports.md');
-          let markdown = '# Exported Functions and Classes\n\n';
+          let markdown = '# Functions and Classes\n\n';
           markdown += `> Generated at ${new Date().toISOString()}\n\n`;
           markdown += '## Summary\n\n';
           markdown += `- **Total Files**: ${sources.size}\n`;
-          markdown += `- **Total Exports**: ${allExports.length}\n\n`;
-          markdown += '### By Type\n\n';
-          for (const [type, count] of Object.entries(byType)) {
-            markdown += `- **${type}**: ${count}\n`;
-          }
-          markdown += '\n## Exports by File\n\n';
+          markdown += `- **Total Functions**: ${byType['function'] || 0}\n`;
+          markdown += `- **Total Classes**: ${byType['class'] || 0}\n`;
+          markdown += `- **Total Methods**: ${byType['method'] || 0}\n\n`;
+          markdown += '## Functions and Classes by File\n\n';
 
           for (const [filePath, exports] of exportsByFile.entries()) {
             if (exports.length === 0) continue;
 
             const relativePath = path.relative(process.cwd(), filePath);
+
+            // 関数とクラスのみをグループ化
+            const functions = exports.filter(e => e.type === 'function');
+            const classes = exports.filter(e => e.type === 'class');
+            const methods = exports.filter(e => e.type === 'method');
+
+            if (functions.length === 0 && classes.length === 0) continue;
+
             markdown += `### ${relativePath}\n\n`;
 
-            for (const exp of exports) {
-              const icon = exp.type === 'function' ? '📦' :
-                          exp.type === 'class' ? '🏛️' :
-                          exp.type === 'interface' ? '📋' :
-                          exp.type === 'type' ? '🏷️' : '📤';
-              markdown += `- ${icon} **${exp.name}** (${exp.type})`;
-              if (exp.signature) {
-                markdown += `\n  \`\`\`typescript\n  ${exp.signature}\n  \`\`\``;
+            // 関数
+            if (functions.length > 0) {
+              markdown += '**Functions:**\n\n';
+              for (const func of functions) {
+                markdown += `- 📦 **${func.name}**`;
+                if (func.signature) {
+                  markdown += `\`${func.signature}\``;
+                }
+                markdown += ` (line ${func.location.line})\n`;
               }
-              markdown += `\n  - Location: line ${exp.location.line}\n`;
+              markdown += '\n';
+            }
 
-              // クラスのメソッドを表示
-              if (exp.type === 'class' && exp.methods && exp.methods.length > 0) {
-                markdown += `  - Methods:\n`;
-                for (const method of exp.methods) {
-                  markdown += `    - ${method.name}()`;
-                  if (method.signature) {
-                    markdown += ` - \`${method.signature}\``;
+            // クラス（メソッドと一緒に表示）
+            if (classes.length > 0) {
+              markdown += '**Classes:**\n\n';
+              for (const cls of classes) {
+                markdown += `- 🏛️ **${cls.name}** (line ${cls.location.line})\n`;
+
+                // このクラスのメソッドを探す
+                const classMethods = methods.filter(m =>
+                  m.location.file === cls.location.file &&
+                  m.location.line > cls.location.line &&
+                  m.location.line < (cls.location.line + 200) // 簡易的な範囲チェック
+                );
+
+                if (classMethods.length > 0) {
+                  markdown += '  - Methods:\n';
+                  for (const method of classMethods) {
+                    markdown += `    - ${method.name}()`;
+                    if (method.signature) {
+                      markdown += ` \`${method.signature}\``;
+                    }
+                    markdown += '\n';
                   }
-                  markdown += '\n';
                 }
               }
               markdown += '\n';
