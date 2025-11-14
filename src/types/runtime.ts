@@ -2,7 +2,7 @@
  * Runtime type definitions for test execution information
  */
 
-import type { TestCatalog, TestSuite, TestCase, CatalogMetadata } from './index';
+import type { TestSuite, TestCase, CatalogMetadata } from './index';
 
 /**
  * Test execution status
@@ -58,9 +58,14 @@ export interface SuiteRuntime {
 /**
  * Test catalog with runtime information
  */
-export interface RuntimeCatalog extends TestCatalog {
+export interface RuntimeCatalog {
   metadata: RuntimeMetadata;
   testSuites: RuntimeTestSuite[];
+  /** Coverage information */
+  coverage: {
+    totalTests: number;
+    totalSuites: number;
+  };
   /** Execution summary statistics */
   executionSummary: ExecutionSummary;
 }
@@ -82,7 +87,7 @@ export interface RuntimeMetadata extends CatalogMetadata {
 /**
  * Test suite with runtime information
  */
-export interface RuntimeTestSuite extends TestSuite {
+export interface RuntimeTestSuite extends Omit<TestSuite, 'tests' | 'nestedSuites'> {
   /** Runtime information for this suite */
   runtime?: SuiteRuntime;
   /** Test cases with runtime information */
@@ -94,9 +99,15 @@ export interface RuntimeTestSuite extends TestSuite {
 /**
  * Test case with runtime information
  */
-export interface RuntimeTestCase extends TestCase {
+export interface RuntimeTestCase extends Omit<TestCase, 'assertions' | 'dependencies' | 'tags'> {
   /** Runtime information (always present in runtime catalogs) */
   runtime: TestRuntime;
+  /** Assertions (optional in runtime) */
+  assertions?: TestCase['assertions'];
+  /** Dependencies (optional in runtime) */
+  dependencies?: TestCase['dependencies'];
+  /** Tags (optional in runtime) */
+  tags?: TestCase['tags'];
 }
 
 /**
