@@ -9,7 +9,7 @@ Test Kanteenは、テストコードを解析して自動的に「テスト観�
 ## 特徴
 
 - **テスト構造の可視化**: テストコードの構造を自動的に抽出
-- **関数・クラス抽出**: ソースコードから関数・クラス一覧を抽出 🆕
+- **関数・クラス抽出**: export/export defaultに完全対応した関数・クラス一覧の抽出 🆕
 - **ESTree準拠**: 標準的なJavaScript ASTフォーマットを使用
 - **柔軟なReporter**: カスタマイズ可能なReporterパターン
 - **マルチフレームワーク対応**: Jest、Vitest、Mochaなどに対応
@@ -57,6 +57,23 @@ npx kanteen extract "src/**/*.ts" --format json
 # 詳細出力モード
 npx kanteen extract "src/**/*.ts" --verbose
 ```
+
+**抽出対象:**
+- 関数（`export function foo() {}`）
+- クラスとそのpublicメソッド（`export class Bar {}`）
+- 名前付きエクスポート（`export { foo, bar }`）
+- デフォルトエクスポート（`export default function() {}`）
+
+**対応しているエクスポート形式:**
+- ✅ `export function foo() {}` - 名前付き関数
+- ✅ `export default function foo() {}` - デフォルト関数
+- ✅ `export class Bar {}` - 名前付きクラス
+- ✅ `export default class Bar {}` - デフォルトクラス
+- ✅ `export { foo, bar }` - エクスポート指定子
+- ✅ `export async function fetchData() {}` - 非同期関数
+- ⚠️ `export * from './module'` - 再エクスポート（非対応）
+
+**注意:** interface、type、variableは抽出されますが、extractコマンドでは「テスト可能な項目」のみに絞るため除外されます。
 
 #### LLMを活用した高度な分析 🆕
 
@@ -148,7 +165,59 @@ export class MyCustomReporter extends BaseReporter {
 
 ## 出力例
 
-### JSON形式
+### Extract（関数・クラス抽出）
+
+**Markdown形式:**
+```markdown
+# Functions and Classes
+
+## Summary
+- **Total Files**: 3
+- **Total Functions**: 5
+- **Total Classes**: 2
+- **Total Methods**: 4
+
+## Exports by File
+
+### src/utils/math.ts
+
+**Functions:**
+- 📦 **add** `(a: number, b: number): number` (line 1)
+- 📦 **subtract** `(a: number, b: number): number` (line 5)
+
+### src/services/user.ts
+
+**Classes:**
+- 🏛️ **UserService** (line 10)
+  - 🔧 **getUser** (line 12)
+  - 🔧 **createUser** (line 18)
+  - 🔧 **updateUser** (line 24)
+```
+
+**JSON形式:**
+```json
+{
+  "summary": {
+    "totalFiles": 3,
+    "totalFunctions": 5,
+    "totalClasses": 2,
+    "totalMethods": 4
+  },
+  "exports": [
+    {
+      "name": "add",
+      "type": "function",
+      "filePath": "src/utils/math.ts",
+      "location": { "line": 1, "column": 1 },
+      "signature": "(a: number, b: number): number"
+    }
+  ]
+}
+```
+
+### Analyze（テスト観点カタログ）
+
+**JSON形式**
 
 ```json
 {
