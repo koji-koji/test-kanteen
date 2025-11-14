@@ -8,3 +8,4 @@ export * from './catalog';
 export * from './config';
 export * from './ast';
 export * from './export';
+export * from './runtime';
