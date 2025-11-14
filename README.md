@@ -45,59 +45,28 @@ npx kanteen analyze --config kanteen.config.js
 #### 関数・クラスの抽出 🆕
 
 ```bash
-# ソースコードから関数・クラス一覧を抽出（デフォルト出力先: ./aaa_test_kanteen/exports）
+# ソースコードから関数・クラス一覧を抽出
 npx kanteen extract "src/**/*.ts"
 
-# 出力先を指定
-npx kanteen extract "src/**/*.ts" --output ./exports
-
-# JSON形式のみで出力
-npx kanteen extract "src/**/*.ts" --format json
-
-# 詳細出力モード
-npx kanteen extract "src/**/*.ts" --verbose
+# オプション
+npx kanteen extract "src/**/*.ts" --output ./exports --format json,markdown
 ```
 
-**抽出対象:**
+**抽出対象**: 関数、クラス、メソッド（export/export default対応）
+詳細: [Extract機能ガイド](./docs/EXTRACT_GUIDE.md)
 
-- 関数（`export function foo() {}`）
-- クラスとそのpublicメソッド（`export class Bar {}`）
-- 名前付きエクスポート（`export { foo, bar }`）
-- デフォルトエクスポート（`export default function() {}`）
+#### LLM活用 🆕
 
-**対応しているエクスポート形式:**
-
-- ✅ `export function foo() {}` - 名前付き関数
-- ✅ `export default function foo() {}` - デフォルト関数
-- ✅ `export class Bar {}` - 名前付きクラス
-- ✅ `export default class Bar {}` - デフォルトクラス
-- ✅ `export { foo, bar }` - エクスポート指定子
-- ✅ `export async function fetchData() {}` - 非同期関数
-- ⚠️ `export * from './module'` - 再エクスポート（非対応）
-
-**注意:** interface、type、variableは抽出されますが、extractコマンドでは「テスト可能な項目」のみに絞るため除外されます。
-
-#### LLMを活用した高度な分析 🆕
-
-extractとanalyzeの出力をLLMに渡すことで、より高度な分析が可能です：
+出力をLLMに渡すことで高度な分析が可能です：
 
 ```bash
-# 1. 関数一覧とテストカタログを生成
 npx kanteen extract "src/**/*.ts"
 npx kanteen analyze "tests/**/*.test.ts"
-
-# 2. aaa_test_kanteen/exports/exports.md と
-#    aaa_test_kanteen/catalog.md をLLMに渡して分析
+# aaa_test_kanteen/ の出力をLLMに渡して分析
 ```
 
-**できること**:
-
-- テストされていない関数の自動検出（高精度）
-- テストの質の評価（正常系/異常系のバランス）
-- 不足しているテストケースの提案
-- テスト実装コードの生成
-
-詳細は [LLM活用ガイド](./docs/LLM_GUIDE.md) を参照してください。
+**LLMでできること**: テストギャップ検出、テスト品質評価、テストケース提案など
+詳細: [LLM活用ガイド](./docs/LLM_GUIDE.md)
 
 ### プログラマティックに使用
 
@@ -138,124 +107,11 @@ export default {
 テストファイル → AST Parser → Test Analyzer → Reporter → Catalog
 ```
 
-### 主要コンポーネント
-
-1. **AST Parser**: テストファイルをESTree準拠のASTに変換
-2. **Test Analyzer**: ASTからテスト構造と観点を抽出
-3. **Reporter**: 観点情報を収集・整形（Visitorパターン）
-4. **Catalog Generator**: 最終的なカタログを生成
-
-## カスタムReporterの作成
-
-```typescript
-import { BaseReporter, TestCase, TestSuite } from 'test-kanteen';
-
-export class MyCustomReporter extends BaseReporter {
-  onTestSuite(suite: TestSuite) {
-    // スイートごとの処理
-  }
-
-  onTestCase(testCase: TestCase) {
-    // テストケースごとの処理
-  }
-
-  generate() {
-    // 最終的な出力を生成
-    return this.formatOutput();
-  }
-}
-```
+カスタムReporterの作成方法など、詳細は[PLAN.md](./PLAN.md)を参照してください。
 
 ## 出力例
 
-### Extract（関数・クラス抽出）
-
-**Markdown形式:**
-
-```markdown
-# Functions and Classes
-
-## Summary
-
-- **Total Files**: 3
-- **Total Functions**: 5
-- **Total Classes**: 2
-- **Total Methods**: 4
-
-## Exports by File
-
-### src/utils/math.ts
-
-**Functions:**
-
-- 📦 **add** `(a: number, b: number): number` (line 1)
-- 📦 **subtract** `(a: number, b: number): number` (line 5)
-
-### src/services/user.ts
-
-**Classes:**
-
-- 🏛️ **UserService** (line 10)
-  - 🔧 **getUser** (line 12)
-  - 🔧 **createUser** (line 18)
-  - 🔧 **updateUser** (line 24)
-```
-
-**JSON形式:**
-
-```json
-{
-  "summary": {
-    "totalFiles": 3,
-    "totalFunctions": 5,
-    "totalClasses": 2,
-    "totalMethods": 4
-  },
-  "exports": [
-    {
-      "name": "add",
-      "type": "function",
-      "filePath": "src/utils/math.ts",
-      "location": { "line": 1, "column": 1 },
-      "signature": "(a: number, b: number): number"
-    }
-  ]
-}
-```
-
-### Analyze（テスト観点カタログ）
-
-**JSON形式**
-
-```json
-{
-  "metadata": {
-    "generatedAt": "2024-01-15T10:30:00Z",
-    "version": "1.0.0",
-    "framework": "jest"
-  },
-  "testSuites": [
-    {
-      "name": "User Authentication",
-      "tests": [
-        {
-          "name": "should login with valid credentials",
-          "assertions": [...]
-        }
-      ]
-    }
-  ],
-  "coverage": {
-    "totalTests": 10,
-    "totalSuites": 3
-  }
-}
-```
-
-### Markdown形式
-
-カタログはMarkdown形式でも出力でき、ドキュメントとしてそのまま使用できます。Jest `--verbose`風のシンプルな階層構造で表示されます。
-
+**Markdown形式（Jest風階層表示）:**
 ```
 ASTParser
   parse
@@ -265,21 +121,12 @@ ASTParser
     ✓ should parse multiple sources
 ```
 
-## 自己分析 - Test Kanteen自身のテストカタログ
+**JSON/YAML形式**: 構造化データとして出力
+詳細な出力例は各ドキュメントを参照してください。
 
-Test Kanteenは自分自身のテストコードを解析できます：
+## 自己分析
 
-```bash
-# Test Kanteen自身のテストを解析
-npx kanteen analyze "tests/unit/**/*.test.ts" --output ./self-catalog --format json,markdown
-```
-
-**結果**:
-
-- **158個のテスト**から**8つの観点**を自動抽出
-- **機能テスト70.9%**、**エッジケース20.3%**、**データ検証15.2%**
-- セキュリティやパフォーマンスの改善余地を特定
-
+Test Kanteen自身のテストカタログを生成することで、ツールの品質を検証しています。
 詳細は[自己分析レポート](./docs/SELF_ANALYSIS.md)を参照してください。
 
 ## 開発
@@ -300,48 +147,14 @@ npm run dev
 
 ## 多言語対応
 
-### TypeScript/JavaScript版（本リポジトリ）
+- **TypeScript/JavaScript版**: 本リポジトリ（完全実装済み）
+- **Python版**: `python/`ディレクトリに設計・骨組みあり（詳細: [python/README.md](./python/README.md)）
 
-✅ **完全実装済み**
+## ステータス
 
-- カバレッジギャップ検出
-- Jest風階層表示
-- 231テスト合格
-
-### Python版（開発予定）
-
-🚧 **設計完了、実装待機中**
-
-Python版は`python/`ディレクトリに設計・骨組みがあります。JSConf JP 2025後に本格実装を開始し、別リポジトリ（`test-kanteen-py`）に移行予定です。
-
-詳細: [python/README.md](./python/README.md)
-
----
-
-## ロードマップ
-
-### TypeScript版
-
-- [x] Phase 1: 基盤構築 ✅
-- [x] Phase 2: コア機能実装 ✅
-- [x] Phase 3: Reporter拡張 ✅
-- [x] Phase 4: Catalog生成 ✅
-- [x] Phase 5: Extract機能追加 ✅
-
-### Python版
-
-- [x] 設計・骨組み作成 ✅
-- [ ] Phase 1: 基本実装（JSConf後）
-- [ ] Phase 2: pytest/unittest対応
-- [ ] Phase 3: PyPI公開
-
-**現在の状況**:
-
-- ✅ 24個のソースファイル
-- ✅ 161個のテスト（全テスト合格）
-- ✅ JSON/YAML/Markdown出力対応
-- ✅ Jest/Vitest/Mocha対応
-- ✅ CLIツール完備（analyze, extract, init）
+- 161個のテスト（全て合格）
+- JSON/YAML/Markdown出力対応
+- Jest/Vitest/Mocha対応
 
 詳細は[PLAN.md](./PLAN.md)を参照してください。
 
