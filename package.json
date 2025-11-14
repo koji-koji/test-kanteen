@@ -71,6 +71,7 @@
     "yaml": "^2.3.4"
   },
   "devDependencies": {
+    "@jest/reporters": "^29.7.0",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.11.19",
     "@types/uuid": "^9.0.8",
@@ -82,5 +83,13 @@
     "prettier": "^3.2.5",
     "ts-jest": "^29.1.2",
     "typescript": "^5.3.3"
+  },
+  "peerDependencies": {
+    "@jest/reporters": "^29.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@jest/reporters": {
+      "optional": true
+    }
   }
 }
