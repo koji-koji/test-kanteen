@@ -118,6 +118,7 @@ export default {
 ## 出力例
 
 **Markdown形式（Jest風階層表示）:**
+
 ```
 ASTParser
   parse
@@ -154,7 +155,6 @@ npm run dev
 ## 多言語対応
 
 - **TypeScript/JavaScript版**: 本リポジトリ（完全実装済み）
-- **Python版**: `python/`ディレクトリに設計・骨組みあり（詳細: [python/README.md](./python/README.md)）
 
 ## ステータス
 

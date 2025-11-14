@@ -90,12 +90,6 @@ docs/
 examples/
 demo/
 
-# Python関連
-python/
-*.pyc
-__pycache__/
-venv/
-
 # 出力ディレクトリ
 aaa_test_kanteen/
 test-kanteen/
