@@ -128,7 +128,7 @@ program
 program
   .command('extract')
   .description('ソースコードから関数・クラスを抽出')
-  .argument('<pattern>', 'ソースファイルのパターン (例: src/**/*.ts)')
+  .argument('[pattern]', 'ソースファイルのパターン', '**/*.{ts,tsx}')
   .option('-o, --output <path>', '出力先ディレクトリ', './aaa_test_kanteen/exports')
   .option(
     '-f, --format <formats>',

@@ -9,13 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **デフォルトフォーマットを`json,markdown`に変更**: `analyze`コマンドのデフォルト出力フォーマットを`json`から`json,markdown`に変更
+- **デフォルトフォーマットを`json,markdown`に変更**: `analyze`コマンドと`extract`コマンドのデフォルト出力フォーマットを`json`から`json,markdown`に変更
 - **デフォルトコマンドを`analyze`に設定**: 引数なしで`npx kanteen`を実行すると、自動的に`analyze`コマンドが実行されるように変更
+- **extractコマンドのデフォルトパターンを`**/*.{ts,tsx}`に変更**: ライブラリプロジェクトやReactプロジェクトにも対応。引数なしで`npx kanteen extract`が実行可能に
 - **Markdown出力からFramework情報を削除**: Markdown/CLI出力から`- **Framework**: jest`の行を削除。JSON/YAML出力には引き続き`framework`フィールドを保持（プログラマティックな利用のため）
 
 ### Added
 
-- **シンプルなCLI使用**: `npx kanteen`だけでテスト観点カタログ生成が可能に
+- **シンプルなCLI使用**:
+  - `npx kanteen` だけでテスト観点カタログ生成が可能に
+  - `npx kanteen extract` だけで関数・クラス抽出が可能に（.ts/.tsx対応）
 
 ### Fixed
 

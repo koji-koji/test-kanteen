@@ -48,14 +48,17 @@ npx kanteen analyze --config kanteen.config.js
 #### 関数・クラスの抽出 🆕
 
 ```bash
-# ソースコードから関数・クラス一覧を抽出
+# 最もシンプルな使い方（デフォルト: **/*.{ts,tsx}, json+markdown出力）
+npx kanteen extract
+
+# 特定のパターンを指定
 npx kanteen extract "src/**/*.ts"
 
 # オプション
-npx kanteen extract "src/**/*.ts" --output ./exports --format json,markdown
+npx kanteen extract "lib/**/*.{ts,tsx}" --output ./exports --format json
 ```
 
-**抽出対象**: 関数、クラス、メソッド（export/export default対応）
+**抽出対象**: 関数、クラス、メソッド（export/export default対応、.ts/.tsx両対応）
 詳細: [Extract機能ガイド](./docs/EXTRACT_GUIDE.md)
 
 #### LLM活用 🆕
