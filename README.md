@@ -29,13 +29,16 @@ npm install test-kanteen
 #### テスト観点カタログ生成
 
 ```bash
-# テストファイルを解析してカタログを生成（デフォルト出力先: ./aaa_test_kanteen）
+# 最もシンプルな使い方（デフォルト: **/*.test.ts, json+markdown出力）
+npx kanteen
+
+# または明示的にanalyzeを指定
 npx kanteen analyze "tests/**/*.test.ts"
 
-# 出力形式を指定
-npx kanteen analyze "tests/**/*.test.ts" --format json,markdown
+# 出力形式を指定（デフォルト: json,markdown）
+npx kanteen analyze "tests/**/*.test.ts" --format yaml
 
-# 出力先を変更
+# 出力先を変更（デフォルト: ./aaa_test_kanteen）
 npx kanteen analyze "tests/**/*.test.ts" --output ./custom-output
 
 # 設定ファイルを使用

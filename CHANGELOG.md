@@ -9,11 +9,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **デフォルトフォーマットを`json,markdown`に変更**: `analyze`コマンドのデフォルト出力フォーマットを`json`から`json,markdown`に変更
+- **デフォルトコマンドを`analyze`に設定**: 引数なしで`npx kanteen`を実行すると、自動的に`analyze`コマンドが実行されるように変更
 - **Markdown出力からFramework情報を削除**: Markdown/CLI出力から`- **Framework**: jest`の行を削除。JSON/YAML出力には引き続き`framework`フィールドを保持（プログラマティックな利用のため）
+
+### Added
+
+- **シンプルなCLI使用**: `npx kanteen`だけでテスト観点カタログ生成が可能に
 
 ### Fixed
 
 - フレームワークを正確に検出できない場合に誤った情報（例: PlaywrightテストをJestと誤検出）が出力される問題を修正
+
+### Migration Guide
+
+**Before**:
+```bash
+pnpm dlx @koji-koji/test-kanteen analyze --format json,markdown
+```
+
+**After**:
+```bash
+# より簡潔に
+pnpm dlx @koji-koji/test-kanteen
+# または
+npx @koji-koji/test-kanteen
+```
 
 ## [0.3.0] - 2025-11-15
 

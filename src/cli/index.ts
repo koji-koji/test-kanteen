@@ -23,7 +23,7 @@ program
   .option(
     '-f, --format <formats>',
     '出力フォーマット (json,yaml,markdown)',
-    'json'
+    'json,markdown'
   )
   .option(
     '-w, --framework <framework>',
@@ -310,6 +310,16 @@ program
     console.log('  - mocha');
     console.log('  - auto (自動検出)');
   });
+
+// デフォルトコマンド: 引数なしの場合はanalyzeを実行
+const args = process.argv.slice(2);
+const knownCommands = ['analyze', 'extract', 'init', 'frameworks'];
+const hasCommand = args.length > 0 && knownCommands.includes(args[0]);
+
+if (!hasCommand && args.length === 0) {
+  // 引数なしの場合、analyze をデフォルトで実行
+  process.argv.splice(2, 0, 'analyze');
+}
 
 program.parse();
 
