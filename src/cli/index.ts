@@ -11,7 +11,7 @@ const program = new Command();
 program
   .name('kanteen')
   .description('AST×Reporterでテストから観点カタログを自動生成')
-  .version('0.3.0');
+  .version('0.4.0');
 
 // analyze コマンド
 program
