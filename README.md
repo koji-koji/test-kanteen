@@ -106,14 +106,7 @@ export default {
   exclude: ['**/node_modules/**'],
   framework: 'auto',
   reporters: ['json', 'markdown'],
-  output: './aaa_test_kanteen',  // デフォルト: GitHubで最初に表示される
-  aspectCategories: {
-    custom: ['my-custom-aspect']
-  },
-  llm: {
-    enabled: true,
-    provider: 'anthropic'
-  }
+  output: './aaa_test_kanteen'  // デフォルト: GitHubで最初に表示される
 };
 ```
 

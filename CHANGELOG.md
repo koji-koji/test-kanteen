@@ -5,6 +5,55 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2025-11-15
+
+### Changed - BREAKING CHANGES
+
+coverage-gapコマンドを削除し、LLM活用による高精度な分析へ移行しました。
+
+#### 削除された機能
+
+- **coverage-gapコマンド**: CLIからcoverage-gapコマンドを削除
+- `CoverageGapAnalyzer`クラス（504行）
+- `TestTargetExtractor`クラス（304行）
+- 関連する型定義（`CoverageGap`, `TestTarget`, `CoverageStatus`, `Impact`）
+- 40個のテスト（coverage-gap関連）
+
+#### 理由
+
+- マッチング精度が低い（完全一致のみ）
+- 誤検知が多い（テストされているのに"untested"と判定）
+- LLMの方が文脈を理解して圧倒的に高精度
+
+### Added
+
+- **extractコマンド**: ソースコードから関数・クラス一覧を抽出
+- **docs/LLM_GUIDE.md**: LLMを活用した高度なテスト分析ガイド（319行）
+- **local_plan/**: プランニングドキュメントディレクトリ
+- extractは関数・クラス・メソッドのみ抽出（interface/type/variableは除外）
+
+### Improved
+
+- パッケージサイズ削減: 249.8 kB → 186.8 kB
+- コードベース簡素化: -1,349行
+- テスト数: 201 → 161（全て合格）
+
+### Migration Guide
+
+**Before (削除):**
+```bash
+npx kanteen coverage-gap "src/**/*.ts" "tests/**/*.test.ts"
+```
+
+**After (推奨):**
+```bash
+npx kanteen extract "src/**/*.ts"
+npx kanteen analyze "tests/**/*.test.ts"
+# 両方の出力をLLMに渡して分析
+```
+
+詳細: [docs/LLM_GUIDE.md](./docs/LLM_GUIDE.md)
+
 ## [0.2.0] - 2025-11-10
 
 ### Changed - BREAKING CHANGES
