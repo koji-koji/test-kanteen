@@ -187,7 +187,7 @@ describe('Formatters', () => {
 
         expect(result).toContain('## Metadata');
         expect(result).toContain('2024-01-01T00:00:00Z');
-        expect(result).toContain('jest');
+        expect(result).not.toContain('jest'); // Framework should not be in Markdown output
       });
 
       it('should include coverage summary', () => {

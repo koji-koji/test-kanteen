@@ -86,7 +86,6 @@ program
         console.log('📊 Summary (Simple Mode):');
         console.log(`  - Total test suites: ${catalog.testSuites.length}`);
         console.log(`  - Total tests: ${catalog.coverage.totalTests}`);
-        console.log(`  - Framework: ${catalog.metadata.framework}`);
         console.log(`  - Mode: simple (testSuites only)`);
         console.log(`\n📁 Output: ${options.output}`);
       } else {
@@ -94,7 +93,6 @@ program
         console.log('📊 Summary:');
         console.log(`  - Total test suites: ${catalog.testSuites.length}`);
         console.log(`  - Total tests: ${catalog.coverage.totalTests}`);
-        console.log(`  - Framework: ${catalog.metadata.framework}`);
         console.log(`  - Mode: detailed`);
         console.log(`\n📁 Output: ${options.output}`);
       }
@@ -374,7 +372,6 @@ function generateSimpleMarkdown(catalog: any): string {
   lines.push('## Metadata');
   lines.push('');
   lines.push(`- **Generated At**: ${new Date(catalog.metadata.generatedAt).toLocaleString()}`);
-  lines.push(`- **Framework**: ${catalog.metadata.framework}`);
   lines.push(`- **Source Files**: ${catalog.metadata.sourceFiles.length}`);
   lines.push('');
 

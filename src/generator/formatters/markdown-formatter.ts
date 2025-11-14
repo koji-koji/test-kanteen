@@ -38,7 +38,6 @@ export class MarkdownFormatter {
   private generateMetadata(catalog: TestCatalog): string {
     let md = '## Metadata\n\n';
     md += `- **Generated At**: ${catalog.metadata.generatedAt}\n`;
-    md += `- **Framework**: ${catalog.metadata.framework}\n`;
     md += `- **Source Files**: ${catalog.metadata.sourceFiles.length}\n`;
     md += `- **Test Suites**: ${catalog.testSuites.length}\n`;
     md += `- **Total Tests**: ${catalog.coverage.totalTests}\n\n`;

@@ -22,7 +22,6 @@ export class MarkdownReporter extends BaseReporter {
     if (this.options.include?.metadata && catalog.metadata) {
       markdown += '## Metadata\n\n';
       markdown += `- **Generated At**: ${catalog.metadata.generatedAt}\n`;
-      markdown += `- **Framework**: ${catalog.metadata.framework}\n`;
       markdown += `- **Source Files**: ${catalog.metadata.sourceFiles?.length || 0}\n`;
       markdown += `- **Test Suites**: ${catalog.testSuites?.length || 0}\n`;
       markdown += `- **Total Tests**: ${catalog.coverage.totalTests}\n\n`;

@@ -72,7 +72,7 @@ describe('MarkdownReporter', () => {
       expect(result).toContain('## Metadata');
       expect(result).toContain('2024-01-01T00:00:00Z');
       expect(result).toContain('0.1.0'); // toolVersion in header
-      expect(result).toContain('jest');
+      expect(result).not.toContain('jest'); // Framework should not be in Markdown output
     });
 
     it('should include coverage section', () => {

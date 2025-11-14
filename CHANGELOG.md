@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+
+- **Markdown出力からFramework情報を削除**: Markdown/CLI出力から`- **Framework**: jest`の行を削除。JSON/YAML出力には引き続き`framework`フィールドを保持（プログラマティックな利用のため）
+
+### Fixed
+
+- フレームワークを正確に検出できない場合に誤った情報（例: PlaywrightテストをJestと誤検出）が出力される問題を修正
+
 ## [0.3.0] - 2025-11-15
 
 ### Changed - BREAKING CHANGES
