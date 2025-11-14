@@ -22,10 +22,10 @@
     "kanteen": "node dist/cli/index.js",
     "kanteen:analyze": "node dist/cli/index.js analyze",
     "kanteen:analyze:simple": "node dist/cli/index.js analyze --mode simple",
-    "kanteen:coverage-gap": "node dist/cli/index.js coverage-gap",
+    "kanteen:extract": "node dist/cli/index.js extract",
     "kanteen:self-analyze": "node dist/cli/index.js analyze \"tests/unit/**/*.test.ts\" --output ./self-catalog --format json,markdown",
     "kanteen:self-analyze:simple": "node dist/cli/index.js analyze \"tests/unit/**/*.test.ts\" --output ./self-catalog --format json,markdown --mode simple",
-    "kanteen:self-coverage": "node dist/cli/index.js coverage-gap \"src/**/*.ts\" \"tests/unit/**/*.test.ts\" --output ./self-catalog"
+    "kanteen:self-extract": "node dist/cli/index.js extract \"src/**/*.ts\" --output ./self-catalog/exports"
   },
   "keywords": [
     "ast",
