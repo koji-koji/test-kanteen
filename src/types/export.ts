@@ -74,22 +74,3 @@ export interface ExportInfo {
   isAsync?: boolean;
 }
 
-/**
- * エクスポート抽出結果
- */
-export interface ExportExtractionResult {
-  /**
-   * ファイルパス
-   */
-  filePath: string;
-
-  /**
-   * 抽出されたエクスポート一覧
-   */
-  exports: ExportInfo[];
-
-  /**
-   * エラーメッセージ（エラーがある場合）
-   */
-  error?: string;
-}
