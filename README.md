@@ -9,12 +9,12 @@ Test Kanteenは、テストコードを解析して自動的に「テスト観�
 ## 特徴
 
 - **テスト構造の可視化**: テストコードの構造を自動的に抽出
-- **関数・クラス抽出**: export/export defaultに完全対応した関数・クラス一覧の抽出 🆕
+- **関数・クラス抽出**: export/export defaultに完全対応した関数・クラス一覧の抽出
 - **ESTree準拠**: 標準的なJavaScript ASTフォーマットを使用
 - **柔軟なReporter**: カスタマイズ可能なReporterパターン
 - **マルチフレームワーク対応**: Jest、Vitest、Mochaなどに対応
 - **LLM統合**: LLMが理解しやすいフォーマットで出力
-- **複数出力形式**: JSON、YAML、Markdown形式に対応
+- **複数出力形式**: JSON、Markdown形式に対応（analyzeコマンドはYAMLにも対応）
 
 ## インストール
 
@@ -59,12 +59,14 @@ npx kanteen extract "src/**/*.ts" --verbose
 ```
 
 **抽出対象:**
+
 - 関数（`export function foo() {}`）
 - クラスとそのpublicメソッド（`export class Bar {}`）
 - 名前付きエクスポート（`export { foo, bar }`）
 - デフォルトエクスポート（`export default function() {}`）
 
 **対応しているエクスポート形式:**
+
 - ✅ `export function foo() {}` - 名前付き関数
 - ✅ `export default function foo() {}` - デフォルト関数
 - ✅ `export class Bar {}` - 名前付きクラス
@@ -89,6 +91,7 @@ npx kanteen analyze "tests/**/*.test.ts"
 ```
 
 **できること**:
+
 - テストされていない関数の自動検出（高精度）
 - テストの質の評価（正常系/異常系のバランス）
 - 不足しているテストケースの提案
@@ -109,7 +112,7 @@ console.log(catalog);
 const catalog = await parseTests('./tests/**/*.test.ts', {
   framework: 'jest',
   reporters: ['json', 'markdown'],
-  output: './catalog'
+  output: './catalog',
 });
 ```
 
@@ -123,7 +126,7 @@ export default {
   exclude: ['**/node_modules/**'],
   framework: 'auto',
   reporters: ['json', 'markdown'],
-  output: './aaa_test_kanteen'  // デフォルト: GitHubで最初に表示される
+  output: './aaa_test_kanteen', // デフォルト: GitHubで最初に表示される
 };
 ```
 
@@ -168,10 +171,12 @@ export class MyCustomReporter extends BaseReporter {
 ### Extract（関数・クラス抽出）
 
 **Markdown形式:**
+
 ```markdown
 # Functions and Classes
 
 ## Summary
+
 - **Total Files**: 3
 - **Total Functions**: 5
 - **Total Classes**: 2
@@ -182,12 +187,14 @@ export class MyCustomReporter extends BaseReporter {
 ### src/utils/math.ts
 
 **Functions:**
+
 - 📦 **add** `(a: number, b: number): number` (line 1)
 - 📦 **subtract** `(a: number, b: number): number` (line 5)
 
 ### src/services/user.ts
 
 **Classes:**
+
 - 🏛️ **UserService** (line 10)
   - 🔧 **getUser** (line 12)
   - 🔧 **createUser** (line 18)
@@ -195,6 +202,7 @@ export class MyCustomReporter extends BaseReporter {
 ```
 
 **JSON形式:**
+
 ```json
 {
   "summary": {
@@ -267,6 +275,7 @@ npx kanteen analyze "tests/unit/**/*.test.ts" --output ./self-catalog --format j
 ```
 
 **結果**:
+
 - **158個のテスト**から**8つの観点**を自動抽出
 - **機能テスト70.9%**、**エッジケース20.3%**、**データ検証15.2%**
 - セキュリティやパフォーマンスの改善余地を特定
@@ -294,6 +303,7 @@ npm run dev
 ### TypeScript/JavaScript版（本リポジトリ）
 
 ✅ **完全実装済み**
+
 - カバレッジギャップ検出
 - Jest風階層表示
 - 231テスト合格
@@ -326,6 +336,7 @@ Python版は`python/`ディレクトリに設計・骨組みがあります。JS
 - [ ] Phase 3: PyPI公開
 
 **現在の状況**:
+
 - ✅ 24個のソースファイル
 - ✅ 161個のテスト（全テスト合格）
 - ✅ JSON/YAML/Markdown出力対応
