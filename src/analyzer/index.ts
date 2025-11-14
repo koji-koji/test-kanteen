@@ -6,5 +6,3 @@
 export * from './test-analyzer';
 export * from './assertion-extractor';
 export * from './export-extractor';
-export * from './test-target-extractor';
-export * from './coverage-gap-analyzer';

@@ -9,7 +9,7 @@ Test Kanteenは、テストコードを解析して自動的に「テスト観�
 ## 特徴
 
 - **テスト構造の可視化**: テストコードの構造を自動的に抽出
-- **カバレッジギャップ検出**: テストされていない関数を自動検出 🆕
+- **関数・クラス抽出**: ソースコードから関数・クラス一覧を抽出 🆕
 - **ESTree準拠**: 標準的なJavaScript ASTフォーマットを使用
 - **柔軟なReporter**: カスタマイズ可能なReporterパターン
 - **マルチフレームワーク対応**: Jest、Vitest、Mochaなどに対応
@@ -58,21 +58,26 @@ npx kanteen extract "src/**/*.ts" --format json
 npx kanteen extract "src/**/*.ts" --verbose
 ```
 
-#### カバレッジギャップ検出 🆕
+#### LLMを活用した高度な分析 🆕
+
+extractとanalyzeの出力をLLMに渡すことで、より高度な分析が可能です：
 
 ```bash
-# テストされていない関数を検出（デフォルト出力先: ./aaa_test_kanteen/coverage-gap）
-npx kanteen coverage-gap "src/**/*.ts" "tests/**/*.test.ts"
+# 1. 関数一覧とテストカタログを生成
+npx kanteen extract "src/**/*.ts"
+npx kanteen analyze "tests/**/*.test.ts"
 
-# 出力先を指定
-npx kanteen coverage-gap "src/**/*.ts" "tests/**/*.test.ts" --output ./custom-output
-
-# JSON形式のみで出力
-npx kanteen coverage-gap "src/**/*.ts" "tests/**/*.test.ts" --format json
-
-# 詳細出力モード
-npx kanteen coverage-gap "src/**/*.ts" "tests/**/*.test.ts" --verbose
+# 2. aaa_test_kanteen/exports/exports.md と
+#    aaa_test_kanteen/catalog.md をLLMに渡して分析
 ```
+
+**できること**:
+- テストされていない関数の自動検出（高精度）
+- テストの質の評価（正常系/異常系のバランス）
+- 不足しているテストケースの提案
+- テスト実装コードの生成
+
+詳細は [LLM活用ガイド](./docs/LLM_GUIDE.md) を参照してください。
 
 ### プログラマティックに使用
 
@@ -249,22 +254,21 @@ Python版は`python/`ディレクトリに設計・骨組みがあります。JS
 - [x] Phase 2: コア機能実装 ✅
 - [x] Phase 3: Reporter拡張 ✅
 - [x] Phase 4: Catalog生成 ✅
-- [x] Phase 5: カバレッジギャップ検出 ✅
+- [x] Phase 5: Extract機能追加 ✅
 
 ### Python版
 
 - [x] 設計・骨組み作成 ✅
 - [ ] Phase 1: 基本実装（JSConf後）
 - [ ] Phase 2: pytest/unittest対応
-- [ ] Phase 3: Coverage Gap実装
-- [ ] Phase 4: PyPI公開
+- [ ] Phase 3: PyPI公開
 
 **現在の状況**:
-- ✅ 26個のソースファイル
-- ✅ 191個のテスト（96.4%カバレッジ）
+- ✅ 24個のソースファイル
+- ✅ 161個のテスト（全テスト合格）
 - ✅ JSON/YAML/Markdown出力対応
 - ✅ Jest/Vitest/Mocha対応
-- ✅ CLIツール完備
+- ✅ CLIツール完備（analyze, extract, init）
 
 詳細は[PLAN.md](./PLAN.md)を参照してください。
 
@@ -278,6 +282,7 @@ Issue報告やPull Requestを歓迎します。
 
 ## ドキュメント
 
+- [LLMを活用したテスト分析ガイド](./docs/LLM_GUIDE.md) 🆕
 - [プロジェクトプラン](./PLAN.md)
 - [テスト計画書](./docs/TEST_PLAN.md)
 - [テスト実装サマリー](./docs/TEST_SUMMARY.md)
