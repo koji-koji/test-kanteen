@@ -5,6 +5,68 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0] - 2025-11-15
+
+### Added
+
+#### LLM統合ガイドの自動生成
+- **aaa_spec/TEST_KANTEEN_GUIDE.md**: analyze実行時に自動生成されるLLM統合ガイド
+  - GitHubでアルファベット順に最初に表示される位置に配置（aaa_test_kanteenと並んで）
+  - LLMへのコピペ用メッセージを含む（🤖マーク付き）
+  - test-kanteenの3つの中心価値を説明
+    1. プランニング・開発のコンテキスト
+    2. テストケースのリファインループ
+    3. LLM統合による高度な分析
+  - 具体的な使用例を4つのシナリオで提示
+    - 新機能開発時: カタログからテストケース提案
+    - コードレビュー時: カバレッジ確認と改善提案
+    - リファクタリング時: 影響範囲の分析
+    - 定期改善時: Gap分析からの改善案提示
+  - プロジェクト固有の情報をカスタマイズ可能（テスト戦略、重要な観点、テスト規約）
+  - 一度生成されると上書きされない（ユーザーカスタマイズを保護）
+
+#### 新機能の動作
+- `parseTests()`実行時に`ensureAaaSpecGuide()`を自動呼び出し
+- ガイドが存在しない場合のみ生成（既存ファイルは保護）
+- aaa_specディレクトリを自動作成（outputDirと同階層）
+- 生成時にコンソールメッセージを表示
+  ```
+  ✨ Generated LLM guide: ./aaa_spec/TEST_KANTEEN_GUIDE.md
+  💡 Share this file with your LLM to enable test-kanteen integration
+  ```
+
+### Changed
+- **テスト数**: 192 → 196 (+4 integration tests)
+  - aaa_spec guide generation tests: 4 tests
+    - ガイド生成テスト
+    - 既存ガイド保護テスト
+    - ディレクトリ構造テスト
+    - 必須セクション検証テスト
+
+### Documentation
+- **README.md**: LLM統合ガイド自動生成セクションを追加
+- **docs/LLM_GUIDE.md**: クイックスタートセクションを追加（自動生成ガイドの使い方）
+
+### Usage Example
+
+```bash
+# 1. テスト分析実行
+npx kanteen analyze "tests/**/*.test.ts"
+# → aaa_spec/TEST_KANTEEN_GUIDE.md が自動生成
+
+# 2. ガイドを開く
+cat aaa_spec/TEST_KANTEEN_GUIDE.md
+
+# 3. 方法1: Claude Code等でファイルを読み込み
+# "aaa_spec/TEST_KANTEEN_GUIDE.md を読んで、
+#  test-kanteenを理解して積極的に活用してください"
+
+# 方法2: コピペメッセージをLLMに貼り付け
+# （ガイド内の🤖マークのセクションをコピー）
+
+# 4. LLMがtest-kanteenを理解して、テスト設計を支援
+```
+
 ## [0.5.0] - 2025-11-15
 
 ### Added

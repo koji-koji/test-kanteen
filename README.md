@@ -139,17 +139,24 @@ npx kanteen compare \
 
 詳細: [Compare Command](./docs/COMPARE_COMMAND.md)
 
-#### LLM活用 🆕
+#### LLM統合ガイドの自動生成 🆕
 
-出力をLLMに渡すことで高度な分析が可能です：
+test-kanteenは、初回のanalyze実行時にLLM統合ガイドを自動生成します：
 
 ```bash
-npx kanteen extract "src/**/*.ts"
 npx kanteen analyze "tests/**/*.test.ts"
-# aaa_test_kanteen/ の出力をLLMに渡して分析
+# → aaa_spec/TEST_KANTEEN_GUIDE.md が自動生成
 ```
 
+**クイックスタート**:
+1. 生成されたガイド `aaa_spec/TEST_KANTEEN_GUIDE.md` を開く
+2. 🤖マークのコピペ用メッセージをLLMに貼り付け
+3. LLMがtest-kanteenを理解し、テスト設計を支援開始
+
+ガイドはユーザーがカスタマイズ可能で、一度作成されると上書きされません。
+
 **LLMでできること**: テストギャップ検出、テスト品質評価、テストケース提案など
+
 詳細: [LLM活用ガイド](./docs/LLM_GUIDE.md)
 
 ### プログラマティックに使用
