@@ -72,6 +72,7 @@
   },
   "devDependencies": {
     "@jest/reporters": "^29.7.0",
+    "@playwright/test": "^1.56.1",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.11.19",
     "@types/uuid": "^9.0.8",
@@ -87,10 +88,14 @@
   },
   "peerDependencies": {
     "@jest/reporters": "^29.0.0",
+    "@playwright/test": "^1.40.0",
     "vitest": "^1.0.0 || ^2.0.0"
   },
   "peerDependenciesMeta": {
     "@jest/reporters": {
+      "optional": true
+    },
+    "@playwright/test": {
       "optional": true
     },
     "vitest": {
