@@ -2,6 +2,60 @@
 
 このドキュメントは、Claude CodeでTest Kanteenを開発する際のガイドラインです。
 
+---
+
+## 🤖 Claude Codeへの指示
+
+**このプロジェクトではtest-kanteen自身を使用しています。**
+
+以下のカタログファイルを参照しながら、test-kanteenの開発・テスト設計を支援してください：
+
+- **ASTカタログ**: `./aaa_test_kanteen/catalog.json` / `catalog.md`
+  - test-kanteen自身の全テスト（213テスト）の構造
+  - 各テストの目的、アサーション、階層構造
+- **プロジェクト固有ガイド**: `./aaa_spec/TEST_KANTEEN_GUIDE.md`
+  - test-kanteenのテスト戦略（3層構造: unit/integration/e2e）
+  - 重要な観点5つ（AST解析の正確性、マルチフレームワーク対応など）
+  - テスト規約（AAA pattern、命名規則など）
+
+### あなた（Claude Code）の主な役割
+
+1. **新機能開発時**
+   - `aaa_test_kanteen/catalog.json`を参照して既存テストパターンを確認
+   - 同じパターンで新機能のテストケースを提案
+   - エッジケース、エラーハンドリングも考慮
+
+2. **コードレビュー時**
+   - カタログと比較してテストカバレッジをチェック
+   - テスト命名規則の一貫性を確認（`should [期待される動作]`形式）
+   - 不足しているテストケースを指摘
+
+3. **リファクタリング時**
+   - カタログで該当機能を使用しているテストを検索
+   - 影響範囲をリスト化
+   - リファクタリング後に確認すべきテストを提示
+
+4. **テスト品質改善時**
+   - カタログを分析してテストの偏りを検出
+   - AAA patternに従っているか確認
+   - テストの独立性をチェック
+
+### カタログの再生成
+
+開発中にテストを追加・変更した場合、カタログを更新してください：
+
+```bash
+# 全テストのカタログ生成
+npx kanteen analyze "tests/**/*.test.ts" --output ./aaa_test_kanteen
+
+# または、単体テストのみ
+npm run kanteen:self-analyze
+```
+
+**重要**: カタログを更新してから、それを参照して次のテストを設計することで、一貫性のあるテストスイートを維持できます。
+
+---
+
 ## 開発フロー
 
 ### 基本原則
@@ -238,9 +292,84 @@ npm run test:coverage
 
 ### テスト追加のガイドライン
 
+#### 基本原則
+
 - 新機能には必ずテストを追加
 - PRには関連するテストの追加が必須
 - テストカバレッジを維持・向上
+
+#### test-kanteenを活用したテスト設計
+
+**ステップ1: 既存テストパターンを確認**
+
+```bash
+# カタログを最新化
+npx kanteen analyze "tests/**/*.test.ts" --output ./aaa_test_kanteen
+
+# Markdownで確認（人間に読みやすい）
+cat aaa_test_kanteen/catalog.md
+
+# JSONで確認（LLMが参照）
+cat aaa_test_kanteen/catalog.json
+```
+
+**ステップ2: Claude Codeに既存パターンを参照させる**
+
+```
+aaa_test_kanteen/catalog.jsonを参照して、
+[類似機能名]のテストパターンを確認してください。
+
+同じパターンで、[新機能名]のテストケースを提案してください。
+以下の観点を含めてください：
+- 正常系
+- 異常系（エラーハンドリング）
+- エッジケース
+- 境界値テスト
+```
+
+**ステップ3: テスト実装**
+
+提案されたテストケースを実装し、以下を確認：
+
+- [ ] テスト名が `should [期待される動作]` 形式
+- [ ] AAA pattern（Arrange-Act-Assert）に従っている
+- [ ] テストが独立している（他のテストに依存しない）
+- [ ] beforeEach/afterEachで適切にクリーンアップ
+
+**ステップ4: カタログ更新と検証**
+
+```bash
+# テスト実行
+npm test
+
+# カタログ再生成
+npx kanteen analyze "tests/**/*.test.ts" --output ./aaa_test_kanteen
+
+# 新しいテストがカタログに含まれているか確認
+cat aaa_test_kanteen/catalog.md | grep "新機能名"
+```
+
+#### 具体例：新しいReporter追加時
+
+```
+# Claude Codeへの指示例
+
+aaa_test_kanteen/catalog.jsonを参照して、
+JSONReporterやMarkdownReporterのテストパターンを確認してください。
+
+同じパターンで、YAMLReporterのテストケースを提案してください：
+1. 基本的な生成テスト
+2. pretty formatオプションのテスト
+3. ファイル書き込みテスト
+4. ディレクトリ自動作成テスト
+5. オプションの検証テスト
+
+各テストケースについて：
+- describe/itのネスト構造
+- テストデータのセットアップ方法
+- アサーションの書き方
+を既存パターンに合わせてください。
+```
 
 ## 自己分析
 
