@@ -9,9 +9,11 @@ Test Kanteenは、テストコードを解析して自動的に「テスト観�
 ## 特徴
 
 - **テスト構造の可視化**: テストコードの構造を自動的に抽出
+- **ランタイムカタログ生成** 🆕: Jest/Vitest/Playwrightのカスタムレポーターでテスト実行情報を収集
+- **AST×Runtime比較** 🆕: 静的解析と実行時情報を比較してGap分析
 - **関数・クラス抽出**: export/export defaultに完全対応した関数・クラス一覧の抽出
 - **ESTree準拠**: 標準的なJavaScript ASTフォーマットを使用
-- **柔軟なReporter**: カスタマイズ可能なReporterパターン
+- **柔軟なReporter**: カスタマイズ可能なReporターパターン
 - **マルチフレームワーク対応**: Jest、Vitest、Mochaなどに対応
 - **LLM統合**: LLMが理解しやすいフォーマットで出力
 - **複数出力形式**: JSON、Markdown形式に対応（analyzeコマンドはYAMLにも対応）
@@ -60,6 +62,82 @@ npx kanteen extract "lib/**/*.{ts,tsx}" --output ./exports --format json
 
 **抽出対象**: 関数、クラス、メソッド（export/export default対応、.ts/.tsx両対応）
 詳細: [Extract機能ガイド](./docs/EXTRACT_GUIDE.md)
+
+#### ランタイムカタログ生成 🆕
+
+テスト実行時の情報（status, duration, errors）を収集してRuntimeカタログを生成します。
+
+**Jest**:
+```javascript
+// jest.config.js
+module.exports = {
+  reporters: [
+    'default',
+    ['@koji-koji/test-kanteen/jest', {
+      output: './test-kanteen-runtime',
+      format: ['json', 'markdown']
+    }]
+  ]
+};
+```
+
+**Vitest**:
+```typescript
+// vitest.config.ts
+export default defineConfig({
+  test: {
+    reporters: [
+      'default',
+      ['@koji-koji/test-kanteen/vitest', {
+        output: './test-kanteen-runtime',
+        format: ['json', 'markdown']
+      }]
+    ]
+  }
+});
+```
+
+**Playwright**:
+```typescript
+// playwright.config.ts
+export default defineConfig({
+  reporter: [
+    ['list'],
+    ['@koji-koji/test-kanteen/playwright', {
+      output: './test-kanteen-runtime',
+      format: ['json', 'markdown']
+    }]
+  ]
+});
+```
+
+詳細: [Jest Reporter](./docs/JEST_REPORTER.md) | [Vitest Reporter](./docs/VITEST_REPORTER.md) | [Playwright Reporter](./docs/PLAYWRIGHT_REPORTER.md)
+
+#### AST×Runtime比較 🆕
+
+ASTカタログとRuntimeカタログを比較してGap分析を実行します。
+
+```bash
+# 1. ASTカタログ生成
+npx kanteen analyze "tests/**/*.test.ts" --output ./ast-catalog
+
+# 2. テスト実行（Runtimeカタログが自動生成される）
+npm test
+
+# 3. 比較分析
+npx kanteen compare \
+  ./ast-catalog/catalog.json \
+  ./test-kanteen-runtime/runtime-catalog.json \
+  --format json,markdown
+```
+
+**発見できること**:
+- 未実行テスト（スキップされたテスト等）
+- 動的生成テスト（`test.each`等で生成されたテスト）
+- テスト実行カバレッジ
+- 失敗したテストの詳細情報
+
+詳細: [Compare Command](./docs/COMPARE_COMMAND.md)
 
 #### LLM活用 🆕
 
@@ -158,9 +236,11 @@ npm run dev
 
 ## ステータス
 
-- 161個のテスト（全て合格）
+- 192個のテスト（全て合格）✅
 - JSON/YAML/Markdown出力対応
 - Jest/Vitest/Mocha対応
+- カスタムレポーター（Jest/Vitest/Playwright）🆕
+- AST×Runtime比較機能 🆕
 
 詳細は[PLAN.md](./PLAN.md)を参照してください。
 
@@ -174,7 +254,15 @@ Issue報告やPull Requestを歓迎します。
 
 ## ドキュメント
 
+### 機能ガイド
 - [LLMを活用したテスト分析ガイド](./docs/LLM_GUIDE.md) 🆕
+- [Jest Reporter](./docs/JEST_REPORTER.md) 🆕
+- [Vitest Reporter](./docs/VITEST_REPORTER.md) 🆕
+- [Playwright Reporter](./docs/PLAYWRIGHT_REPORTER.md) 🆕
+- [Compare Command](./docs/COMPARE_COMMAND.md) 🆕
+- [Extract機能ガイド](./docs/EXTRACT_GUIDE.md)
+
+### プロジェクト情報
 - [プロジェクトプラン](./PLAN.md)
 - [テスト計画書](./docs/TEST_PLAN.md)
 - [テスト実装サマリー](./docs/TEST_SUMMARY.md)

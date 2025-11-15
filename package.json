@@ -1,6 +1,6 @@
 {
   "name": "@koji-koji/test-kanteen",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "AST×Reporterでテストから観点カタログを自動生成し、LLMと人間の共通Specにするライブラリ",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -71,6 +71,8 @@
     "yaml": "^2.3.4"
   },
   "devDependencies": {
+    "@jest/reporters": "^29.7.0",
+    "@playwright/test": "^1.56.1",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.11.19",
     "@types/uuid": "^9.0.8",
@@ -81,6 +83,23 @@
     "jest": "^29.7.0",
     "prettier": "^3.2.5",
     "ts-jest": "^29.1.2",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "vitest": "^2.1.9"
+  },
+  "peerDependencies": {
+    "@jest/reporters": "^29.0.0",
+    "@playwright/test": "^1.40.0",
+    "vitest": "^1.0.0 || ^2.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@jest/reporters": {
+      "optional": true
+    },
+    "@playwright/test": {
+      "optional": true
+    },
+    "vitest": {
+      "optional": true
+    }
   }
 }
