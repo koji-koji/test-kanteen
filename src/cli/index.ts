@@ -383,6 +383,97 @@ program
     }
   });
 
+// report コマンド
+program
+  .command('report')
+  .description('カスタムレポートを生成')
+  .argument('<type>', 'レポートタイプ (runtime, compare)')
+  .option('-i, --input <path>', 'Runtimeカタログのパス', './test-kanteen-runtime/runtime-catalog.json')
+  .option('--ast <path>', 'ASTカタログのパス', './aaa_test_kanteen/catalog.json')
+  .option('--runtime <path>', 'Runtimeカタログのパス', './test-kanteen-runtime/runtime-catalog.json')
+  .option('-o, --output <path>', '出力先ファイルパス')
+  .option('-v, --verbose', '詳細な出力を表示')
+  .action(async (type: string, options) => {
+    try {
+      if (type === 'runtime') {
+        // Runtimeレポート生成
+        console.log('🔍 Generating runtime report...\n');
+
+        const runtimeCatalogPath = path.resolve(process.cwd(), options.input);
+
+        try {
+          const runtimeContent = await fs.readFile(runtimeCatalogPath, 'utf-8');
+          const runtimeCatalog = JSON.parse(runtimeContent);
+
+          const markdown = generateRuntimeReportMarkdown(runtimeCatalog);
+
+          const outputPath = options.output || './test-reports/runtime-report.md';
+          const resolvedOutputPath = path.resolve(process.cwd(), outputPath);
+          await fs.mkdir(path.dirname(resolvedOutputPath), { recursive: true });
+          await fs.writeFile(resolvedOutputPath, markdown, 'utf-8');
+
+          console.log('✅ Runtime report generated!\n');
+          console.log(`📄 Output: ${outputPath}\n`);
+        } catch (error) {
+          console.error(`❌ Error: Cannot read runtime catalog at ${options.input}`);
+          console.error(`   Make sure to run tests with kanteen reporter first.`);
+          throw error;
+        }
+
+      } else if (type === 'compare') {
+        // Compare+Runtimeレポート生成
+        console.log('🔍 Generating compare+runtime report...\n');
+
+        const astCatalogPath = path.resolve(process.cwd(), options.ast);
+        const runtimeCatalogPath = path.resolve(process.cwd(), options.runtime);
+
+        try {
+          const astContent = await fs.readFile(astCatalogPath, 'utf-8');
+          const runtimeContent = await fs.readFile(runtimeCatalogPath, 'utf-8');
+
+          const astCatalog = JSON.parse(astContent);
+          const runtimeCatalog = JSON.parse(runtimeContent);
+
+          const { TestMatcher } = await import('../utils/test-matcher');
+          const matcher = new TestMatcher();
+          const comparisonResult = matcher.compare(astCatalog, runtimeCatalog);
+
+          const markdown = generateCompareRuntimeReportMarkdown(
+            comparisonResult,
+            runtimeCatalog,
+            { astCatalogPath: options.ast, runtimeCatalogPath: options.runtime }
+          );
+
+          const outputPath = options.output || './test-reports/compare-runtime-report.md';
+          const resolvedOutputPath = path.resolve(process.cwd(), outputPath);
+          await fs.mkdir(path.dirname(resolvedOutputPath), { recursive: true });
+          await fs.writeFile(resolvedOutputPath, markdown, 'utf-8');
+
+          console.log('✅ Compare+Runtime report generated!\n');
+          console.log(`📄 Output: ${outputPath}\n`);
+        } catch (error) {
+          console.error(`❌ Error: Cannot read catalogs`);
+          console.error(`   AST: ${options.ast}`);
+          console.error(`   Runtime: ${options.runtime}`);
+          console.error(`   Make sure to run 'npx kanteen analyze' and tests first.`);
+          throw error;
+        }
+
+      } else {
+        console.error(`❌ Error: Unknown report type "${type}"`);
+        console.log('\nAvailable types:');
+        console.log('  - runtime   : Generate runtime execution report');
+        console.log('  - compare   : Generate AST×Runtime comparison report with runtime details');
+        process.exit(1);
+      }
+    } catch (error) {
+      if (options.verbose) {
+        console.error('❌ Error:', error instanceof Error ? error.message : error);
+      }
+      process.exit(1);
+    }
+  });
+
 // list-frameworks コマンド
 program
   .command('list-frameworks')
@@ -397,7 +488,7 @@ program
 
 // デフォルトコマンド: 引数なしの場合はanalyzeを実行
 const args = process.argv.slice(2);
-const knownCommands = ['analyze', 'extract', 'init', 'compare', 'list-frameworks'];
+const knownCommands = ['analyze', 'extract', 'init', 'compare', 'report', 'list-frameworks'];
 const hasCommand = args.length > 0 && knownCommands.includes(args[0]);
 
 if (!hasCommand && args.length === 0) {
@@ -697,4 +788,259 @@ function generateComparisonMarkdown(
   }
 
   return lines.join('\n');
+}
+
+/**
+ * Runtimeレポートのmarkdownを生成
+ */
+function generateRuntimeReportMarkdown(runtimeCatalog: any): string {
+  const lines: string[] = [];
+  const summary = runtimeCatalog.executionSummary;
+
+  lines.push('# 🧪 Test Execution Report');
+  lines.push('');
+  lines.push(`> Generated at ${new Date().toLocaleString()}`);
+  lines.push('');
+
+  // 実行サマリー
+  lines.push('## 📊 Execution Summary');
+  lines.push('');
+  lines.push(`- **Total Tests**: ${summary.totalTests}`);
+  lines.push(`- **✅ Passed**: ${summary.passed}`);
+  lines.push(`- **❌ Failed**: ${summary.failed}`);
+  lines.push(`- **⏭️  Skipped**: ${summary.skipped}`);
+  lines.push(`- **⏱️  Total Duration**: ${summary.totalDuration}ms`);
+  lines.push(`- **Execution Time**: ${new Date(summary.startTime).toLocaleString()}`);
+  lines.push('');
+
+  // 失敗したテストを強調表示
+  if (summary.failed > 0) {
+    lines.push('## ❌ Failed Tests');
+    lines.push('');
+
+    const collectFailedTests = (suite: any): any[] => {
+      const failed: any[] = [];
+      suite.tests?.forEach((test: any) => {
+        if (test.runtime?.status === 'failed') {
+          failed.push({ ...test, suiteName: suite.name });
+        }
+      });
+      suite.nestedSuites?.forEach((nested: any) => {
+        failed.push(...collectFailedTests(nested));
+      });
+      return failed;
+    };
+
+    runtimeCatalog.testSuites.forEach((suite: any) => {
+      collectFailedTests(suite).forEach((test: any) => {
+        lines.push(`### ${test.name}`);
+        lines.push('');
+        lines.push(`**Suite**: ${test.suiteName}`);
+        lines.push('');
+        lines.push(`**File**: \`${test.location.file}:${test.location.line}\``);
+        lines.push('');
+        lines.push(`**Duration**: ${test.runtime.duration}ms`);
+        lines.push('');
+        if (test.runtime.error) {
+          lines.push('**Error**:');
+          lines.push('```');
+          lines.push(test.runtime.error.message);
+          lines.push('```');
+          lines.push('');
+          if (test.runtime.error.stack) {
+            lines.push('<details>');
+            lines.push('<summary>Stack Trace</summary>');
+            lines.push('');
+            lines.push('```');
+            lines.push(test.runtime.error.stack);
+            lines.push('```');
+            lines.push('</details>');
+            lines.push('');
+          }
+        }
+      });
+    });
+  }
+
+  // すべてのテストスイートの詳細
+  lines.push('## 📝 Test Suites');
+  lines.push('');
+
+  const generateSuiteReport = (suite: any, indent: number = 0): void => {
+    const prefix = '  '.repeat(indent);
+    lines.push(`${prefix}### ${suite.name}`);
+    lines.push('');
+
+    if (suite.runtime) {
+      lines.push(`${prefix}**Duration**: ${suite.runtime.duration}ms`);
+      lines.push('');
+    }
+
+    suite.tests?.forEach((test: any) => {
+      const statusIcon = getStatusIcon(test.runtime?.status);
+      lines.push(`${prefix}- ${statusIcon} **${test.name}** (${test.runtime?.duration || 0}ms)`);
+    });
+
+    lines.push('');
+
+    suite.nestedSuites?.forEach((nested: any) => {
+      generateSuiteReport(nested, indent + 1);
+    });
+  };
+
+  runtimeCatalog.testSuites.forEach((suite: any) => {
+    generateSuiteReport(suite);
+  });
+
+  return lines.join('\n');
+}
+
+/**
+ * Compare+Runtimeレポートのmarkdownを生成
+ */
+function generateCompareRuntimeReportMarkdown(
+  comparisonResult: any,
+  runtimeCatalog: any,
+  _metadata: { astCatalogPath: string; runtimeCatalogPath: string }
+): string {
+  const lines: string[] = [];
+  const stats = comparisonResult.statistics;
+  const summary = runtimeCatalog.executionSummary;
+
+  lines.push('# 📊 AST×Runtime Comparison Report');
+  lines.push('');
+  lines.push(`> Generated at ${new Date().toLocaleString()}`);
+  lines.push('');
+
+  // 1. 実行サマリー（Runtime情報）
+  lines.push('## 🧪 Execution Summary');
+  lines.push('');
+  lines.push(`- **Total Tests Executed**: ${summary.totalTests}`);
+  lines.push(`- **✅ Passed**: ${summary.passed}`);
+  lines.push(`- **❌ Failed**: ${summary.failed}`);
+  lines.push(`- **⏭️  Skipped**: ${summary.skipped}`);
+  lines.push(`- **⏱️  Total Duration**: ${summary.totalDuration}ms`);
+  lines.push(`- **Execution Time**: ${new Date(summary.startTime).toLocaleString()}`);
+  lines.push('');
+
+  // 2. AST×Runtime比較統計
+  lines.push('## 📈 AST×Runtime Comparison Statistics');
+  lines.push('');
+  lines.push(`- **AST Tests**: ${stats.totalAstTests}`);
+  lines.push(`- **Runtime Tests**: ${stats.totalRuntimeTests}`);
+  lines.push(`- **Perfect Matches**: ${stats.perfectMatches}`);
+  lines.push(`- **High Confidence Matches**: ${stats.highConfidenceMatches}`);
+  lines.push(`- **Medium Confidence Matches**: ${stats.mediumConfidenceMatches}`);
+  lines.push(`- **Unmatched AST (not executed)**: ${stats.unmatchedAst}`);
+  lines.push(`- **Unmatched Runtime (dynamically generated)**: ${stats.unmatchedRuntime}`);
+  lines.push('');
+
+  // 3. 未実行テスト（ASTにあるがRuntimeにない）
+  if (comparisonResult.astOnly && comparisonResult.astOnly.length > 0) {
+    lines.push('## ⚠️  Tests Not Executed (AST only)');
+    lines.push('');
+    lines.push('これらのテストはコードに存在しますが、実行されませんでした（スキップまたは条件分岐）：');
+    lines.push('');
+    comparisonResult.astOnly.forEach((test: any) => {
+      lines.push(`- **${test.name}**`);
+      lines.push(`  - File: \`${test.location.file}:${test.location.line}\``);
+    });
+    lines.push('');
+  }
+
+  // 4. 動的生成テスト（Runtimeにのみ存在）
+  if (comparisonResult.runtimeOnly && comparisonResult.runtimeOnly.length > 0) {
+    lines.push('## ✨ Dynamically Generated Tests (Runtime only)');
+    lines.push('');
+    lines.push('これらのテストは実行時に動的生成されました（test.each等）：');
+    lines.push('');
+    comparisonResult.runtimeOnly.forEach((test: any) => {
+      const statusIcon = getStatusIcon(test.runtime?.status);
+      lines.push(`- ${statusIcon} **${test.name}** (${test.runtime?.duration || 0}ms)`);
+      lines.push(`  - File: \`${test.location.file}:${test.location.line}\``);
+      lines.push(`  - Status: ${test.runtime?.status}`);
+    });
+    lines.push('');
+  }
+
+  // 5. 失敗したテスト（Runtime情報から）
+  const failedTests = comparisonResult.matches.filter(
+    (match: any) => match.runtimeTest?.runtime?.status === 'failed'
+  );
+
+  if (failedTests.length > 0) {
+    lines.push('## ❌ Failed Tests');
+    lines.push('');
+    failedTests.forEach((match: any) => {
+      const test = match.runtimeTest;
+      lines.push(`### ${test.name}`);
+      lines.push('');
+      lines.push(`**File**: \`${test.location.file}:${test.location.line}\``);
+      lines.push('');
+      lines.push(`**Duration**: ${test.runtime.duration}ms`);
+      lines.push('');
+      lines.push(`**Match Type**: ${match.matchType} (confidence: ${match.confidence}%)`);
+      lines.push('');
+
+      if (test.runtime.error) {
+        lines.push('**Error**:');
+        lines.push('```');
+        lines.push(test.runtime.error.message);
+        lines.push('```');
+        lines.push('');
+
+        if (test.runtime.error.expected !== undefined && test.runtime.error.actual !== undefined) {
+          lines.push(`**Expected**: \`${JSON.stringify(test.runtime.error.expected)}\``);
+          lines.push('');
+          lines.push(`**Actual**: \`${JSON.stringify(test.runtime.error.actual)}\``);
+          lines.push('');
+        }
+
+        if (test.runtime.error.stack) {
+          lines.push('<details>');
+          lines.push('<summary>Stack Trace</summary>');
+          lines.push('');
+          lines.push('```');
+          lines.push(test.runtime.error.stack);
+          lines.push('```');
+          lines.push('</details>');
+          lines.push('');
+        }
+      }
+    });
+  }
+
+  // 6. すべてのマッチング結果（詳細）
+  lines.push('## 📝 All Test Matches');
+  lines.push('');
+  lines.push('| Test Name | AST | Runtime | Status | Duration | Match |');
+  lines.push('|-----------|-----|---------|--------|----------|-------|');
+
+  comparisonResult.matches.forEach((match: any) => {
+    const name = match.astTest?.name || match.runtimeTest?.name || 'Unknown';
+    const hasAst = match.astTest ? '✓' : '✗';
+    const hasRuntime = match.runtimeTest ? '✓' : '✗';
+    const status = match.runtimeTest ? getStatusIcon(match.runtimeTest.runtime?.status) : '-';
+    const duration = match.runtimeTest ? `${match.runtimeTest.runtime?.duration || 0}ms` : '-';
+    const matchType = match.matchType;
+
+    lines.push(`| ${name} | ${hasAst} | ${hasRuntime} | ${status} | ${duration} | ${matchType} |`);
+  });
+  lines.push('');
+
+  return lines.join('\n');
+}
+
+/**
+ * ステータスアイコンを取得
+ */
+function getStatusIcon(status: string): string {
+  switch (status) {
+    case 'passed': return '✅';
+    case 'failed': return '❌';
+    case 'skipped': return '⏭️';
+    case 'pending': return '⏸️';
+    case 'todo': return '📝';
+    default: return '❓';
+  }
 }

@@ -139,6 +139,42 @@ npx kanteen compare \
 
 詳細: [Compare Command](./docs/COMPARE_COMMAND.md)
 
+#### カスタムレポート生成 🆕
+
+Runtime情報やCompare結果をマークダウンレポートとして一発出力できます。
+
+**Runtimeレポート**（テスト実行結果の可視化）:
+```bash
+# デフォルトパスを使用（最短）
+npx kanteen report runtime
+
+# カスタムパスを指定
+npx kanteen report runtime --input ./custom-path/runtime-catalog.json
+```
+
+**Compare+Runtimeレポート**（AST×Runtime比較 + 実行結果詳細）:
+```bash
+# デフォルトパスを使用（最短）
+npx kanteen report compare
+
+# カスタムパスを指定
+npx kanteen report compare --ast ./custom/catalog.json --runtime ./custom/runtime-catalog.json
+```
+
+**デフォルトパス**:
+- AST: `./aaa_test_kanteen/catalog.json`
+- Runtime: `./test-kanteen-runtime/runtime-catalog.json`
+- 出力先: `./test-reports/`
+
+**レポートに含まれる情報**:
+- ✅ テスト実行サマリー（passed/failed/skipped/duration）
+- ❌ 失敗したテストの詳細（エラーメッセージ、スタックトレース）
+- ⚠️  未実行テスト（ASTに存在するが実行されなかったテスト）
+- ✨ 動的生成テスト（test.each等で実行時生成されたテスト）
+- 📊 AST×Runtime比較統計（compareレポートのみ）
+
+詳細: [カスタムレポーターガイド](./docs/CUSTOM_REPORTER.md)
+
 #### LLM統合ガイドの自動生成 🆕
 
 test-kanteenは、初回のanalyze実行時にLLM統合ガイドを自動生成します：
@@ -175,6 +211,32 @@ const catalog = await parseTests('./tests/**/*.test.ts', {
   output: './catalog',
 });
 ```
+
+### カスタムレポーターの作成
+
+Test Kanteenは独自のレポート形式を作成できます。HTMLレポート、Slack通知、CSV出力など、用途に応じたカスタムレポーターを実装可能です。
+
+```typescript
+import { BaseReporter } from 'test-kanteen';
+import type { TestCatalog } from 'test-kanteen';
+
+export class GitHubMarkdownReporter extends BaseReporter {
+  generate(): string {
+    const catalog = this.catalog as TestCatalog;
+    return `# 📊 Test Report\n...`;
+  }
+}
+
+// 使用例
+const catalog = await parseTests('tests/**/*.test.ts');
+const reporter = new GitHubMarkdownReporter();
+reporter.onComplete(catalog);
+await reporter.writeToFile('./test-reports/github.md');
+```
+
+**⚠️ 重要**: カスタムレポートは公式カタログ（`catalog.md`, `catalog.json`）を上書きしないよう、別のディレクトリ（`test-reports/`等）に保存してください。
+
+詳細: [カスタムレポーターガイド](./docs/CUSTOM_REPORTER.md)
 
 ### 設定ファイル
 
@@ -268,6 +330,7 @@ Issue報告やPull Requestを歓迎します。
 - [Playwright Reporter](./docs/PLAYWRIGHT_REPORTER.md) 🆕
 - [Compare Command](./docs/COMPARE_COMMAND.md) 🆕
 - [Extract機能ガイド](./docs/EXTRACT_GUIDE.md)
+- [カスタムレポーターガイド](./docs/CUSTOM_REPORTER.md) 🆕
 
 ### プロジェクト情報
 - [プロジェクトプラン](./PLAN.md)
