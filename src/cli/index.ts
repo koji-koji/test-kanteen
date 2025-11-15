@@ -299,6 +299,90 @@ program
     }
   });
 
+// compare コマンド
+program
+  .command('compare')
+  .description('ASTカタログとランタイムカタログを比較')
+  .argument('<ast-catalog>', 'ASTカタログのパス (JSON)')
+  .argument('<runtime-catalog>', 'ランタイムカタログのパス (JSON)')
+  .option('-o, --output <path>', '出力先ディレクトリ', './test-kanteen-comparison')
+  .option(
+    '-f, --format <formats>',
+    '出力フォーマット (json,markdown)',
+    'json,markdown'
+  )
+  .option('-v, --verbose', '詳細な出力を表示')
+  .action(async (astCatalogPath: string, runtimeCatalogPath: string, options) => {
+    try {
+      console.log('🔍 Comparing catalogs...\n');
+
+      // カタログファイルを読み込み
+      const astCatalogContent = await fs.readFile(
+        path.resolve(process.cwd(), astCatalogPath),
+        'utf-8'
+      );
+      const runtimeCatalogContent = await fs.readFile(
+        path.resolve(process.cwd(), runtimeCatalogPath),
+        'utf-8'
+      );
+
+      const astCatalog = JSON.parse(astCatalogContent);
+      const runtimeCatalog = JSON.parse(runtimeCatalogContent);
+
+      if (options.verbose) {
+        console.log(`📄 AST Catalog: ${astCatalogPath}`);
+        console.log(`📄 Runtime Catalog: ${runtimeCatalogPath}\n`);
+      }
+
+      // TestMatcherを使用して比較
+      const { TestMatcher } = await import('../utils/test-matcher');
+      const matcher = new TestMatcher();
+      const comparisonResult = matcher.compare(astCatalog, runtimeCatalog);
+
+      // サマリーを表示
+      console.log('✅ Comparison complete!\n');
+      console.log('📊 Summary:');
+      console.log(`  - AST Tests: ${comparisonResult.statistics.totalAstTests}`);
+      console.log(`  - Runtime Tests: ${comparisonResult.statistics.totalRuntimeTests}`);
+      console.log(`  - Perfect Matches: ${comparisonResult.statistics.perfectMatches}`);
+      console.log(`  - High Confidence: ${comparisonResult.statistics.highConfidenceMatches}`);
+      console.log(`  - Medium Confidence: ${comparisonResult.statistics.mediumConfidenceMatches}`);
+      console.log(`  - AST Only (not executed): ${comparisonResult.statistics.unmatchedAst}`);
+      console.log(`  - Runtime Only (dynamically generated): ${comparisonResult.statistics.unmatchedRuntime}`);
+
+      // 出力
+      const outputPath = path.resolve(process.cwd(), options.output);
+      await fs.mkdir(outputPath, { recursive: true });
+
+      const formats = options.format.split(',');
+
+      for (const format of formats) {
+        if (format === 'json') {
+          const jsonPath = path.join(outputPath, 'comparison.json');
+          await fs.writeFile(
+            jsonPath,
+            JSON.stringify(comparisonResult, null, 2),
+            'utf-8'
+          );
+          console.log(`\n📄 JSON: ${jsonPath}`);
+        } else if (format === 'markdown') {
+          const mdPath = path.join(outputPath, 'comparison.md');
+          const markdown = generateComparisonMarkdown(comparisonResult, {
+            astCatalogPath,
+            runtimeCatalogPath,
+          });
+          await fs.writeFile(mdPath, markdown, 'utf-8');
+          console.log(`📄 Markdown: ${mdPath}`);
+        }
+      }
+
+      console.log(`\n📁 Output: ${options.output}\n`);
+    } catch (error) {
+      console.error('❌ Error:', error instanceof Error ? error.message : error);
+      process.exit(1);
+    }
+  });
+
 // list-frameworks コマンド
 program
   .command('list-frameworks')
@@ -313,7 +397,7 @@ program
 
 // デフォルトコマンド: 引数なしの場合はanalyzeを実行
 const args = process.argv.slice(2);
-const knownCommands = ['analyze', 'extract', 'init', 'frameworks'];
+const knownCommands = ['analyze', 'extract', 'init', 'compare', 'list-frameworks'];
 const hasCommand = args.length > 0 && knownCommands.includes(args[0]);
 
 if (!hasCommand && args.length === 0) {
@@ -417,6 +501,199 @@ function generateTestSuiteTree(testSuites: any[], indent: number = 0): string {
     if (suite.nestedSuites && suite.nestedSuites.length > 0) {
       lines.push(generateTestSuiteTree(suite.nestedSuites, indent + 1));
     }
+  }
+
+  return lines.join('\n');
+}
+
+/**
+ * 比較結果のMarkdownを生成
+ */
+function generateComparisonMarkdown(
+  comparisonResult: any,
+  metadata: { astCatalogPath: string; runtimeCatalogPath: string }
+): string {
+  const lines: string[] = [];
+
+  // ヘッダー
+  lines.push('# Test Catalog Comparison');
+  lines.push('');
+  lines.push('> AST Catalog vs Runtime Catalog Comparison Report');
+  lines.push('');
+
+  // メタデータ
+  lines.push('## Metadata');
+  lines.push('');
+  lines.push(`- **Generated At**: ${new Date().toLocaleString()}`);
+  lines.push(`- **AST Catalog**: ${metadata.astCatalogPath}`);
+  lines.push(`- **Runtime Catalog**: ${metadata.runtimeCatalogPath}`);
+  lines.push('');
+
+  // サマリー
+  lines.push('## Summary');
+  lines.push('');
+  lines.push('| Metric | Count |');
+  lines.push('|--------|-------|');
+  lines.push(`| AST Tests | ${comparisonResult.statistics.totalAstTests} |`);
+  lines.push(`| Runtime Tests | ${comparisonResult.statistics.totalRuntimeTests} |`);
+  lines.push(`| Perfect Matches | ${comparisonResult.statistics.perfectMatches} ✅ |`);
+  lines.push(`| High Confidence Matches | ${comparisonResult.statistics.highConfidenceMatches} 🟢 |`);
+  lines.push(`| Medium Confidence Matches | ${comparisonResult.statistics.mediumConfidenceMatches} 🟡 |`);
+  lines.push(`| AST Only (Not Executed) | ${comparisonResult.statistics.unmatchedAst} ⚠️ |`);
+  lines.push(`| Runtime Only (Dynamically Generated) | ${comparisonResult.statistics.unmatchedRuntime} 🔵 |`);
+  lines.push('');
+
+  // Coverage率
+  const matchedTests = comparisonResult.statistics.perfectMatches +
+    comparisonResult.statistics.highConfidenceMatches +
+    comparisonResult.statistics.mediumConfidenceMatches;
+  const coverageRate = comparisonResult.statistics.totalAstTests > 0
+    ? ((matchedTests / comparisonResult.statistics.totalAstTests) * 100).toFixed(1)
+    : '0.0';
+
+  lines.push('### Test Execution Coverage');
+  lines.push('');
+  lines.push(`**${coverageRate}%** of AST tests were executed at runtime`);
+  lines.push('');
+
+  // AST Only Tests (未実行)
+  if (comparisonResult.astOnly && comparisonResult.astOnly.length > 0) {
+    lines.push('## AST Only Tests (Not Executed) ⚠️');
+    lines.push('');
+    lines.push('These tests exist in the source code but were not executed:');
+    lines.push('');
+
+    for (const test of comparisonResult.astOnly) {
+      const suitePath = test.suitePath ? test.suitePath.join(' > ') : '';
+      lines.push(`- **${test.name}**`);
+      if (suitePath) {
+        lines.push(`  - Suite: ${suitePath}`);
+      }
+      lines.push(`  - File: ${test.location?.file || 'unknown'}:${test.location?.line || '?'}`);
+    }
+    lines.push('');
+  }
+
+  // Runtime Only Tests (動的生成)
+  if (comparisonResult.runtimeOnly && comparisonResult.runtimeOnly.length > 0) {
+    lines.push('## Runtime Only Tests (Dynamically Generated) 🔵');
+    lines.push('');
+    lines.push('These tests were executed but not found in the AST (likely generated dynamically):');
+    lines.push('');
+
+    for (const test of comparisonResult.runtimeOnly) {
+      const suitePath = test.suitePath ? test.suitePath.join(' > ') : '';
+      lines.push(`- **${test.name}**`);
+      if (suitePath) {
+        lines.push(`  - Suite: ${suitePath}`);
+      }
+      lines.push(`  - Status: ${test.status}`);
+      if (test.duration !== undefined) {
+        lines.push(`  - Duration: ${test.duration}ms`);
+      }
+    }
+    lines.push('');
+  }
+
+  // Match Details (Perfect + High Confidence)
+  const goodMatches = comparisonResult.matches.filter(
+    (m: any) => m.matchType === 'perfect' || m.matchType === 'high-confidence'
+  );
+
+  // Group by status (declare at top level for use in recommendations)
+  const passed = goodMatches.filter((m: any) => m.runtimeTest?.status === 'passed');
+  const failed = goodMatches.filter((m: any) => m.runtimeTest?.status === 'failed');
+  const skipped = goodMatches.filter((m: any) => m.runtimeTest?.status === 'skipped');
+
+  if (goodMatches.length > 0) {
+    lines.push('## Matched Tests ✅');
+    lines.push('');
+    lines.push(`${goodMatches.length} tests were successfully matched between AST and Runtime:`);
+    lines.push('');
+
+    lines.push('### Status Breakdown');
+    lines.push('');
+    lines.push(`- ✅ Passed: ${passed.length}`);
+    lines.push(`- ❌ Failed: ${failed.length}`);
+    lines.push(`- ⏭️ Skipped: ${skipped.length}`);
+    lines.push('');
+
+    // Show failed tests
+    if (failed.length > 0) {
+      lines.push('### Failed Tests ❌');
+      lines.push('');
+      for (const match of failed) {
+        const test = match.runtimeTest;
+        const suitePath = test.suitePath ? test.suitePath.join(' > ') : '';
+        lines.push(`- **${test.name}**`);
+        if (suitePath) {
+          lines.push(`  - Suite: ${suitePath}`);
+        }
+        if (test.error?.message) {
+          const errorPreview = test.error.message.split('\n')[0];
+          lines.push(`  - Error: ${errorPreview}`);
+        }
+      }
+      lines.push('');
+    }
+  }
+
+  // Medium Confidence Matches
+  const mediumMatches = comparisonResult.matches.filter(
+    (m: any) => m.matchType === 'medium-confidence'
+  );
+
+  if (mediumMatches.length > 0) {
+    lines.push('## Medium Confidence Matches 🟡');
+    lines.push('');
+    lines.push('These tests were matched with medium confidence. Please verify manually:');
+    lines.push('');
+
+    for (const match of mediumMatches) {
+      lines.push(`- **${match.astTest?.name || match.runtimeTest?.name}**`);
+      lines.push(`  - Confidence: ${match.confidence}%`);
+      if (match.reasons && match.reasons.length > 0) {
+        lines.push(`  - Reasons: ${match.reasons.join(', ')}`);
+      }
+    }
+    lines.push('');
+  }
+
+  // Recommendations
+  lines.push('## Recommendations');
+  lines.push('');
+
+  if (comparisonResult.statistics.unmatchedAst > 0) {
+    lines.push('### Unexecuted Tests ⚠️');
+    lines.push('');
+    lines.push(`${comparisonResult.statistics.unmatchedAst} tests were not executed. Consider:`);
+    lines.push('');
+    lines.push('- Are these tests skipped intentionally?');
+    lines.push('- Do test file patterns exclude these tests?');
+    lines.push('- Are there conditional skips (e.g., `test.skip`)?');
+    lines.push('');
+  }
+
+  if (comparisonResult.statistics.unmatchedRuntime > 0) {
+    lines.push('### Dynamically Generated Tests 🔵');
+    lines.push('');
+    lines.push(`${comparisonResult.statistics.unmatchedRuntime} tests appear to be dynamically generated. This is common with:`);
+    lines.push('');
+    lines.push('- `test.each()` / `describe.each()`');
+    lines.push('- Parameterized tests');
+    lines.push('- Tests generated from data sources');
+    lines.push('');
+  }
+
+  if (failed.length > 0) {
+    lines.push('### Failed Tests ❌');
+    lines.push('');
+    lines.push(`${failed.length} tests failed during execution. Priority actions:`);
+    lines.push('');
+    lines.push('1. Review error messages above');
+    lines.push('2. Fix failing tests');
+    lines.push('3. Re-run comparison after fixes');
+    lines.push('');
   }
 
   return lines.join('\n');
