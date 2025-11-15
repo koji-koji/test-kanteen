@@ -4,150 +4,23 @@
 
 ## Metadata
 
-- **Generated At**: 2025-11-15T05:35:19.662Z
-- **Source Files**: 20
-- **Test Suites**: 20
-- **Total Tests**: 225
+- **Generated At**: 2025-11-15T06:22:58.277Z
+- **Source Files**: 24
+- **Test Suites**: 23
+- **Total Tests**: 208
 
 ## Test Suites
 
 ```
-CLI E2E Workflow (tests/e2e/cli-workflow.test.ts) (Total: 7 tests)
-  ✓ should execute full analyze workflow from CLI
-  ✓ should handle multiple output formats
-  ✓ should respect output directory flag
-  ✓ should handle glob patterns correctly
-  ✓ should generate guide file on first run
-  ✓ should support framework flag
-  ✓ should handle verbose flag
-E2E: Full Workflow (tests/e2e/full-workflow.test.ts) (Total: 5 tests)
-  ✓ should analyze test files and generate AST catalog
-  ✓ should support multiple output formats
-  ✓ should handle nested test suites correctly
-  ✓ should detect framework automatically
-  ✓ should extract test assertions
-Compare Functionality Integration (tests/integration/compare.test.ts) (Total: 3 tests)
-  ✓ should compare AST and Runtime catalogs successfully
-  ✓ should handle empty catalogs
-  ✓ should handle all tests executed scenario
-Performance with large projects (tests/e2e/performance.test.ts) (Total: 3 tests)
-  ✓ should handle 100+ test files efficiently
-  ✓ should handle deeply nested test suites
-  ✓ should generate catalog for large codebase within time limit
-TestMatcher (tests/unit/utils/test-matcher.test.ts) (Total: 9 tests)
-  compare (Total: 5 tests)
-    ✓ should match identical tests perfectly
-    ✓ should detect runtime-only tests (dynamically generated)
-    ✓ should detect AST-only tests (not executed)
-    ✓ should handle file path normalization
-    ✓ should calculate statistics correctly
-  configuration (Total: 2 tests)
-    ✓ should respect custom confidence thresholds
-    ✓ should support case-sensitive matching
-  edge cases (Total: 2 tests)
-    ✓ should handle empty catalogs
-    ✓ should handle nested test suites
-JSONReporter (tests/unit/reporter/json-reporter.test.ts) (Total: 16 tests)
-  generate (Total: 2 tests)
-    ✓ should generate catalog as object
-    ✓ should include all catalog properties
-  generatePretty (Total: 3 tests)
-    ✓ should generate pretty formatted JSON string
-    ✓ should be valid JSON
-    ✓ should contain catalog data
-  writeToFile (Total: 3 tests)
-    ✓ should write JSON to file
-    ✓ should create directory if not exists
-    ✓ should write valid JSON format
-  options (Total: 2 tests)
-    ✓ should respect pretty format option
-    ✓ should respect include options
-  error handling (Total: 6 tests)
-    ✓ should handle write permission errors gracefully
-    ✓ should validate output path before writing
-    ✓ should handle empty output path
-    ✓ should handle very long file paths
-    ✓ should handle concurrent writes to the same file
-    ✓ should maintain data integrity when writing fails
-ASTParser (tests/unit/parser/ast-parser.test.ts) (Total: 10 tests)
-  parse (Total: 4 tests)
-    ✓ should parse simple JavaScript code
-    ✓ should parse TypeScript code
-    ✓ should parse test file with describe and it
-    ✓ should throw error for invalid syntax
-  parseMultiple (Total: 1 tests)
-    ✓ should parse multiple sources
-  isValidAST (Total: 2 tests)
-    ✓ should return true for valid AST
-    ✓ should return false for invalid AST
-  ASTParser - edge cases (Total: 3 tests)
-    ✓ should handle empty file
-    ✓ should handle very large files efficiently
-    ✓ should handle deep nesting (100+ levels)
-aaa_spec Guide Generation (tests/integration/aaa-spec-guide.test.ts) (Total: 4 tests)
-  ✓ should generate TEST_KANTEEN_GUIDE.md when analyzing tests
-  ✓ should not overwrite existing guide
-  ✓ should place guide in aaa_spec directory alongside output directory
-  ✓ should include all essential sections in guide
-Formatters (tests/unit/generator/formatters.test.ts) (Total: 23 tests)
-  JSONFormatter (Total: 7 tests)
-    format (Total: 5 tests)
-      ✓ should format catalog as JSON string
-      ✓ should format with pretty print by default
-      ✓ should format without pretty print when disabled
-      ✓ should respect custom indent
-      ✓ should include all catalog properties
-    toObject (Total: 2 tests)
-      ✓ should return catalog as object
-      ✓ should return same catalog reference
-  YAMLFormatter (Total: 7 tests)
-    format (Total: 5 tests)
-      ✓ should format catalog as YAML string
-      ✓ should include metadata in YAML
-      ✓ should include test suites in YAML
-      ✓ should respect custom indent
-      ✓ should be valid YAML format
-    toDocument (Total: 2 tests)
-      ✓ should return YAML Document
-      ✓ should contain catalog data
-  MarkdownFormatter (Total: 9 tests)
-    format (Total: 7 tests)
-      ✓ should format catalog as Markdown string
-      ✓ should include main header
-      ✓ should include metadata section
-      ✓ should include coverage summary
-      ✓ should include test suites
-      ✓ should format test information
-      ✓ should use proper Markdown syntax
-    nested suites (Total: 2 tests)
-      ✓ should format nested suites correctly
-      ✓ should use correct indentation levels
-SourceLoader (tests/unit/parser/source-loader.test.ts) (Total: 20 tests)
-  loadFile (Total: 4 tests)
-    ✓ should load existing file
-    ✓ should throw error for non-existent file
-    ✓ should handle absolute paths
-    ✓ should handle relative paths
-  loadFiles (Total: 3 tests)
-    ✓ should load multiple files
+Array Operations (tests/fixtures/edge-cases.test.ts) (Total: 6 tests)
+  Edge cases (Total: 5 tests)
     ✓ should handle empty array
-    ✓ should skip files that fail to load
-  loadByPattern (Total: 7 tests)
-    ✓ should load files matching pattern
-    ✓ should handle multiple patterns
-    ✓ should respect ignore patterns
-    ✓ should use custom cwd
-    ✓ should return empty map for no matches
-    ✓ should ignore node_modules by default
-    ✓ should ignore dist by default
-  exists (Total: 3 tests)
-    ✓ should return true for existing file
-    ✓ should return false for non-existent file
-    ✓ should handle absolute paths
-  getStats (Total: 3 tests)
-    ✓ should return file stats
-    ✓ should throw error for non-existent file
-    ✓ should work with directories
+    ✓ should handle array with single element
+    ✓ should handle array with negative numbers
+    ✓ should handle very large numbers
+    ✓ should handle null and undefined gracefully
+  Performance (Total: 1 tests)
+    ✓ should process large array efficiently
 Main API Integration Tests (tests/integration/main-api.test.ts) (Total: 21 tests)
   parseTests (Total: 10 tests)
     ✓ should parse test files and generate catalog
@@ -174,15 +47,83 @@ Main API Integration Tests (tests/integration/main-api.test.ts) (Total: 21 tests
     ✓ should handle empty test files gracefully
     ✓ should provide meaningful error message when no tests found
     ✓ should handle malformed test structure
-CatalogGenerator (tests/unit/generator/catalog-generator.test.ts) (Total: 7 tests)
-  generate (Total: 7 tests)
-    ✓ should generate catalog with metadata
-    ✓ should calculate coverage information
+Compare Functionality Integration (tests/integration/compare.test.ts) (Total: 3 tests)
+  ✓ should compare AST and Runtime catalogs successfully
+  ✓ should handle empty catalogs
+  ✓ should handle all tests executed scenario
+Performance with large projects (tests/e2e/performance.test.ts) (Total: 1 tests)
+  ✓ should handle large codebase with multiple directories efficiently
+TestMatcher (tests/unit/utils/test-matcher.test.ts) (Total: 9 tests)
+  compare (Total: 5 tests)
+    ✓ should match identical tests perfectly
+    ✓ should detect runtime-only tests (dynamically generated)
+    ✓ should detect AST-only tests (not executed)
+    ✓ should handle file path normalization
+    ✓ should calculate statistics correctly
+  configuration (Total: 2 tests)
+    ✓ should respect custom confidence thresholds
+    ✓ should support case-sensitive matching
+  edge cases (Total: 2 tests)
+    ✓ should handle empty catalogs
     ✓ should handle nested test suites
-    ✓ should add totalTests field to each test suite
-    ✓ should calculate totalTests correctly for nested suites
-    ✓ should calculate totalTests for deeply nested suites
-    ✓ should handle suite with no tests but nested suites
+MarkdownReporter (tests/unit/reporter/markdown-reporter.test.ts) (Total: 13 tests)
+  generate (Total: 7 tests)
+    ✓ should generate Markdown string
+    ✓ should include header
+    ✓ should include metadata section
+    ✓ should include coverage section
+    ✓ should include test suites section
+    ✓ should include test structure
+    ✓ should use Jest-style hierarchical format
+  nested test suites (Total: 2 tests)
+    ✓ should include nested suites
+    ✓ should use correct indentation levels
+  writeToFile (Total: 2 tests)
+    ✓ should write Markdown to file
+    ✓ should create directory if not exists
+  options (Total: 2 tests)
+    ✓ should respect include metadata option
+    ✓ should respect include aspects option
+aaa_spec Guide Generation (tests/integration/aaa-spec-guide.test.ts) (Total: 4 tests)
+  ✓ should generate TEST_KANTEEN_GUIDE.md when analyzing tests
+  ✓ should not overwrite existing guide
+  ✓ should place guide in aaa_spec directory alongside output directory
+  ✓ should include all essential sections in guide
+JSONReporter (tests/unit/reporter/json-reporter.test.ts) (Total: 16 tests)
+  generate (Total: 2 tests)
+    ✓ should generate catalog as object
+    ✓ should include all catalog properties
+  generatePretty (Total: 3 tests)
+    ✓ should generate pretty formatted JSON string
+    ✓ should be valid JSON
+    ✓ should contain catalog data
+  writeToFile (Total: 3 tests)
+    ✓ should write JSON to file
+    ✓ should create directory if not exists
+    ✓ should write valid JSON format
+  options (Total: 2 tests)
+    ✓ should respect pretty format option
+    ✓ should respect include options
+  error handling (Total: 6 tests)
+    ✓ should handle write permission errors gracefully
+    ✓ should validate output path before writing
+    ✓ should handle empty output path
+    ✓ should handle very long file paths
+    ✓ should handle concurrent writes to the same file
+    ✓ should maintain data integrity when writing fails
+Formatters (tests/unit/generator/formatters.test.ts) (Total: 8 tests)
+  common functionality (Total: 2 tests)
+    ✓ should include all catalog properties in all formats
+    ✓ should handle nested test suites correctly in all formats
+  JSONFormatter (Total: 2 tests)
+    ✓ should format catalog as valid JSON with configurable options
+    ✓ should return catalog as object through toObject method
+  YAMLFormatter (Total: 2 tests)
+    ✓ should format catalog as valid YAML with configurable options
+    ✓ should return YAML Document through toDocument method
+  MarkdownFormatter (Total: 2 tests)
+    ✓ should format catalog as valid Markdown with proper structure
+    ✓ should use correct indentation levels for nested suites
 TestFrameworkDetector (tests/unit/parser/test-framework-detector.test.ts) (Total: 21 tests)
   detectFromSource (Total: 5 tests)
     ✓ should detect Jest from import
@@ -211,24 +152,43 @@ TestFrameworkDetector (tests/unit/parser/test-framework-detector.test.ts) (Total
     ✓ should have correct Vitest identifiers
     ✓ should have correct Mocha identifiers
     ✓ should have correct Mocha hook identifiers
-MarkdownReporter (tests/unit/reporter/markdown-reporter.test.ts) (Total: 13 tests)
+SourceLoader (tests/unit/parser/source-loader.test.ts) (Total: 8 tests)
+  loadFile (Total: 2 tests)
+    ✓ should load existing file with both absolute and relative paths
+    ✓ should throw error for non-existent file
+  loadFiles (Total: 1 tests)
+    ✓ should load multiple files and skip invalid ones
+  loadByPattern (Total: 3 tests)
+    ✓ should load files matching glob patterns
+    ✓ should respect ignore patterns and default ignores
+    ✓ should use custom working directory when specified
+  exists and getStats (Total: 2 tests)
+    ✓ should check file existence for existing and non-existing files
+    ✓ should return file stats for files and directories
+CatalogGenerator (tests/unit/generator/catalog-generator.test.ts) (Total: 7 tests)
   generate (Total: 7 tests)
-    ✓ should generate Markdown string
-    ✓ should include header
-    ✓ should include metadata section
-    ✓ should include coverage section
-    ✓ should include test suites section
-    ✓ should include test structure
-    ✓ should use Jest-style hierarchical format
-  nested test suites (Total: 2 tests)
-    ✓ should include nested suites
-    ✓ should use correct indentation levels
-  writeToFile (Total: 2 tests)
-    ✓ should write Markdown to file
-    ✓ should create directory if not exists
-  options (Total: 2 tests)
-    ✓ should respect include metadata option
-    ✓ should respect include aspects option
+    ✓ should generate catalog with metadata
+    ✓ should calculate coverage information
+    ✓ should handle nested test suites
+    ✓ should add totalTests field to each test suite
+    ✓ should calculate totalTests correctly for nested suites
+    ✓ should calculate totalTests for deeply nested suites
+    ✓ should handle suite with no tests but nested suites
+ASTParser (tests/unit/parser/ast-parser.test.ts) (Total: 10 tests)
+  parse (Total: 4 tests)
+    ✓ should parse simple JavaScript code
+    ✓ should parse TypeScript code
+    ✓ should parse test file with describe and it
+    ✓ should throw error for invalid syntax
+  parseMultiple (Total: 1 tests)
+    ✓ should parse multiple sources
+  isValidAST (Total: 2 tests)
+    ✓ should return true for valid AST
+    ✓ should return false for invalid AST
+  ASTParser - edge cases (Total: 3 tests)
+    ✓ should handle empty file
+    ✓ should handle very large files efficiently
+    ✓ should handle deep nesting (100+ levels)
 TestAnalyzer (tests/unit/analyzer/test-analyzer.test.ts) (Total: 11 tests)
   analyze (Total: 11 tests)
     ✓ should analyze simple test suite
@@ -242,24 +202,12 @@ TestAnalyzer (tests/unit/analyzer/test-analyzer.test.ts) (Total: 11 tests)
     ✓ should handle deeply nested suites
     ✓ should work with test() instead of it()
     ✓ should include location information
-ExportExtractor (tests/unit/analyzer/export-extractor.test.ts) (Total: 16 tests)
-  extract (Total: 16 tests)
-    ✓ should extract named function export
-    ✓ should extract default function export
-    ✓ should extract async function export
-    ✓ should extract class export
-    ✓ should extract class with public methods
-    ✓ should not extract private methods
-    ✓ should extract variable export
-    ✓ should extract TypeScript interface export
-    ✓ should extract TypeScript type alias export
-    ✓ should extract multiple exports
-    ✓ should extract export specifiers
-    ✓ should include location information
-    ✓ should include function signature
-    ✓ should handle rest parameters
-    ✓ should handle empty file
-    ✓ should handle file with no exports
+E2E: Full Workflow (tests/e2e/full-workflow.test.ts) (Total: 5 tests)
+  ✓ should analyze test files and generate AST catalog
+  ✓ should support multiple output formats
+  ✓ should handle nested test suites correctly
+  ✓ should detect framework automatically
+  ✓ should extract test assertions
 AssertionExtractor (tests/unit/analyzer/assertion-extractor.test.ts) (Total: 22 tests)
   extract (Total: 14 tests)
     ✓ should extract expect().toBe() assertion
@@ -285,22 +233,59 @@ AssertionExtractor (tests/unit/analyzer/assertion-extractor.test.ts) (Total: 22 
     ✓ should classify error matchers
     ✓ should classify mock matchers
     ✓ should return "other" for unknown matchers
-KanteenVitestReporter Integration (tests/integration/reporters/vitest-reporter.test.ts) (Total: 5 tests)
+CLI E2E Workflow (tests/e2e/cli-workflow.test.ts) (Total: 2 tests)
+  ✓ should execute full analyze workflow from CLI with nested test suites
+  ✓ should handle multiple output formats and glob patterns
+ExportExtractor (tests/unit/analyzer/export-extractor.test.ts) (Total: 16 tests)
+  extract (Total: 16 tests)
+    ✓ should extract named function export
+    ✓ should extract default function export
+    ✓ should extract async function export
+    ✓ should extract class export
+    ✓ should extract class with public methods
+    ✓ should not extract private methods
+    ✓ should extract variable export
+    ✓ should extract TypeScript interface export
+    ✓ should extract TypeScript type alias export
+    ✓ should extract multiple exports
+    ✓ should extract export specifiers
+    ✓ should include location information
+    ✓ should include function signature
+    ✓ should handle rest parameters
+    ✓ should handle empty file
+    ✓ should handle file with no exports
+User Authentication (tests/fixtures/sample.test.ts) (Total: 9 tests)
+  Login functionality (Total: 4 tests)
+    ✓ should successfully login with valid credentials
+    ✓ should fail login with invalid password
+    ✓ should handle empty email
+    ✓ should handle SQL injection attempts
+  Password validation (Total: 3 tests)
+    ✓ should require minimum 8 characters
+    ✓ should require at least one uppercase letter
+    ✓ should accept valid password
+  Session management (Total: 2 tests)
+    ✓ should create session token on successful login
+    ✓ should expire session after 30 minutes of inactivity
+Data Validation (tests/fixtures/sample.test.ts) (Total: 2 tests)
+  ✓ should validate email format
+  ✓ should sanitize user input
+KanteenJestReporter Integration (tests/integration/reporters/jest-reporter.test.ts) (Total: 4 tests)
   ✓ should capture test results and generate catalog
   ✓ should handle multiple test files
   ✓ should capture error details
-  ✓ should handle tests without nested suite
-  ✓ should handle different test statuses
+  ✓ should handle tests without suite
 KanteenPlaywrightReporter Integration (tests/integration/reporters/playwright-reporter.test.ts) (Total: 5 tests)
   ✓ should capture test results and generate catalog
   ✓ should handle multiple test files
   ✓ should capture error details
   ✓ should handle tests without suite
   ✓ should handle different test statuses
-KanteenJestReporter Integration (tests/integration/reporters/jest-reporter.test.ts) (Total: 4 tests)
+KanteenVitestReporter Integration (tests/integration/reporters/vitest-reporter.test.ts) (Total: 5 tests)
   ✓ should capture test results and generate catalog
   ✓ should handle multiple test files
   ✓ should capture error details
-  ✓ should handle tests without suite
+  ✓ should handle tests without nested suite
+  ✓ should handle different test statuses
 ```
 
