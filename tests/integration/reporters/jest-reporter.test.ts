@@ -29,6 +29,9 @@ describe('KanteenJestReporter Integration', () => {
   });
 
   it('should capture test results and generate catalog', async () => {
+    // Ensure directory exists
+    await fs.mkdir(outputDir, { recursive: true });
+
     const reporter = new KanteenJestReporter(
       {},
       {
@@ -123,6 +126,9 @@ describe('KanteenJestReporter Integration', () => {
   });
 
   it('should handle multiple test files', async () => {
+    // Ensure directory exists
+    await fs.mkdir(outputDir, { recursive: true });
+
     const reporter = new KanteenJestReporter(
       {},
       {
@@ -180,6 +186,9 @@ describe('KanteenJestReporter Integration', () => {
   });
 
   it('should capture error details', async () => {
+    // Ensure directory exists
+    await fs.mkdir(outputDir, { recursive: true });
+
     const reporter = new KanteenJestReporter(
       {},
       {
