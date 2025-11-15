@@ -1,0 +1,244 @@
+/**
+ * Vitest Custom Reporter for Test Kanteen
+ */
+
+import type { Reporter, File, Task } from 'vitest';
+import { RuntimeCatalogBuilder } from '../shared/runtime-catalog-builder';
+import { VitestResultMapper } from './result-mapper';
+import * as fs from 'fs/promises';
+import * as path from 'path';
+
+/**
+ * Options for Kanteen Vitest Reporter
+ */
+export interface KanteenVitestReporterOptions {
+  /** Output directory */
+  output?: string;
+  /** Output formats */
+  format?: string[];
+  /** Verbose output */
+  verbose?: boolean;
+}
+
+/**
+ * Kanteen Vitest Reporter
+ * Captures runtime test execution information from Vitest
+ */
+export default class KanteenVitestReporter implements Reporter {
+  private catalogBuilder: RuntimeCatalogBuilder;
+  private mapper: VitestResultMapper;
+  private options: Required<KanteenVitestReporterOptions>;
+
+  constructor(options?: KanteenVitestReporterOptions) {
+    this.options = {
+      output: options?.output ?? './test-kanteen-runtime',
+      format: options?.format ?? ['json', 'markdown'],
+      verbose: options?.verbose ?? false,
+    };
+
+    this.catalogBuilder = new RuntimeCatalogBuilder(this.options);
+    this.mapper = new VitestResultMapper();
+
+    if (this.options.verbose) {
+      console.log('[Kanteen] Vitest Reporter initialized');
+      console.log(`[Kanteen] Output: ${this.options.output}`);
+      console.log(`[Kanteen] Format: ${this.options.format.join(', ')}`);
+    }
+  }
+
+  /**
+   * Called when Vitest starts
+   */
+  onInit(): void {
+    this.catalogBuilder.startRun(new Date());
+
+    if (this.options.verbose) {
+      console.log('[Kanteen] Test run started');
+    }
+  }
+
+  /**
+   * Called when tasks are updated (tests complete)
+   */
+  onTaskUpdate(packs: any[]): void {
+    for (const pack of packs) {
+      const file = pack[1]; // [id, result, meta] -> get result
+      if (file && file.type === 'suite') {
+        this.processFile(file);
+      }
+    }
+  }
+
+  /**
+   * Called when all tests are finished
+   */
+  async onFinished(): Promise<void> {
+    this.catalogBuilder.endRun(new Date());
+
+    try {
+      const catalog = this.catalogBuilder.build();
+
+      // Set framework to vitest
+      catalog.metadata.framework = 'vitest';
+
+      // Output catalog
+      await this.outputCatalog(catalog);
+
+      if (this.options.verbose) {
+        console.log('[Kanteen] Test run completed');
+        console.log(`[Kanteen] Total tests: ${catalog.executionSummary.totalTests}`);
+        console.log(`[Kanteen] Passed: ${catalog.executionSummary.passed}`);
+        console.log(`[Kanteen] Failed: ${catalog.executionSummary.failed}`);
+        console.log(`[Kanteen] Duration: ${catalog.executionSummary.totalDuration}ms`);
+      }
+    } catch (error) {
+      console.error('[Kanteen] Error building catalog:', error);
+    }
+  }
+
+  /**
+   * Process a test file
+   */
+  private processFile(file: File): void {
+    if (!file.tasks) return;
+
+    for (const task of file.tasks) {
+      this.processTask(task, file.filepath);
+    }
+
+    if (this.options.verbose && file.tasks.length > 0) {
+      console.log(
+        `[Kanteen] Processed ${file.tasks.length} tasks from ${file.filepath}`
+      );
+    }
+  }
+
+  /**
+   * Process a task (test or suite)
+   */
+  private processTask(task: Task, filePath: string): void {
+    if (task.type === 'test') {
+      // Map test result
+      const testResult = this.mapper.mapTestResult(task, filePath);
+      this.catalogBuilder.addTestResult(testResult);
+    } else if (task.type === 'suite' && task.tasks) {
+      // Process nested tasks
+      for (const nestedTask of task.tasks) {
+        this.processTask(nestedTask, filePath);
+      }
+    }
+  }
+
+  /**
+   * Output catalog to files
+   */
+  private async outputCatalog(catalog: any): Promise<void> {
+    const outputPath = path.resolve(process.cwd(), this.options.output);
+    await fs.mkdir(outputPath, { recursive: true });
+
+    for (const format of this.options.format) {
+      if (format === 'json') {
+        const jsonPath = path.join(outputPath, 'runtime-catalog.json');
+        await fs.writeFile(jsonPath, JSON.stringify(catalog, null, 2), 'utf-8');
+
+        if (this.options.verbose) {
+          console.log(`[Kanteen] JSON catalog written to: ${jsonPath}`);
+        }
+      } else if (format === 'markdown') {
+        const mdPath = path.join(outputPath, 'runtime-catalog.md');
+        const markdown = this.generateMarkdown(catalog);
+        await fs.writeFile(mdPath, markdown, 'utf-8');
+
+        if (this.options.verbose) {
+          console.log(`[Kanteen] Markdown catalog written to: ${mdPath}`);
+        }
+      }
+    }
+  }
+
+  /**
+   * Generate Markdown from catalog
+   */
+  private generateMarkdown(catalog: any): string {
+    const lines: string[] = [];
+
+    lines.push('# Runtime Test Catalog (Vitest)');
+    lines.push('');
+    lines.push(`> Generated by Test Kanteen v${catalog.metadata.version}`);
+    lines.push('');
+
+    // Metadata
+    lines.push('## Metadata');
+    lines.push('');
+    lines.push(`- **Generated At**: ${new Date(catalog.metadata.generatedAt).toLocaleString()}`);
+    lines.push(`- **Execution Date**: ${new Date(catalog.metadata.executionDate).toLocaleString()}`);
+    lines.push(`- **Total Duration**: ${catalog.metadata.totalDuration}ms`);
+    lines.push(`- **Source Files**: ${catalog.metadata.sourceFiles.length}`);
+    lines.push('');
+
+    // Execution Summary
+    lines.push('## Execution Summary');
+    lines.push('');
+    lines.push(`- **Total Tests**: ${catalog.executionSummary.totalTests}`);
+    lines.push(`- **Passed**: ${catalog.executionSummary.passed} ✅`);
+    lines.push(`- **Failed**: ${catalog.executionSummary.failed} ❌`);
+    lines.push(`- **Skipped**: ${catalog.executionSummary.skipped} ⏭️`);
+    lines.push(`- **Pending**: ${catalog.executionSummary.pending} ⏸️`);
+    lines.push(`- **Todo**: ${catalog.executionSummary.todo} 📝`);
+    lines.push('');
+
+    // Test Results
+    lines.push('## Test Results');
+    lines.push('');
+
+    for (const suite of catalog.testSuites) {
+      this.generateSuiteMarkdown(suite, lines, 0);
+    }
+
+    return lines.join('\n');
+  }
+
+  /**
+   * Generate Markdown for a test suite
+   */
+  private generateSuiteMarkdown(suite: any, lines: string[], depth: number): void {
+    const indent = '  '.repeat(depth);
+
+    lines.push(`${indent}**${suite.name}**${suite.runtime ? ` (${suite.runtime.duration}ms)` : ''}`);
+
+    if (suite.tests && suite.tests.length > 0) {
+      for (const test of suite.tests) {
+        const status = this.getStatusEmoji(test.runtime.status);
+        lines.push(
+          `${indent}  - ${status} ${test.name} (${test.runtime.duration}ms)`
+        );
+
+        if (test.runtime.error) {
+          lines.push(`${indent}    - ❌ Error: ${test.runtime.error.message}`);
+        }
+      }
+    }
+
+    if (suite.nestedSuites && suite.nestedSuites.length > 0) {
+      for (const nested of suite.nestedSuites) {
+        this.generateSuiteMarkdown(nested, lines, depth + 1);
+      }
+    }
+
+    lines.push('');
+  }
+
+  /**
+   * Get status emoji
+   */
+  private getStatusEmoji(status: string): string {
+    const emojis: Record<string, string> = {
+      passed: '✅',
+      failed: '❌',
+      skipped: '⏭️',
+      pending: '⏸️',
+      todo: '📝',
+    };
+    return emojis[status] || '❓';
+  }
+}

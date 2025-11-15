@@ -231,6 +231,9 @@ describe('KanteenJestReporter Integration', () => {
   });
 
   it('should handle tests without suite', async () => {
+    // Ensure directory exists
+    await fs.mkdir(outputDir, { recursive: true });
+
     const reporter = new KanteenJestReporter(
       {},
       {
