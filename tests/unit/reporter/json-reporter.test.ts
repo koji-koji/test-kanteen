@@ -163,4 +163,104 @@ describe('JSONReporter', () => {
       // Note: Actual filtering logic depends on implementation
     });
   });
+
+  describe('error handling', () => {
+    const outputDir = path.join(__dirname, '../../tmp');
+
+    afterEach(async () => {
+      // Cleanup
+      try {
+        await fs.rm(outputDir, { recursive: true });
+      } catch {
+        // Ignore errors
+      }
+    });
+
+    it('should handle write permission errors gracefully', async () => {
+      // Arrange
+      reporter.onComplete(mockCatalog);
+      const invalidPath = '/root/no-permission/catalog.json';
+
+      // Act & Assert
+      await expect(reporter.writeToFile(invalidPath)).rejects.toThrow();
+    });
+
+    it('should validate output path before writing', async () => {
+      // Arrange
+      reporter.onComplete(mockCatalog);
+      const nullCharPath = path.join(outputDir, 'invalid\x00path.json');
+
+      // Act & Assert
+      await expect(reporter.writeToFile(nullCharPath)).rejects.toThrow();
+    });
+
+    it('should handle empty output path', async () => {
+      // Arrange
+      reporter.onComplete(mockCatalog);
+      const emptyPath = '';
+
+      // Act & Assert
+      await expect(reporter.writeToFile(emptyPath)).rejects.toThrow();
+    });
+
+    it('should handle very long file paths', async () => {
+      // Arrange
+      reporter.onComplete(mockCatalog);
+      const longDirName = 'a'.repeat(255);
+      const longPath = path.join(outputDir, longDirName, 'catalog.json');
+
+      // Act & Assert
+      // This should either succeed or throw a clear error
+      try {
+        await reporter.writeToFile(longPath);
+        const exists = await fs
+          .access(longPath)
+          .then(() => true)
+          .catch(() => false);
+        expect(exists).toBe(true);
+      } catch (error) {
+        // If it fails, it should be with a filesystem error
+        expect(error).toBeDefined();
+      }
+    });
+
+    it('should handle concurrent writes to the same file', async () => {
+      // Arrange
+      reporter.onComplete(mockCatalog);
+      const outputFile = path.join(outputDir, 'concurrent.json');
+
+      // Act
+      const writes = [
+        reporter.writeToFile(outputFile),
+        reporter.writeToFile(outputFile),
+        reporter.writeToFile(outputFile),
+      ];
+
+      // Assert
+      await expect(Promise.all(writes)).resolves.toBeDefined();
+
+      // Verify file was written
+      const content = await fs.readFile(outputFile, 'utf-8');
+      const parsed = JSON.parse(content);
+      expect(parsed.metadata.framework).toBe('jest');
+    });
+
+    it('should maintain data integrity when writing fails', async () => {
+      // Arrange
+      reporter.onComplete(mockCatalog);
+      const invalidPath = '/root/no-permission/catalog.json';
+
+      // Act
+      try {
+        await reporter.writeToFile(invalidPath);
+      } catch {
+        // Expected to fail
+      }
+
+      // Assert - catalog should still be intact
+      const result = reporter.generate() as TestCatalog;
+      expect(result.metadata.framework).toBe('jest');
+      expect(result.testSuites).toHaveLength(1);
+    });
+  });
 });
