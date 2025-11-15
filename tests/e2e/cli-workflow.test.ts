@@ -1,6 +1,11 @@
 /**
  * E2E tests for CLI complete workflow:
- * Tests the actual CLI commands to ensure they work correctly in real-world scenarios
+ * Reduced to essential test cases for stability and maintainability
+ *
+ * Phase 1, Round 3: IMPROVEMENT_PLAN_ROUND3.md
+ * - Reduced from 7 tests to 2 essential tests
+ * - Focus on core workflow and multi-format support
+ * - Detailed scenarios covered by unit and integration tests
  */
 
 import * as fs from 'fs/promises';
@@ -8,7 +13,7 @@ import * as path from 'path';
 import { execSync } from 'child_process';
 
 describe('CLI E2E Workflow', () => {
-  const tempDir = path.join(__dirname, '../tmp/cli-e2e');
+  const tempDir = path.join(__dirname, '../tmp', `cli-e2e-${process.pid}-${Date.now()}`);
   const cliPath = path.join(__dirname, '../../dist/cli/index.js');
 
   beforeAll(async () => {
@@ -41,9 +46,13 @@ describe('CLI E2E Workflow', () => {
     }
   });
 
-  it('should execute full analyze workflow from CLI', async () => {
-    // Arrange: Create test fixture
-    const testFixturePath = path.join(tempDir, 'example.test.ts');
+  it('should execute full analyze workflow from CLI with nested test suites', async () => {
+    // Arrange: Create comprehensive test fixture with nested structure
+    const uniqueId = `comprehensive-${Date.now()}-${Math.random().toString(36).substring(7)}`;
+    const testDir = path.join(tempDir, uniqueId);
+    await fs.mkdir(testDir, { recursive: true });
+
+    const testFixturePath = path.join(testDir, 'comprehensive.test.ts');
     const testFixtureContent = `
 describe('Math Operations', () => {
   describe('Addition', () => {
@@ -56,126 +65,53 @@ describe('Math Operations', () => {
     });
   });
 });
+
+describe('String Operations', () => {
+  it('should concatenate strings', () => {
+    expect('hello' + ' world').toBe('hello world');
+  });
+});
 `;
     await fs.writeFile(testFixturePath, testFixtureContent, 'utf-8');
 
-    const outputDir = path.join(tempDir, 'analyze-output');
+    const outputDir = path.join(testDir, 'output');
 
-    // Act: Execute CLI command
+    // Act: Execute CLI command with JSON format
     const result = execSync(
-      `node "${cliPath}" analyze "${testFixturePath}" --output "${outputDir}" --format json,markdown`,
+      `node "${cliPath}" analyze "${testFixturePath}" --output "${outputDir}" --format json`,
       {
         encoding: 'utf-8',
       }
     );
 
-    // Assert: Verify CLI output
+    // Assert: Verify CLI output and execution
     expect(result).toContain('Analyzing test files');
     expect(result).toContain('Analysis complete');
-    expect(result).toContain('Total test suites:');
-    expect(result).toContain('Total tests: 2');
+    expect(result).toContain('Total tests: 3');
 
     // Verify JSON file was created
     const jsonPath = path.join(outputDir, 'catalog.json');
     const jsonExists = await fs.access(jsonPath).then(() => true).catch(() => false);
     expect(jsonExists).toBe(true);
 
-    // Verify Markdown file was created
-    const mdPath = path.join(outputDir, 'catalog.md');
-    const mdExists = await fs.access(mdPath).then(() => true).catch(() => false);
-    expect(mdExists).toBe(true);
-
-    // Verify JSON content
+    // Verify JSON content structure
     const jsonContent = await fs.readFile(jsonPath, 'utf-8');
     const catalog = JSON.parse(jsonContent);
-    expect(catalog.coverage.totalTests).toBe(2);
+    expect(catalog.coverage.totalTests).toBe(3);
     expect(catalog.metadata.framework).toBe('jest');
+    expect(catalog.testSuites).toHaveLength(2);
+
+    // Verify nested suite structure
+    const mathSuite = catalog.testSuites.find((s: any) => s.name === 'Math Operations');
+    expect(mathSuite.nestedSuites).toHaveLength(1);
+    expect(mathSuite.nestedSuites[0].name).toBe('Addition');
+    expect(mathSuite.nestedSuites[0].tests).toHaveLength(2);
   }, 30000);
 
-  it('should handle multiple output formats', async () => {
-    // Arrange: Create test fixture
-    const testFile = path.join(tempDir, 'multi-format.test.ts');
-    const testContent = `
-describe('Test Suite', () => {
-  it('should pass test case', () => {
-    expect(true).toBe(true);
-  });
-});
-`;
-    await fs.writeFile(testFile, testContent, 'utf-8');
-
-    const outputDir = path.join(tempDir, 'multi-format-output');
-
-    // Act: Execute CLI with multiple formats (json and markdown)
-    const result = execSync(
-      `node "${cliPath}" analyze "${testFile}" --output "${outputDir}" --format json,markdown`,
-      {
-        encoding: 'utf-8',
-      }
-    );
-
-    // Assert: Verify both formats were created
-    expect(result).toContain('Analysis complete');
-
-    const jsonPath = path.join(outputDir, 'catalog.json');
-    const mdPath = path.join(outputDir, 'catalog.md');
-
-    const jsonExists = await fs.access(jsonPath).then(() => true).catch(() => false);
-    const mdExists = await fs.access(mdPath).then(() => true).catch(() => false);
-
-    expect(jsonExists).toBe(true);
-    expect(mdExists).toBe(true);
-
-    // Verify content
-    const jsonContent = await fs.readFile(jsonPath, 'utf-8');
-    const catalog = JSON.parse(jsonContent);
-    expect(catalog.coverage.totalTests).toBe(1);
-
-    const mdContent = await fs.readFile(mdPath, 'utf-8');
-    expect(mdContent).toContain('# Test Catalog');
-    expect(mdContent).toContain('Test Suite');
-  }, 30000);
-
-  it('should respect output directory flag', async () => {
-    // Arrange: Create test fixture
-    const testFile = path.join(tempDir, 'custom-dir.test.ts');
-    const testContent = `
-describe('Custom Dir Test', () => {
-  it('should work', () => {
-    expect(1).toBe(1);
-  });
-});
-`;
-    await fs.writeFile(testFile, testContent, 'utf-8');
-
-    const customOutputDir = path.join(tempDir, 'custom-output');
-
-    // Act: Execute CLI with custom output directory
-    const result = execSync(
-      `node "${cliPath}" analyze "${testFile}" --output "${customOutputDir}" --format json`,
-      {
-        encoding: 'utf-8',
-      }
-    );
-
-    // Assert: Verify output was created in custom directory
-    expect(result).toContain('Analysis complete');
-    expect(result).toContain(`Output: ${customOutputDir}`);
-
-    const jsonPath = path.join(customOutputDir, 'catalog.json');
-    const jsonExists = await fs.access(jsonPath).then(() => true).catch(() => false);
-    expect(jsonExists).toBe(true);
-
-    // Verify content
-    const jsonContent = await fs.readFile(jsonPath, 'utf-8');
-    const catalog = JSON.parse(jsonContent);
-    expect(catalog.coverage.totalTests).toBe(1);
-    expect(catalog.testSuites[0].name).toBe('Custom Dir Test');
-  }, 30000);
-
-  it('should handle glob patterns correctly', async () => {
-    // Arrange: Create multiple test fixtures
-    const subDir = path.join(tempDir, 'glob-tests');
+  it('should handle multiple output formats and glob patterns', async () => {
+    // Arrange: Create multiple test fixtures to test glob pattern support
+    const uniqueId = `multi-format-${Date.now()}-${Math.random().toString(36).substring(7)}`;
+    const subDir = path.join(tempDir, uniqueId);
     await fs.mkdir(subDir, { recursive: true });
 
     const test1 = path.join(subDir, 'test1.test.ts');
@@ -184,9 +120,9 @@ describe('Custom Dir Test', () => {
     await fs.writeFile(
       test1,
       `
-describe('Test Suite 1', () => {
-  it('should pass test 1', () => {
-    expect(1).toBe(1);
+describe('Feature A', () => {
+  it('should work correctly', () => {
+    expect(true).toBe(true);
   });
 });
 `,
@@ -196,21 +132,21 @@ describe('Test Suite 1', () => {
     await fs.writeFile(
       test2,
       `
-describe('Test Suite 2', () => {
-  it('should pass test 2', () => {
-    expect(2).toBe(2);
+describe('Feature B', () => {
+  it('should also work correctly', () => {
+    expect(true).toBe(true);
   });
 });
 `,
       'utf-8'
     );
 
-    const outputDir = path.join(tempDir, 'glob-pattern-output');
+    const outputDir = path.join(tempDir, 'multi-format-output');
     const pattern = path.join(subDir, '**/*.test.ts');
 
-    // Act: Execute CLI with glob pattern
+    // Act: Execute CLI with multiple formats (json, markdown) and glob pattern
     const result = execSync(
-      `node "${cliPath}" analyze "${pattern}" --output "${outputDir}" --format json`,
+      `node "${cliPath}" analyze "${pattern}" --output "${outputDir}" --format json,markdown`,
       {
         encoding: 'utf-8',
       }
@@ -220,128 +156,31 @@ describe('Test Suite 2', () => {
     expect(result).toContain('Analysis complete');
     expect(result).toContain('Total tests: 2');
 
+    // Verify both output formats were created
     const jsonPath = path.join(outputDir, 'catalog.json');
+    const mdPath = path.join(outputDir, 'catalog.md');
+
+    const jsonExists = await fs.access(jsonPath).then(() => true).catch(() => false);
+    const mdExists = await fs.access(mdPath).then(() => true).catch(() => false);
+
+    expect(jsonExists).toBe(true);
+    expect(mdExists).toBe(true);
+
+    // Verify JSON content
     const jsonContent = await fs.readFile(jsonPath, 'utf-8');
     const catalog = JSON.parse(jsonContent);
-
     expect(catalog.coverage.totalTests).toBe(2);
     expect(catalog.testSuites).toHaveLength(2);
 
     const suiteNames = catalog.testSuites.map((s: any) => s.name);
-    expect(suiteNames).toContain('Test Suite 1');
-    expect(suiteNames).toContain('Test Suite 2');
-  }, 30000);
+    expect(suiteNames).toContain('Feature A');
+    expect(suiteNames).toContain('Feature B');
 
-  it('should generate guide file on first run', async () => {
-    // Arrange: Create test fixture in a unique subdirectory
-    const uniqueDir = path.join(tempDir, 'guide-test-unique');
-    await fs.mkdir(uniqueDir, { recursive: true });
-
-    const testFile = path.join(uniqueDir, 'guide-test.test.ts');
-    const testContent = `
-describe('Guide Test', () => {
-  it('should generate guide', () => {
-    expect(true).toBe(true);
-  });
-});
-`;
-    await fs.writeFile(testFile, testContent, 'utf-8');
-
-    const outputDir = path.join(uniqueDir, 'guide-test-output');
-
-    // Act: Execute CLI for the first time
-    const result = execSync(
-      `node "${cliPath}" analyze "${testFile}" --output "${outputDir}" --format json,markdown`,
-      {
-        encoding: 'utf-8',
-      }
-    );
-
-    // Assert: Verify guide file was created in parent's aaa_spec directory
-    expect(result).toContain('Analysis complete');
-    expect(result).toContain('Generated LLM guide');
-
-    // The guide is created in the parent directory's aaa_spec folder
-    const parentDir = path.dirname(path.resolve(outputDir));
-    const guidePath = path.join(parentDir, 'aaa_spec', 'TEST_KANTEEN_GUIDE.md');
-    const guideExists = await fs.access(guidePath).then(() => true).catch(() => false);
-    expect(guideExists).toBe(true);
-
-    // Verify guide content
-    const guideContent = await fs.readFile(guidePath, 'utf-8');
-    expect(guideContent).toContain('Test Kanteen');
-    expect(guideContent).toContain('catalog.json');
-    expect(guideContent).toContain('LLM活用ガイド');
-    expect(guideContent).toContain('テスト観点カタログ');
-
-    // Verify the guide provides useful information
-    expect(guideContent.length).toBeGreaterThan(500); // Guide should be substantial
-
-    // Clean up the unique directory
-    await fs.rm(uniqueDir, { recursive: true });
-  }, 30000);
-
-  it('should support framework flag', async () => {
-    // Arrange: Create test fixture
-    const testFile = path.join(tempDir, 'framework-test.test.ts');
-    const testContent = `
-describe('Framework Test', () => {
-  it('should detect framework', () => {
-    expect(1).toBe(1);
-  });
-});
-`;
-    await fs.writeFile(testFile, testContent, 'utf-8');
-
-    const outputDir = path.join(tempDir, 'framework-output');
-
-    // Act: Execute CLI with explicit framework flag
-    const result = execSync(
-      `node "${cliPath}" analyze "${testFile}" --output "${outputDir}" --framework jest --format json`,
-      {
-        encoding: 'utf-8',
-      }
-    );
-
-    // Assert: Verify framework was set correctly
-    expect(result).toContain('Analysis complete');
-
-    const jsonPath = path.join(outputDir, 'catalog.json');
-    const jsonContent = await fs.readFile(jsonPath, 'utf-8');
-    const catalog = JSON.parse(jsonContent);
-
-    expect(catalog.metadata.framework).toBe('jest');
-  }, 30000);
-
-  it('should handle verbose flag', async () => {
-    // Arrange: Create test fixture
-    const testFile = path.join(tempDir, 'verbose-test.test.ts');
-    const testContent = `
-describe('Verbose Test', () => {
-  it('should show verbose output', () => {
-    expect(true).toBe(true);
-  });
-});
-`;
-    await fs.writeFile(testFile, testContent, 'utf-8');
-
-    const outputDir = path.join(tempDir, 'verbose-output');
-
-    // Act: Execute CLI with verbose flag
-    const result = execSync(
-      `node "${cliPath}" analyze "${testFile}" --output "${outputDir}" --format json --verbose`,
-      {
-        encoding: 'utf-8',
-      }
-    );
-
-    // Assert: Verify verbose output is present
-    expect(result).toContain('Analyzing test files');
-    expect(result).toContain('Analysis complete');
-
-    // Verify output was still generated correctly
-    const jsonPath = path.join(outputDir, 'catalog.json');
-    const jsonExists = await fs.access(jsonPath).then(() => true).catch(() => false);
-    expect(jsonExists).toBe(true);
+    // Verify Markdown content
+    const mdContent = await fs.readFile(mdPath, 'utf-8');
+    expect(mdContent).toContain('# Test Catalog');
+    expect(mdContent).toContain('Feature A');
+    expect(mdContent).toContain('Feature B');
+    expect(mdContent).toContain('**Total Tests**: 2'); // Markdown bold format
   }, 30000);
 });
