@@ -47,13 +47,16 @@ export class MarkdownReporter extends BaseReporter {
     let markdown = '';
     const indent = '  '.repeat(depth);
 
+    // totalTests情報を追加
+    const totalTestsInfo = suite.totalTests !== undefined ? ` (Total: ${suite.totalTests} tests)` : '';
+
     // スイート名（トップレベルのみファイルパスを表示）
     if (depth === 0 && suite.filePath) {
       // 相対パスに変換
       const relativePath = path.relative(process.cwd(), suite.filePath);
-      markdown += `${indent}${suite.name} (${relativePath})\n`;
+      markdown += `${indent}${suite.name} (${relativePath})${totalTestsInfo}\n`;
     } else {
-      markdown += `${indent}${suite.name}\n`;
+      markdown += `${indent}${suite.name}${totalTestsInfo}\n`;
     }
 
     // テストケース

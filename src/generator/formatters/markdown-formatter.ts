@@ -65,8 +65,9 @@ export class MarkdownFormatter {
     let md = '';
     const indent = '  '.repeat(depth);
 
-    // スイート名
-    md += `${indent}${suite.name}\n`;
+    // スイート名 + totalTests表示
+    const totalTestsInfo = suite.totalTests !== undefined ? ` (Total: ${suite.totalTests} tests)` : '';
+    md += `${indent}${suite.name}${totalTestsInfo}\n`;
 
     // テストケース
     if (suite.tests && suite.tests.length > 0) {
