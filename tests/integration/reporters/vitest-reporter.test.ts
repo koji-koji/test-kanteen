@@ -31,6 +31,9 @@ describe('KanteenVitestReporter Integration', () => {
   });
 
   it('should capture test results and generate catalog', async () => {
+    // Ensure directory exists
+    await fs.mkdir(outputDir, { recursive: true });
+
     const reporter = new KanteenVitestReporter({
       output: outputDir,
       format: ['json', 'markdown'],
