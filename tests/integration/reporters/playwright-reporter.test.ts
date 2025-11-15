@@ -293,6 +293,9 @@ describe('KanteenPlaywrightReporter Integration', () => {
   });
 
   it('should handle tests without suite', async () => {
+    // Ensure directory exists
+    await fs.mkdir(outputDir, { recursive: true });
+
     const reporter = new KanteenPlaywrightReporter({
       output: outputDir,
       format: ['json'],
