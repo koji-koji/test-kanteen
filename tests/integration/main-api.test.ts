@@ -162,7 +162,7 @@ describe('Main API Integration Tests', () => {
   });
 
   describe('end-to-end scenarios', () => {
-    it('Scenario 1: Analyze edge case tests', async () => {
+    it('should analyze edge case tests and generate correct catalog', async () => {
       const pattern = path.join(fixturesDir, 'edge-cases.test.ts');
       const catalog = await parseTests(pattern, {
         framework: 'jest',
@@ -183,7 +183,7 @@ describe('Main API Integration Tests', () => {
       expect(parsed.testSuites.length).toBeGreaterThan(0);
     });
 
-    it('Scenario 2: Multiple reporters with verbose output', async () => {
+    it('should generate multiple reporters with verbose output', async () => {
       const pattern = path.join(fixturesDir, 'edge-cases.test.ts');
       const catalog = await parseTests(pattern, {
         reporters: ['json', 'markdown'],
@@ -199,7 +199,7 @@ describe('Main API Integration Tests', () => {
       expect(files).toContain('catalog.md');
     });
 
-    it('Scenario 3: Test catalog structure', async () => {
+    it('should verify test catalog structure', async () => {
       const pattern = path.join(fixturesDir, 'edge-cases.test.ts');
       const catalog = await parseTests(pattern);
 

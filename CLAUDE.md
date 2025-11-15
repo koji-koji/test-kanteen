@@ -322,6 +322,35 @@ npm run test:coverage
 - PRには関連するテストの追加が必須
 - テストカバレッジを維持・向上
 
+#### テスト命名規則
+
+**すべてのテストは`should [期待される動作]`形式で統一してください。**
+
+```javascript
+// ✅ Good: 明確で一貫性のある命名
+it('should format catalog as JSON string', () => { ... });
+it('should detect Jest from import statement', () => { ... });
+it('should throw error for invalid TypeScript syntax', () => { ... });
+it('should analyze edge case tests and generate correct catalog', () => { ... });
+
+// ❌ Bad: Scenario形式やその他の形式
+it('Scenario 1: Analyze edge case tests', () => { ... });
+it('Test catalog structure', () => { ... });
+it('Parses test files correctly', () => { ... });
+```
+
+**理由:**
+- カタログの可読性向上: 全テストが統一されたパターンで表示される
+- LLMによるパターン学習の精度向上: 一貫した形式で理解しやすい
+- 新規開発者の迷い解消: 明確な命名規則が存在する
+- テストの意図が明確: 「何をテストしているか」が即座に理解できる
+
+**適用範囲:**
+- 単体テスト (Unit tests)
+- 統合テスト (Integration tests)
+- E2Eテスト (End-to-End tests)
+- すべてのテストフレームワーク (Jest, Vitest, Mocha等)
+
 #### test-kanteenを活用したテスト設計
 
 **ステップ1: 既存テストパターンを確認**
