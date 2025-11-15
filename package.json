@@ -1,6 +1,6 @@
 {
   "name": "@koji-koji/test-kanteen",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "AST×Reporterでテストから観点カタログを自動生成し、LLMと人間の共通Specにするライブラリ",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
