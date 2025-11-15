@@ -36,13 +36,16 @@ lerna-debug.log*
 .env.local
 .env.*.local
 
-# Test catalog output
+# Experimental/legacy catalog directories (not used)
 test-catalog/
 catalog/
-self-catalog/
-aaa_test_kanteen/
+
+# Coverage gap analysis output (generated on demand)
 coverage-gap/
 coverage-gap-demo/
+
+# Note: aaa_test_kanteen/ is tracked in Git as the official test catalog
+# This enables PR reviews, historical tracking, and collaborative development
 
 # Temporary files
 tmp/

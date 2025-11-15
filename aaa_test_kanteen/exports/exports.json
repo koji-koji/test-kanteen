@@ -1,0 +1,1649 @@
+{
+  "summary": {
+    "totalFiles": 44,
+    "totalExports": 52,
+    "byType": {
+      "class": 14,
+      "method": 35,
+      "function": 3
+    },
+    "generatedAt": "2025-11-14T22:21:33.139Z"
+  },
+  "exports": [
+    {
+      "name": "BaseReporter",
+      "type": "class",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/base-reporter.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/base-reporter.ts",
+        "line": 9,
+        "column": 7
+      },
+      "isExported": true,
+      "isPublic": true
+    },
+    {
+      "name": "onTestSuite",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/base-reporter.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/base-reporter.ts",
+        "line": 31,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "BaseReporter",
+      "isAsync": false,
+      "signature": "(_suite)"
+    },
+    {
+      "name": "onTestCase",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/base-reporter.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/base-reporter.ts",
+        "line": 38,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "BaseReporter",
+      "isAsync": false,
+      "signature": "(_testCase)"
+    },
+    {
+      "name": "onComplete",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/base-reporter.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/base-reporter.ts",
+        "line": 45,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "BaseReporter",
+      "isAsync": false,
+      "signature": "(catalog)"
+    },
+    {
+      "name": "writeToFile",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/base-reporter.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/base-reporter.ts",
+        "line": 57,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "BaseReporter",
+      "isAsync": true,
+      "signature": "(outputPath)"
+    },
+    {
+      "name": "parseTests",
+      "type": "function",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/index.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/index.ts",
+        "line": 23,
+        "column": 7
+      },
+      "isExported": true,
+      "isPublic": true,
+      "isAsync": true,
+      "signature": "(pattern, config)"
+    },
+    {
+      "name": "parseTestsWithConfig",
+      "type": "function",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/index.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/index.ts",
+        "line": 78,
+        "column": 7
+      },
+      "isExported": true,
+      "isPublic": true,
+      "isAsync": true,
+      "signature": "(configPath)"
+    },
+    {
+      "name": "parseTestFile",
+      "type": "function",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/index.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/index.ts",
+        "line": 135,
+        "column": 7
+      },
+      "isExported": true,
+      "isPublic": true,
+      "isAsync": true,
+      "signature": "(filePath)"
+    },
+    {
+      "name": "TestFrameworkDetector",
+      "type": "class",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/test-framework-detector.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/test-framework-detector.ts",
+        "line": 6,
+        "column": 7
+      },
+      "isExported": true,
+      "isPublic": true
+    },
+    {
+      "name": "detectFromSource",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/test-framework-detector.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/test-framework-detector.ts",
+        "line": 66,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "TestFrameworkDetector",
+      "isAsync": false,
+      "signature": "(source)"
+    },
+    {
+      "name": "detectFromAST",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/test-framework-detector.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/test-framework-detector.ts",
+        "line": 94,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "TestFrameworkDetector",
+      "isAsync": false,
+      "signature": "(ast)"
+    },
+    {
+      "name": "detectFromPackageJson",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/test-framework-detector.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/test-framework-detector.ts",
+        "line": 114,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "TestFrameworkDetector",
+      "isAsync": true,
+      "signature": "(packageJsonPath)"
+    },
+    {
+      "name": "autoDetect",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/test-framework-detector.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/test-framework-detector.ts",
+        "line": 144,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "TestFrameworkDetector",
+      "isAsync": true,
+      "signature": "(source, ast)"
+    },
+    {
+      "name": "getFramework",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/test-framework-detector.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/test-framework-detector.ts",
+        "line": 168,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "TestFrameworkDetector",
+      "isAsync": false,
+      "signature": "(name)"
+    },
+    {
+      "name": "getSupportedFrameworks",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/test-framework-detector.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/test-framework-detector.ts",
+        "line": 175,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "TestFrameworkDetector",
+      "isAsync": false,
+      "signature": "()"
+    },
+    {
+      "name": "SourceLoader",
+      "type": "class",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/source-loader.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/source-loader.ts",
+        "line": 8,
+        "column": 7
+      },
+      "isExported": true,
+      "isPublic": true
+    },
+    {
+      "name": "loadFile",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/source-loader.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/source-loader.ts",
+        "line": 12,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "SourceLoader",
+      "isAsync": true,
+      "signature": "(filePath)"
+    },
+    {
+      "name": "loadFiles",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/source-loader.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/source-loader.ts",
+        "line": 25,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "SourceLoader",
+      "isAsync": true,
+      "signature": "(filePaths)"
+    },
+    {
+      "name": "loadByPattern",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/source-loader.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/source-loader.ts",
+        "line": 45,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "SourceLoader",
+      "isAsync": true,
+      "signature": "(pattern, options)"
+    },
+    {
+      "name": "exists",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/source-loader.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/source-loader.ts",
+        "line": 68,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "SourceLoader",
+      "isAsync": true,
+      "signature": "(filePath)"
+    },
+    {
+      "name": "getStats",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/source-loader.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/source-loader.ts",
+        "line": 80,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "SourceLoader",
+      "isAsync": true,
+      "signature": "(filePath)"
+    },
+    {
+      "name": "ASTParser",
+      "type": "class",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/ast-parser.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/ast-parser.ts",
+        "line": 37,
+        "column": 7
+      },
+      "isExported": true,
+      "isPublic": true
+    },
+    {
+      "name": "parse",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/ast-parser.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/ast-parser.ts",
+        "line": 49,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "ASTParser",
+      "isAsync": false,
+      "signature": "(source, filePath, options)"
+    },
+    {
+      "name": "parseMultiple",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/ast-parser.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/ast-parser.ts",
+        "line": 77,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "ASTParser",
+      "isAsync": false,
+      "signature": "(sources, options)"
+    },
+    {
+      "name": "isValidAST",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/ast-parser.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/ast-parser.ts",
+        "line": 98,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "ASTParser",
+      "isAsync": false,
+      "signature": "(ast)"
+    },
+    {
+      "name": "CatalogGenerator",
+      "type": "class",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/generator/catalog-generator.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/generator/catalog-generator.ts",
+        "line": 11,
+        "column": 7
+      },
+      "isExported": true,
+      "isPublic": true
+    },
+    {
+      "name": "generate",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/generator/catalog-generator.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/generator/catalog-generator.ts",
+        "line": 17,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "CatalogGenerator",
+      "isAsync": false,
+      "signature": "(testSuites, options)"
+    },
+    {
+      "name": "TestAnalyzer",
+      "type": "class",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/test-analyzer.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/test-analyzer.ts",
+        "line": 20,
+        "column": 7
+      },
+      "isExported": true,
+      "isPublic": true
+    },
+    {
+      "name": "analyze",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/test-analyzer.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/test-analyzer.ts",
+        "line": 30,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "TestAnalyzer",
+      "isAsync": false,
+      "signature": "(parseResult, framework)"
+    },
+    {
+      "name": "ExportExtractor",
+      "type": "class",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/export-extractor.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/export-extractor.ts",
+        "line": 17,
+        "column": 7
+      },
+      "isExported": true,
+      "isPublic": true
+    },
+    {
+      "name": "extract",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/export-extractor.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/export-extractor.ts",
+        "line": 21,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "ExportExtractor",
+      "isAsync": false,
+      "signature": "(parseResult)"
+    },
+    {
+      "name": "AssertionExtractor",
+      "type": "class",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/assertion-extractor.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/assertion-extractor.ts",
+        "line": 6,
+        "column": 7
+      },
+      "isExported": true,
+      "isPublic": true
+    },
+    {
+      "name": "extract",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/assertion-extractor.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/assertion-extractor.ts",
+        "line": 10,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "AssertionExtractor",
+      "isAsync": false,
+      "signature": "(node)"
+    },
+    {
+      "name": "classifyAssertion",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/assertion-extractor.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/assertion-extractor.ts",
+        "line": 142,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "AssertionExtractor",
+      "isAsync": false,
+      "signature": "(matcher)"
+    },
+    {
+      "name": "HTMLReporter",
+      "type": "class",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/examples/custom-reporter/custom-reporter.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/examples/custom-reporter/custom-reporter.ts",
+        "line": 11,
+        "column": 7
+      },
+      "isExported": true,
+      "isPublic": true
+    },
+    {
+      "name": "onTestSuite",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/examples/custom-reporter/custom-reporter.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/examples/custom-reporter/custom-reporter.ts",
+        "line": 18,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "HTMLReporter",
+      "isAsync": false,
+      "signature": "(suite)"
+    },
+    {
+      "name": "onTestCase",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/examples/custom-reporter/custom-reporter.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/examples/custom-reporter/custom-reporter.ts",
+        "line": 22,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "HTMLReporter",
+      "isAsync": false,
+      "signature": "(testCase)"
+    },
+    {
+      "name": "onComplete",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/examples/custom-reporter/custom-reporter.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/examples/custom-reporter/custom-reporter.ts",
+        "line": 26,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "HTMLReporter",
+      "isAsync": false,
+      "signature": "(catalog)"
+    },
+    {
+      "name": "generate",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/examples/custom-reporter/custom-reporter.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/examples/custom-reporter/custom-reporter.ts",
+        "line": 30,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "HTMLReporter",
+      "isAsync": false,
+      "signature": "()"
+    },
+    {
+      "name": "MarkdownReporter",
+      "type": "class",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/built-in-reporters/markdown-reporter.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/built-in-reporters/markdown-reporter.ts",
+        "line": 9,
+        "column": 7
+      },
+      "isExported": true,
+      "isPublic": true
+    },
+    {
+      "name": "generate",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/built-in-reporters/markdown-reporter.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/built-in-reporters/markdown-reporter.ts",
+        "line": 13,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "MarkdownReporter",
+      "isAsync": false,
+      "signature": "()"
+    },
+    {
+      "name": "JSONReporter",
+      "type": "class",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/built-in-reporters/json-reporter.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/built-in-reporters/json-reporter.ts",
+        "line": 7,
+        "column": 7
+      },
+      "isExported": true,
+      "isPublic": true
+    },
+    {
+      "name": "generate",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/built-in-reporters/json-reporter.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/built-in-reporters/json-reporter.ts",
+        "line": 11,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "JSONReporter",
+      "isAsync": false,
+      "signature": "()"
+    },
+    {
+      "name": "generatePretty",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/built-in-reporters/json-reporter.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/built-in-reporters/json-reporter.ts",
+        "line": 18,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "JSONReporter",
+      "isAsync": false,
+      "signature": "()"
+    },
+    {
+      "name": "YAMLFormatter",
+      "type": "class",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/yaml-formatter.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/yaml-formatter.ts",
+        "line": 7,
+        "column": 7
+      },
+      "isExported": true,
+      "isPublic": true
+    },
+    {
+      "name": "format",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/yaml-formatter.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/yaml-formatter.ts",
+        "line": 11,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "YAMLFormatter",
+      "isAsync": false,
+      "signature": "(catalog, options)"
+    },
+    {
+      "name": "toDocument",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/yaml-formatter.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/yaml-formatter.ts",
+        "line": 23,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "YAMLFormatter",
+      "isAsync": false,
+      "signature": "(catalog)"
+    },
+    {
+      "name": "MarkdownFormatter",
+      "type": "class",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/markdown-formatter.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/markdown-formatter.ts",
+        "line": 6,
+        "column": 7
+      },
+      "isExported": true,
+      "isPublic": true
+    },
+    {
+      "name": "format",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/markdown-formatter.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/markdown-formatter.ts",
+        "line": 10,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "MarkdownFormatter",
+      "isAsync": false,
+      "signature": "(catalog)"
+    },
+    {
+      "name": "JSONFormatter",
+      "type": "class",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/json-formatter.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/json-formatter.ts",
+        "line": 6,
+        "column": 7
+      },
+      "isExported": true,
+      "isPublic": true
+    },
+    {
+      "name": "format",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/json-formatter.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/json-formatter.ts",
+        "line": 10,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "JSONFormatter",
+      "isAsync": false,
+      "signature": "(catalog, options)"
+    },
+    {
+      "name": "toObject",
+      "type": "method",
+      "kind": "named",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/json-formatter.ts",
+      "location": {
+        "file": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/json-formatter.ts",
+        "line": 24,
+        "column": 2
+      },
+      "isExported": true,
+      "isPublic": true,
+      "parent": "JSONFormatter",
+      "isAsync": false,
+      "signature": "(catalog)"
+    }
+  ],
+  "byFile": {
+    "/Users/koyama.koji/git/self/test-kanteen/src/reporter/reporter-interface.ts": [],
+    "/Users/koyama.koji/git/self/test-kanteen/src/reporter/index.ts": [],
+    "/Users/koyama.koji/git/self/test-kanteen/src/types/index.ts": [],
+    "/Users/koyama.koji/git/self/test-kanteen/src/reporter/base-reporter.ts": [
+      {
+        "name": "BaseReporter",
+        "type": "class",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/base-reporter.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/base-reporter.ts",
+          "line": 9,
+          "column": 7
+        },
+        "isExported": true,
+        "isPublic": true
+      },
+      {
+        "name": "onTestSuite",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/base-reporter.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/base-reporter.ts",
+          "line": 31,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "BaseReporter",
+        "isAsync": false,
+        "signature": "(_suite)"
+      },
+      {
+        "name": "onTestCase",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/base-reporter.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/base-reporter.ts",
+          "line": 38,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "BaseReporter",
+        "isAsync": false,
+        "signature": "(_testCase)"
+      },
+      {
+        "name": "onComplete",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/base-reporter.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/base-reporter.ts",
+          "line": 45,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "BaseReporter",
+        "isAsync": false,
+        "signature": "(catalog)"
+      },
+      {
+        "name": "writeToFile",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/base-reporter.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/base-reporter.ts",
+          "line": 57,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "BaseReporter",
+        "isAsync": true,
+        "signature": "(outputPath)"
+      }
+    ],
+    "/Users/koyama.koji/git/self/test-kanteen/src/types/config.ts": [],
+    "/Users/koyama.koji/git/self/test-kanteen/src/index.ts": [
+      {
+        "name": "parseTests",
+        "type": "function",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/index.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/index.ts",
+          "line": 23,
+          "column": 7
+        },
+        "isExported": true,
+        "isPublic": true,
+        "isAsync": true,
+        "signature": "(pattern, config)"
+      },
+      {
+        "name": "parseTestsWithConfig",
+        "type": "function",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/index.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/index.ts",
+          "line": 78,
+          "column": 7
+        },
+        "isExported": true,
+        "isPublic": true,
+        "isAsync": true,
+        "signature": "(configPath)"
+      },
+      {
+        "name": "parseTestFile",
+        "type": "function",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/index.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/index.ts",
+          "line": 135,
+          "column": 7
+        },
+        "isExported": true,
+        "isPublic": true,
+        "isAsync": true,
+        "signature": "(filePath)"
+      }
+    ],
+    "/Users/koyama.koji/git/self/test-kanteen/src/types/export.ts": [],
+    "/Users/koyama.koji/git/self/test-kanteen/src/types/catalog.ts": [],
+    "/Users/koyama.koji/git/self/test-kanteen/src/types/ast.ts": [],
+    "/Users/koyama.koji/git/self/test-kanteen/src/parser/test-framework-detector.ts": [
+      {
+        "name": "TestFrameworkDetector",
+        "type": "class",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/test-framework-detector.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/test-framework-detector.ts",
+          "line": 6,
+          "column": 7
+        },
+        "isExported": true,
+        "isPublic": true
+      },
+      {
+        "name": "detectFromSource",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/test-framework-detector.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/test-framework-detector.ts",
+          "line": 66,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "TestFrameworkDetector",
+        "isAsync": false,
+        "signature": "(source)"
+      },
+      {
+        "name": "detectFromAST",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/test-framework-detector.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/test-framework-detector.ts",
+          "line": 94,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "TestFrameworkDetector",
+        "isAsync": false,
+        "signature": "(ast)"
+      },
+      {
+        "name": "detectFromPackageJson",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/test-framework-detector.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/test-framework-detector.ts",
+          "line": 114,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "TestFrameworkDetector",
+        "isAsync": true,
+        "signature": "(packageJsonPath)"
+      },
+      {
+        "name": "autoDetect",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/test-framework-detector.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/test-framework-detector.ts",
+          "line": 144,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "TestFrameworkDetector",
+        "isAsync": true,
+        "signature": "(source, ast)"
+      },
+      {
+        "name": "getFramework",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/test-framework-detector.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/test-framework-detector.ts",
+          "line": 168,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "TestFrameworkDetector",
+        "isAsync": false,
+        "signature": "(name)"
+      },
+      {
+        "name": "getSupportedFrameworks",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/test-framework-detector.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/test-framework-detector.ts",
+          "line": 175,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "TestFrameworkDetector",
+        "isAsync": false,
+        "signature": "()"
+      }
+    ],
+    "/Users/koyama.koji/git/self/test-kanteen/src/generator/index.ts": [],
+    "/Users/koyama.koji/git/self/test-kanteen/src/parser/source-loader.ts": [
+      {
+        "name": "SourceLoader",
+        "type": "class",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/source-loader.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/source-loader.ts",
+          "line": 8,
+          "column": 7
+        },
+        "isExported": true,
+        "isPublic": true
+      },
+      {
+        "name": "loadFile",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/source-loader.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/source-loader.ts",
+          "line": 12,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "SourceLoader",
+        "isAsync": true,
+        "signature": "(filePath)"
+      },
+      {
+        "name": "loadFiles",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/source-loader.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/source-loader.ts",
+          "line": 25,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "SourceLoader",
+        "isAsync": true,
+        "signature": "(filePaths)"
+      },
+      {
+        "name": "loadByPattern",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/source-loader.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/source-loader.ts",
+          "line": 45,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "SourceLoader",
+        "isAsync": true,
+        "signature": "(pattern, options)"
+      },
+      {
+        "name": "exists",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/source-loader.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/source-loader.ts",
+          "line": 68,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "SourceLoader",
+        "isAsync": true,
+        "signature": "(filePath)"
+      },
+      {
+        "name": "getStats",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/source-loader.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/source-loader.ts",
+          "line": 80,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "SourceLoader",
+        "isAsync": true,
+        "signature": "(filePath)"
+      }
+    ],
+    "/Users/koyama.koji/git/self/test-kanteen/src/parser/index.ts": [],
+    "/Users/koyama.koji/git/self/test-kanteen/src/parser/ast-parser.ts": [
+      {
+        "name": "ASTParser",
+        "type": "class",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/ast-parser.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/ast-parser.ts",
+          "line": 37,
+          "column": 7
+        },
+        "isExported": true,
+        "isPublic": true
+      },
+      {
+        "name": "parse",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/ast-parser.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/ast-parser.ts",
+          "line": 49,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "ASTParser",
+        "isAsync": false,
+        "signature": "(source, filePath, options)"
+      },
+      {
+        "name": "parseMultiple",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/ast-parser.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/ast-parser.ts",
+          "line": 77,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "ASTParser",
+        "isAsync": false,
+        "signature": "(sources, options)"
+      },
+      {
+        "name": "isValidAST",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/parser/ast-parser.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/parser/ast-parser.ts",
+          "line": 98,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "ASTParser",
+        "isAsync": false,
+        "signature": "(ast)"
+      }
+    ],
+    "/Users/koyama.koji/git/self/test-kanteen/src/generator/catalog-generator.ts": [
+      {
+        "name": "CatalogGenerator",
+        "type": "class",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/generator/catalog-generator.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/generator/catalog-generator.ts",
+          "line": 11,
+          "column": 7
+        },
+        "isExported": true,
+        "isPublic": true
+      },
+      {
+        "name": "generate",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/generator/catalog-generator.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/generator/catalog-generator.ts",
+          "line": 17,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "CatalogGenerator",
+        "isAsync": false,
+        "signature": "(testSuites, options)"
+      }
+    ],
+    "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/index.ts": [],
+    "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/test-analyzer.ts": [
+      {
+        "name": "TestAnalyzer",
+        "type": "class",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/test-analyzer.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/test-analyzer.ts",
+          "line": 20,
+          "column": 7
+        },
+        "isExported": true,
+        "isPublic": true
+      },
+      {
+        "name": "analyze",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/test-analyzer.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/test-analyzer.ts",
+          "line": 30,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "TestAnalyzer",
+        "isAsync": false,
+        "signature": "(parseResult, framework)"
+      }
+    ],
+    "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/export-extractor.ts": [
+      {
+        "name": "ExportExtractor",
+        "type": "class",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/export-extractor.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/export-extractor.ts",
+          "line": 17,
+          "column": 7
+        },
+        "isExported": true,
+        "isPublic": true
+      },
+      {
+        "name": "extract",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/export-extractor.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/export-extractor.ts",
+          "line": 21,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "ExportExtractor",
+        "isAsync": false,
+        "signature": "(parseResult)"
+      }
+    ],
+    "/Users/koyama.koji/git/self/test-kanteen/src/cli/index.ts": [],
+    "/Users/koyama.koji/git/self/test-kanteen/examples/basic-usage/example.ts": [],
+    "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/assertion-extractor.ts": [
+      {
+        "name": "AssertionExtractor",
+        "type": "class",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/assertion-extractor.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/assertion-extractor.ts",
+          "line": 6,
+          "column": 7
+        },
+        "isExported": true,
+        "isPublic": true
+      },
+      {
+        "name": "extract",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/assertion-extractor.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/assertion-extractor.ts",
+          "line": 10,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "AssertionExtractor",
+        "isAsync": false,
+        "signature": "(node)"
+      },
+      {
+        "name": "classifyAssertion",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/assertion-extractor.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/analyzer/assertion-extractor.ts",
+          "line": 142,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "AssertionExtractor",
+        "isAsync": false,
+        "signature": "(matcher)"
+      }
+    ],
+    "/Users/koyama.koji/git/self/test-kanteen/examples/llm-integration/example.ts": [],
+    "/Users/koyama.koji/git/self/test-kanteen/examples/custom-reporter/custom-reporter.ts": [
+      {
+        "name": "HTMLReporter",
+        "type": "class",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/examples/custom-reporter/custom-reporter.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/examples/custom-reporter/custom-reporter.ts",
+          "line": 11,
+          "column": 7
+        },
+        "isExported": true,
+        "isPublic": true
+      },
+      {
+        "name": "onTestSuite",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/examples/custom-reporter/custom-reporter.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/examples/custom-reporter/custom-reporter.ts",
+          "line": 18,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "HTMLReporter",
+        "isAsync": false,
+        "signature": "(suite)"
+      },
+      {
+        "name": "onTestCase",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/examples/custom-reporter/custom-reporter.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/examples/custom-reporter/custom-reporter.ts",
+          "line": 22,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "HTMLReporter",
+        "isAsync": false,
+        "signature": "(testCase)"
+      },
+      {
+        "name": "onComplete",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/examples/custom-reporter/custom-reporter.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/examples/custom-reporter/custom-reporter.ts",
+          "line": 26,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "HTMLReporter",
+        "isAsync": false,
+        "signature": "(catalog)"
+      },
+      {
+        "name": "generate",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/examples/custom-reporter/custom-reporter.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/examples/custom-reporter/custom-reporter.ts",
+          "line": 30,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "HTMLReporter",
+        "isAsync": false,
+        "signature": "()"
+      }
+    ],
+    "/Users/koyama.koji/git/self/test-kanteen/src/reporter/built-in-reporters/markdown-reporter.ts": [
+      {
+        "name": "MarkdownReporter",
+        "type": "class",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/built-in-reporters/markdown-reporter.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/built-in-reporters/markdown-reporter.ts",
+          "line": 9,
+          "column": 7
+        },
+        "isExported": true,
+        "isPublic": true
+      },
+      {
+        "name": "generate",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/built-in-reporters/markdown-reporter.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/built-in-reporters/markdown-reporter.ts",
+          "line": 13,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "MarkdownReporter",
+        "isAsync": false,
+        "signature": "()"
+      }
+    ],
+    "/Users/koyama.koji/git/self/test-kanteen/examples/custom-reporter/example.ts": [],
+    "/Users/koyama.koji/git/self/test-kanteen/src/reporter/built-in-reporters/json-reporter.ts": [
+      {
+        "name": "JSONReporter",
+        "type": "class",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/built-in-reporters/json-reporter.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/built-in-reporters/json-reporter.ts",
+          "line": 7,
+          "column": 7
+        },
+        "isExported": true,
+        "isPublic": true
+      },
+      {
+        "name": "generate",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/built-in-reporters/json-reporter.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/built-in-reporters/json-reporter.ts",
+          "line": 11,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "JSONReporter",
+        "isAsync": false,
+        "signature": "()"
+      },
+      {
+        "name": "generatePretty",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/built-in-reporters/json-reporter.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/reporter/built-in-reporters/json-reporter.ts",
+          "line": 18,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "JSONReporter",
+        "isAsync": false,
+        "signature": "()"
+      }
+    ],
+    "/Users/koyama.koji/git/self/test-kanteen/tests/fixtures/sample.test.ts": [],
+    "/Users/koyama.koji/git/self/test-kanteen/src/reporter/built-in-reporters/index.ts": [],
+    "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/yaml-formatter.ts": [
+      {
+        "name": "YAMLFormatter",
+        "type": "class",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/yaml-formatter.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/yaml-formatter.ts",
+          "line": 7,
+          "column": 7
+        },
+        "isExported": true,
+        "isPublic": true
+      },
+      {
+        "name": "format",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/yaml-formatter.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/yaml-formatter.ts",
+          "line": 11,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "YAMLFormatter",
+        "isAsync": false,
+        "signature": "(catalog, options)"
+      },
+      {
+        "name": "toDocument",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/yaml-formatter.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/yaml-formatter.ts",
+          "line": 23,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "YAMLFormatter",
+        "isAsync": false,
+        "signature": "(catalog)"
+      }
+    ],
+    "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/markdown-formatter.ts": [
+      {
+        "name": "MarkdownFormatter",
+        "type": "class",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/markdown-formatter.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/markdown-formatter.ts",
+          "line": 6,
+          "column": 7
+        },
+        "isExported": true,
+        "isPublic": true
+      },
+      {
+        "name": "format",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/markdown-formatter.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/markdown-formatter.ts",
+          "line": 10,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "MarkdownFormatter",
+        "isAsync": false,
+        "signature": "(catalog)"
+      }
+    ],
+    "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts": [],
+    "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/index.ts": [],
+    "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/json-formatter.ts": [
+      {
+        "name": "JSONFormatter",
+        "type": "class",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/json-formatter.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/json-formatter.ts",
+          "line": 6,
+          "column": 7
+        },
+        "isExported": true,
+        "isPublic": true
+      },
+      {
+        "name": "format",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/json-formatter.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/json-formatter.ts",
+          "line": 10,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "JSONFormatter",
+        "isAsync": false,
+        "signature": "(catalog, options)"
+      },
+      {
+        "name": "toObject",
+        "type": "method",
+        "kind": "named",
+        "filePath": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/json-formatter.ts",
+        "location": {
+          "file": "/Users/koyama.koji/git/self/test-kanteen/src/generator/formatters/json-formatter.ts",
+          "line": 24,
+          "column": 2
+        },
+        "isExported": true,
+        "isPublic": true,
+        "parent": "JSONFormatter",
+        "isAsync": false,
+        "signature": "(catalog)"
+      }
+    ],
+    "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts": [],
+    "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/formatters.test.ts": [],
+    "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts": [],
+    "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/test-analyzer.test.ts": [],
+    "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts": [],
+    "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/ast-parser.test.ts": [],
+    "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/catalog-generator.test.ts": [],
+    "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts": [],
+    "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/source-loader.test.ts": [],
+    "/Users/koyama.koji/git/self/test-kanteen/tests/fixtures/edge-cases.test.ts": [],
+    "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/assertion-extractor.test.ts": []
+  }
+}
