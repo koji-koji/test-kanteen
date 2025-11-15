@@ -179,13 +179,13 @@ npx kanteen report compare --ast ./custom/catalog.json --runtime ./custom/runtim
 
 GitHub ActionsでAST生成とカスタムレポート出力を自動化できます。
 
-**ワークフローサンプル集**: [.github/workflows/README.md](./.github/workflows/README.md)
+**ワークフローサンプル集**: [examples/workflows/README.md](./examples/workflows/README.md)
 
 3種類のワークフローテンプレートを用意しています：
 
-1. **[kanteen-basic.yml](./.github/workflows/kanteen-basic.yml)** - 最もシンプルな基本セットアップ
-2. **[kanteen-pr-comment.yml](./.github/workflows/kanteen-pr-comment.yml)** - PRコメント機能付き
-3. **[kanteen-full.yml](./.github/workflows/kanteen-full.yml)** - フル機能版（推奨）
+1. **[kanteen-basic.yml](./examples/workflows/kanteen-basic.yml)** - 最もシンプルな基本セットアップ
+2. **[kanteen-pr-comment.yml](./examples/workflows/kanteen-pr-comment.yml)** - PRコメント機能付き
+3. **[kanteen-full.yml](./examples/workflows/kanteen-full.yml)** - フル機能版（推奨）
 
 **基本的な使い方**:
 ```yaml
@@ -212,7 +212,7 @@ GitHub ActionsでAST生成とカスタムレポート出力を自動化できま
 - ✅ PRへの自動コメント投稿
 - ✅ レポートをアーティファクトとして保存
 
-詳細: [CI/CD統合ガイド](./.github/workflows/README.md)
+詳細: [CI/CD統合ガイド](./examples/workflows/README.md)
 
 #### LLM統合ガイドの自動生成 🆕
 

@@ -20,8 +20,8 @@
 
 **使い方**:
 ```bash
-# このファイルを自分のリポジトリにコピー
-cp .github/workflows/kanteen-basic.yml /path/to/your/project/.github/workflows/
+# このファイルを自分のリポジトリの.github/workflows/にコピー
+cp examples/workflows/kanteen-basic.yml /path/to/your/project/.github/workflows/
 ```
 
 ---
@@ -43,8 +43,8 @@ PRに自動的にテスト比較レポートを投稿します。
 
 **使い方**:
 ```bash
-# このファイルを自分のリポジトリにコピー
-cp .github/workflows/kanteen-pr-comment.yml /path/to/your/project/.github/workflows/
+# このファイルを自分のリポジトリの.github/workflows/にコピー
+cp examples/workflows/kanteen-pr-comment.yml /path/to/your/project/.github/workflows/
 ```
 
 ---
@@ -69,15 +69,15 @@ cp .github/workflows/kanteen-pr-comment.yml /path/to/your/project/.github/workfl
 
 **使い方**:
 ```bash
-# このファイルを自分のリポジトリにコピー
-cp .github/workflows/kanteen-full.yml /path/to/your/project/.github/workflows/
+# このファイルを自分のリポジトリの.github/workflows/にコピー
+cp examples/workflows/kanteen-full.yml /path/to/your/project/.github/workflows/
 ```
 
 ---
 
-### 4. **test-with-kanteen.yml** - 実際の運用例
+### 4. **実際の運用例**
 
-test-kanteenプロジェクト自身が使用している実際のワークフロー。
+test-kanteenプロジェクト自身が使用している実際のワークフローは [../../.github/workflows/test-with-kanteen.yml](../../.github/workflows/test-with-kanteen.yml) を参照してください。
 
 **使用場面**:
 - 実際の運用例を参考にしたい場合
@@ -141,7 +141,7 @@ export default defineConfig({
 
 ```bash
 # 例: 基本的なワークフローを使用
-cp .github/workflows/kanteen-basic.yml /path/to/your/project/.github/workflows/kanteen.yml
+cp examples/workflows/kanteen-basic.yml /path/to/your/project/.github/workflows/kanteen.yml
 ```
 
 ### 3. 必要に応じてカスタマイズ
