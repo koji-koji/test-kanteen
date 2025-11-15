@@ -3,7 +3,7 @@ module.exports = {
   testEnvironment: 'node',
   roots: ['<rootDir>/tests'],
   testMatch: ['**/__tests__/**/*.ts', '**/?(*.)+(spec|test).ts'],
-  testPathIgnorePatterns: ['/node_modules/', '/tests/fixtures/'],
+  testPathIgnorePatterns: ['/node_modules/', '/tests/fixtures/', '/tests/tmp/'],
   collectCoverageFrom: [
     'src/**/*.ts',
     '!src/**/*.d.ts',
