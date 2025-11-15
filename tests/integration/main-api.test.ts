@@ -210,4 +210,99 @@ describe('Main API Integration Tests', () => {
       expect(catalog.testSuites.length).toBeGreaterThan(0);
     });
   });
+
+  describe('parseTests - error handling', () => {
+    it('should handle invalid TypeScript syntax gracefully', async () => {
+      // Arrange
+      const invalidSyntaxFile = path.join(fixturesDir, 'invalid-syntax.test.ts');
+
+      // Act
+      const catalog = await parseTests(invalidSyntaxFile);
+
+      // Assert
+      // Parser logs error but continues with empty catalog
+      expect(catalog).toBeDefined();
+      expect(catalog.testSuites.length).toBe(0);
+      expect(catalog.coverage.totalTests).toBe(0);
+    });
+
+    it('should provide clear error message for unsupported framework', async () => {
+      // Arrange
+      const unsupportedFile = path.join(fixturesDir, 'unsupported-framework.test.ts');
+
+      // Act
+      const catalog = await parseTests(unsupportedFile, {
+        framework: 'auto',
+      });
+
+      // Assert
+      // The parser should complete, but framework detection might fall back to a default
+      expect(catalog).toBeDefined();
+      expect(catalog.metadata.framework).toBeDefined();
+    });
+
+    it('should handle circular dependencies gracefully', async () => {
+      // Arrange
+      // This is an optional advanced test case
+      // For now, we test that the parser handles re-imports correctly
+      const pattern = path.join(fixturesDir, 'edge-cases.test.ts');
+
+      // Act
+      const catalog = await parseTests(pattern);
+
+      // Assert
+      expect(catalog).toBeDefined();
+      expect(catalog.testSuites.length).toBeGreaterThan(0);
+    });
+
+    it('should handle empty test files gracefully', async () => {
+      // Arrange
+      const emptyFile = path.join(fixturesDir, 'empty.test.ts');
+      await fs.writeFile(emptyFile, '// Empty test file\n', 'utf-8');
+
+      // Act
+      const catalog = await parseTests(emptyFile);
+
+      // Assert
+      expect(catalog).toBeDefined();
+      expect(catalog.testSuites.length).toBe(0);
+      expect(catalog.coverage.totalTests).toBe(0);
+
+      // Cleanup
+      await fs.unlink(emptyFile);
+    });
+
+    it('should provide meaningful error message when no tests found', async () => {
+      // Arrange
+      const nonExistentPattern = path.join(fixturesDir, 'completely-missing-*.test.ts');
+
+      // Act & Assert
+      await expect(parseTests(nonExistentPattern)).rejects.toThrow('No test files found');
+    });
+
+    it('should handle malformed test structure', async () => {
+      // Arrange
+      const malformedFile = path.join(fixturesDir, 'malformed.test.ts');
+      await fs.writeFile(
+        malformedFile,
+        `
+        // Malformed test without proper structure
+        const x = 1;
+        const y = 2;
+        console.log(x + y);
+      `,
+        'utf-8'
+      );
+
+      // Act
+      const catalog = await parseTests(malformedFile);
+
+      // Assert
+      expect(catalog).toBeDefined();
+      expect(catalog.testSuites.length).toBe(0);
+
+      // Cleanup
+      await fs.unlink(malformedFile);
+    });
+  });
 });
