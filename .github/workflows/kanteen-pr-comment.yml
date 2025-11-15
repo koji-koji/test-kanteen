@@ -1,0 +1,73 @@
+# Example: PR comment with test comparison report
+# This workflow posts a detailed test report as a PR comment
+
+name: Kanteen PR Report
+
+on:
+  pull_request:
+
+jobs:
+  test-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # 1. Generate AST catalog
+      - name: Generate AST catalog
+        run: npx kanteen analyze
+
+      # 2. Run tests (generates runtime catalog)
+      - name: Run tests
+        run: npm test
+        continue-on-error: true
+        id: test
+
+      # 3. Generate comparison report
+      - name: Generate comparison report
+        if: always()
+        run: npx kanteen report compare
+
+      # 4. Post report as PR comment
+      - name: Comment PR with test report
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+
+            try {
+              // Read the comparison report
+              const report = fs.readFileSync('./test-reports/compare-runtime-report.md', 'utf8');
+
+              // Truncate if too long (GitHub comment limit: 65536 chars)
+              const maxLength = 65000;
+              const truncatedReport = report.length > maxLength
+                ? report.substring(0, maxLength) + '\n\n... (truncated)'
+                : report;
+
+              // Post comment
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: truncatedReport
+              });
+            } catch (error) {
+              console.error('Failed to post comment:', error);
+            }
+
+      # 5. Fail if tests failed
+      - name: Fail if tests failed
+        if: steps.test.outcome == 'failure'
+        run: exit 1

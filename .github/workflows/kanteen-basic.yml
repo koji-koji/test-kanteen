@@ -1,0 +1,46 @@
+# Basic example: AST catalog generation and test execution
+# This is the simplest setup for test-kanteen in CI
+
+name: Basic Kanteen Workflow
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Generate AST catalog
+      - name: Generate AST catalog
+        run: npx kanteen analyze
+
+      # Run tests with kanteen reporter
+      # Make sure your jest.config.js/vitest.config.ts includes kanteen reporter
+      - name: Run tests
+        run: npm test
+
+      # Upload catalogs as artifacts
+      - name: Upload test catalogs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-catalogs
+          path: |
+            aaa_test_kanteen/
+            test-kanteen-runtime/
+          retention-days: 7

@@ -20,5 +20,12 @@ module.exports = {
     }
   },
   moduleFileExtensions: ['ts', 'js', 'json'],
-  verbose: true
+  verbose: true,
+  reporters: [
+    'default',
+    ['./dist/reporters/jest/index.js', {
+      output: './test-kanteen-runtime',
+      format: ['json', 'markdown']
+    }]
+  ]
 };
