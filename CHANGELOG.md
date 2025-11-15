@@ -5,6 +5,70 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2025-11-15
+
+### Added
+
+#### カスタムレポーター
+- **Jest Reporter** (`@koji-koji/test-kanteen/jest`): Jestテスト実行時のRuntime catalogを生成
+- **Vitest Reporter** (`@koji-koji/test-kanteen/vitest`): Vitestテスト実行時のRuntime catalogを生成
+- **Playwright Reporter** (`@koji-koji/test-kanteen/playwright`): Playwrightテスト実行時のRuntime catalogを生成
+- Runtime catalog: テスト実行情報（status, duration, errors）を含む実行時カタログ
+- 各レポーターはJSON/Markdown形式での出力をサポート
+
+#### Compare機能
+- **Compare CLI Command** (`kanteen compare <ast-catalog> <runtime-catalog>`): ASTカタログとRuntimeカタログを比較
+- **Gap分析**:
+  - 未実行テスト検出（スキップされたテスト等）
+  - 動的生成テスト検出（`test.each`等で生成されたテスト）
+  - テスト実行カバレッジ算出
+- **比較レポート**: JSON/Markdown形式で詳細な比較結果を出力
+- **TestMatcher**: テストの自動マッチング（Perfect/High/Medium confidence levels）
+
+#### 新しい型定義
+- `RuntimeCatalog`: 実行時カタログの型定義
+- `RuntimeTest`: 実行時テスト情報の型定義（status, duration, error含む）
+- `ExecutionSummary`: 実行サマリーの型定義（passed, failed, skipped等）
+- `TestError`: テストエラー詳細の型定義（matcher名, expected/actual値）
+- `ComparisonResult`: カタログ比較結果の型定義
+
+#### ドキュメント
+- [Jest Reporter Guide](./docs/JEST_REPORTER.md): Jestカスタムレポーターの完全ガイド
+- [Vitest Reporter Guide](./docs/VITEST_REPORTER.md): Vitestカスタムレポーターの完全ガイド
+- [Playwright Reporter Guide](./docs/PLAYWRIGHT_REPORTER.md): Playwrightカスタムレポーターの完全ガイド
+- [Compare Command Guide](./docs/COMPARE_COMMAND.md): Compare機能の詳細ガイド
+
+### Changed
+- **テスト数**: 161 → 192 (+31テスト)
+  - カスタムレポーター統合テスト: 14 tests
+  - Compare機能統合テスト: 3 tests
+  - TestMatcher単体テスト: 9 tests
+  - E2Eテスト: 5 tests
+- **README**: カスタムレポーター機能とcompareコマンドの使用方法を追加
+
+### Fixed
+- Reporter integration testsのrace condition修正（Jest/Vitest/Playwright）
+- 非同期ファイル操作前のディレクトリ存在確認を追加
+
+### Usage Example
+
+```bash
+# 1. ASTカタログ生成
+npx kanteen analyze "tests/**/*.test.ts" --output ./ast-catalog
+
+# 2. Jest/Vitest/Playwrightの設定にカスタムレポーターを追加
+# (詳細はドキュメント参照)
+
+# 3. テスト実行（Runtimeカタログが自動生成される）
+npm test
+
+# 4. 比較分析
+npx kanteen compare \
+  ./ast-catalog/catalog.json \
+  ./test-kanteen-runtime/runtime-catalog.json \
+  --format json,markdown
+```
+
 ## [0.4.0] - 2025-11-15
 
 ### Changed
