@@ -65,6 +65,7 @@ export interface TestSuite {
   setup?: SetupInfo[];
   teardown?: TeardownInfo[];
   nestedSuites?: TestSuite[];
+  totalTests?: number;
 }
 
 /**

@@ -74,5 +74,125 @@ describe('CatalogGenerator', () => {
       expect(catalog.coverage.totalTests).toBe(4); // 2 from parent + 2 from nested
     });
 
+    it('should add totalTests field to each test suite', () => {
+      // Arrange
+      const testSuites = [createMockTestSuite()];
+
+      // Act
+      const catalog = generator.generate(testSuites);
+
+      // Assert
+      expect(catalog.testSuites[0].totalTests).toBe(2);
+    });
+
+    it('should calculate totalTests correctly for nested suites', () => {
+      // Arrange
+      const nestedSuite: TestSuite = {
+        ...createMockTestSuite(),
+        id: 'nested-suite',
+        name: 'Nested Suite',
+      };
+
+      const parentSuite: TestSuite = {
+        id: 'parent-suite',
+        name: 'Parent Suite',
+        filePath: '/test/parent.test.ts',
+        tests: [
+          {
+            id: 'parent-test-1',
+            name: 'should work in parent',
+            assertions: [],
+            dependencies: [],
+            tags: [],
+            location: { file: '/test/parent.test.ts', line: 5, column: 5 },
+          },
+        ],
+        nestedSuites: [nestedSuite],
+      };
+
+      // Act
+      const catalog = generator.generate([parentSuite]);
+
+      // Assert
+      expect(catalog.testSuites[0].totalTests).toBe(3); // 1 from parent + 2 from nested
+      expect(catalog.testSuites[0].nestedSuites?.[0].totalTests).toBe(2); // 2 from nested only
+    });
+
+    it('should calculate totalTests for deeply nested suites', () => {
+      // Arrange
+      const deeplyNestedSuite: TestSuite = {
+        id: 'deeply-nested',
+        name: 'Deeply Nested',
+        filePath: '/test/deep.test.ts',
+        tests: [
+          {
+            id: 'deep-test',
+            name: 'should work deeply',
+            assertions: [],
+            dependencies: [],
+            tags: [],
+            location: { file: '/test/deep.test.ts', line: 10, column: 5 },
+          },
+        ],
+      };
+
+      const nestedSuite: TestSuite = {
+        id: 'nested-suite',
+        name: 'Nested Suite',
+        filePath: '/test/nested.test.ts',
+        tests: [
+          {
+            id: 'nested-test',
+            name: 'should work in nested',
+            assertions: [],
+            dependencies: [],
+            tags: [],
+            location: { file: '/test/nested.test.ts', line: 5, column: 5 },
+          },
+        ],
+        nestedSuites: [deeplyNestedSuite],
+      };
+
+      const parentSuite: TestSuite = {
+        id: 'parent-suite',
+        name: 'Parent Suite',
+        filePath: '/test/parent.test.ts',
+        tests: [],
+        nestedSuites: [nestedSuite],
+      };
+
+      // Act
+      const catalog = generator.generate([parentSuite]);
+
+      // Assert
+      expect(catalog.testSuites[0].totalTests).toBe(2); // 0 + 1 + 1
+      expect(catalog.testSuites[0].nestedSuites?.[0].totalTests).toBe(2); // 1 + 1
+      expect(catalog.testSuites[0].nestedSuites?.[0].nestedSuites?.[0].totalTests).toBe(1); // 1 only
+    });
+
+    it('should handle suite with no tests but nested suites', () => {
+      // Arrange
+      const nestedSuite: TestSuite = {
+        ...createMockTestSuite(),
+        id: 'nested-suite',
+        name: 'Nested Suite',
+      };
+
+      const parentSuite: TestSuite = {
+        id: 'parent-suite',
+        name: 'Parent Suite',
+        filePath: '/test/parent.test.ts',
+        tests: [], // No direct tests
+        nestedSuites: [nestedSuite],
+      };
+
+      // Act
+      const catalog = generator.generate([parentSuite]);
+
+      // Assert
+      expect(catalog.testSuites[0].tests.length).toBe(0);
+      expect(catalog.testSuites[0].totalTests).toBe(2); // All from nested
+    });
+
   });
 });

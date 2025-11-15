@@ -22,11 +22,17 @@ export class CatalogGenerator {
     }
   ): TestCatalog {
     const metadata = this.generateMetadata(options);
-    const coverage = this.calculateCoverage(testSuites);
+
+    // 各スイートにtotalTestsを追加
+    const suitesWithTotalTests = testSuites.map((suite) =>
+      this.addTotalTestsToSuite(suite)
+    );
+
+    const coverage = this.calculateCoverage(suitesWithTotalTests);
 
     return {
       metadata,
-      testSuites,
+      testSuites: suitesWithTotalTests,
       coverage,
     };
   }
@@ -48,21 +54,33 @@ export class CatalogGenerator {
   }
 
   /**
+   * テストスイートにtotalTestsフィールドを追加（再帰的）
+   */
+  private addTotalTestsToSuite(suite: TestSuite): TestSuite {
+    // ネストされたスイートにもtotalTestsを追加
+    const nestedSuites = suite.nestedSuites?.map((nested) =>
+      this.addTotalTestsToSuite(nested)
+    );
+
+    // このスイートのテスト数を再帰的に計算
+    const totalTests = this.countTests({
+      ...suite,
+      nestedSuites,
+    });
+
+    return {
+      ...suite,
+      nestedSuites,
+      totalTests,
+    };
+  }
+
+  /**
    * カバレッジ情報を計算
    */
   private calculateCoverage(testSuites: TestSuite[]): CoverageInfo {
     let totalTests = 0;
     let totalSuites = 0;
-
-    const countTests = (suite: TestSuite): number => {
-      let count = suite.tests.length;
-      if (suite.nestedSuites) {
-        suite.nestedSuites.forEach((nested) => {
-          count += countTests(nested);
-        });
-      }
-      return count;
-    };
 
     const countSuites = (suite: TestSuite): number => {
       let count = 1; // 自分自身をカウント
@@ -75,7 +93,7 @@ export class CatalogGenerator {
     };
 
     testSuites.forEach((suite) => {
-      totalTests += countTests(suite);
+      totalTests += this.countTests(suite);
       totalSuites += countSuites(suite);
     });
 
@@ -83,6 +101,19 @@ export class CatalogGenerator {
       totalTests,
       totalSuites,
     };
+  }
+
+  /**
+   * テストスイートの総テスト数を再帰的に計算
+   */
+  private countTests(suite: TestSuite): number {
+    let count = suite.tests.length;
+    if (suite.nestedSuites) {
+      suite.nestedSuites.forEach((nested) => {
+        count += this.countTests(nested);
+      });
+    }
+    return count;
   }
 
 }
