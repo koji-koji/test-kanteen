@@ -76,4 +76,74 @@ describe('ASTParser', () => {
       expect(parser.isValidAST({ type: 'Invalid' })).toBe(false);
     });
   });
+
+  describe('ASTParser - edge cases', () => {
+    it('should handle empty file', () => {
+      // Arrange
+      const source = '';
+      const filePath = 'empty.ts';
+
+      // Act
+      const result = parser.parse(source, filePath);
+
+      // Assert
+      expect(result.ast).toBeDefined();
+      expect(result.ast.type).toBe('Program');
+      expect(result.ast.body).toHaveLength(0);
+      expect(result.filePath).toBe(filePath);
+      expect(result.source).toBe(source);
+    });
+
+    it('should handle very large files efficiently', () => {
+      // Arrange
+      // Generate a large file (simulate ~10MB with many test cases)
+      const testCases = Array.from({ length: 1000 }, (_, i) => `
+        describe('Test Suite ${i}', () => {
+          it('should test case ${i}', () => {
+            expect(${i}).toBe(${i});
+          });
+        });
+      `).join('\n');
+      const source = testCases;
+      const filePath = 'large-file.test.ts';
+
+      // Act
+      const startTime = Date.now();
+      const result = parser.parse(source, filePath);
+      const duration = Date.now() - startTime;
+
+      // Assert
+      expect(result.ast).toBeDefined();
+      expect(result.ast.type).toBe('Program');
+      expect(result.ast.body.length).toBeGreaterThan(0);
+      expect(result.filePath).toBe(filePath);
+      // Verify it completes in reasonable time (less than 5 seconds)
+      expect(duration).toBeLessThan(5000);
+    });
+
+    it('should handle deep nesting (100+ levels)', () => {
+      // Arrange
+      // Generate deeply nested describe blocks (100 levels)
+      const nestingLevel = 100;
+      let source = '';
+      for (let i = 0; i < nestingLevel; i++) {
+        source += `describe('Level ${i}', () => {\n`;
+      }
+      source += `it('should work at deepest level', () => { expect(true).toBe(true); });\n`;
+      for (let i = 0; i < nestingLevel; i++) {
+        source += '});\n';
+      }
+      const filePath = 'deep-nesting.test.ts';
+
+      // Act
+      const result = parser.parse(source, filePath);
+
+      // Assert
+      expect(result.ast).toBeDefined();
+      expect(result.ast.type).toBe('Program');
+      expect(result.ast.body.length).toBeGreaterThan(0);
+      expect(result.filePath).toBe(filePath);
+      expect(parser.isValidAST(result.ast)).toBe(true);
+    });
+  });
 });
