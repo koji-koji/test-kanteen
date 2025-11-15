@@ -175,6 +175,36 @@ npx kanteen report compare --ast ./custom/catalog.json --runtime ./custom/runtim
 
 詳細: [カスタムレポーターガイド](./docs/CUSTOM_REPORTER.md)
 
+#### CI/CD統合 🆕
+
+GitHub ActionsでAST生成とカスタムレポート出力を自動化できます。
+
+**サンプルワークフロー**: [.github/workflows/test-with-kanteen.yml](./.github/workflows/test-with-kanteen.yml)
+
+```yaml
+- name: Generate AST catalog
+  run: npx kanteen analyze
+
+- name: Run tests
+  run: npm test
+
+- name: Generate comparison report
+  run: npx kanteen report compare
+
+- name: Upload reports
+  uses: actions/upload-artifact@v4
+  with:
+    name: test-reports
+    path: test-reports/
+```
+
+**機能**:
+- ✅ ASTカタログ生成
+- ✅ テスト実行（Runtimeカタログ自動生成）
+- ✅ Compare+Runtimeレポート生成
+- ✅ PRへの自動コメント投稿
+- ✅ レポートをアーティファクトとして保存
+
 #### LLM統合ガイドの自動生成 🆕
 
 test-kanteenは、初回のanalyze実行時にLLM統合ガイドを自動生成します：
