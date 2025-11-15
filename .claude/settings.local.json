@@ -52,7 +52,9 @@
       "Bash(git rm:*)",
       "Bash(npm run test:*)",
       "Bash(git config:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(git checkout:*)",
+      "Bash(git pull:*)"
     ],
     "deny": [],
     "ask": []
