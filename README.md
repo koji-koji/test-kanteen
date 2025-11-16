@@ -2,6 +2,9 @@
 
 > AST×Reporterでテストから"観点カタログ"を自動生成し、LLMと人間の共通Specにするライブラリ
 
+[JSConf JP2025 登壇資料](https://speakerdeck.com/kojikojikoji37/astxreporterdetesutokara-guan-dian-katarogu-wozi-dong-sheng-cheng-si-llmtoren-jian-nogong-tong-specnisuru)
+
+
 ## 概要
 
 Test Kanteenは、テストコードを解析して自動的に「テスト観点カタログ」を生成するTypeScriptライブラリです。ESTree準拠のASTパーサーとReporterパターンを組み合わせることで、テストから意図を抽出し、LLMと人間の両方が理解できる共通仕様書を作成します。
