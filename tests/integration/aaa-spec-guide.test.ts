@@ -1,15 +1,16 @@
 /**
- * Integration tests for TEST_KANTEEN_GUIDE.md generation
+ * Integration tests for aaa_spec guide generation
  */
 
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import { parseTests } from '../../src/index';
 
-describe('LLM Guide Generation', () => {
+describe('aaa_spec Guide Generation', () => {
   const tempDir = path.join(__dirname, '../tmp/aaa-spec');
   const outputDir = path.join(tempDir, 'aaa_test_kanteen');
-  const guidePath = path.join(outputDir, 'TEST_KANTEEN_GUIDE.md');
+  const specDir = path.join(tempDir, 'aaa_spec');
+  const guidePath = path.join(specDir, 'TEST_KANTEEN_GUIDE.md');
 
   beforeEach(async () => {
     // Clean temp directory
@@ -113,7 +114,7 @@ describe('Example', () => {
     expect(guideContent).not.toContain('🤖 LLMへのコピペ用メッセージ');
   });
 
-  it('should place guide in output directory alongside catalog files', async () => {
+  it('should place guide in aaa_spec directory alongside output directory', async () => {
     // Create test file
     const testFile = path.join(tempDir, 'example.test.ts');
     await fs.writeFile(
@@ -140,16 +141,21 @@ describe('Example', () => {
       .access(outputDir)
       .then(() => true)
       .catch(() => false);
+    const specDirExists = await fs
+      .access(specDir)
+      .then(() => true)
+      .catch(() => false);
     const guideExists = await fs
       .access(guidePath)
       .then(() => true)
       .catch(() => false);
 
     expect(outputDirExists).toBe(true);
+    expect(specDirExists).toBe(true);
     expect(guideExists).toBe(true);
 
-    // Verify guide is in output directory
-    expect(path.dirname(guidePath)).toBe(outputDir);
+    // Verify they are siblings
+    expect(path.dirname(outputDir)).toBe(path.dirname(specDir));
   });
 
   it('should include all essential sections in guide', async () => {

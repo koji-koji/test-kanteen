@@ -10,19 +10,19 @@ test-kanteenは、LLMが理解しやすいガイドを自動生成します。
 
 ```bash
 npx kanteen analyze "tests/**/*.test.ts"
-# → aaa_test_kanteen/TEST_KANTEEN_GUIDE.md が自動生成
+# → aaa_spec/TEST_KANTEEN_GUIDE.md が自動生成
 ```
 
 ### LLMへの導入方法
 
 **方法1: ファイル読み込み可能なLLM（Claude Code等）**
 ```
-aaa_test_kanteen/TEST_KANTEEN_GUIDE.md を読んで、
+aaa_spec/TEST_KANTEEN_GUIDE.md を読んで、
 test-kanteenを理解して積極的に活用してください。
 ```
 
 **方法2: コピペでオンボーディング**
-1. `aaa_test_kanteen/TEST_KANTEEN_GUIDE.md` を開く
+1. `aaa_spec/TEST_KANTEEN_GUIDE.md` を開く
 2. 🤖マークの「LLMへのコピペ用メッセージ」セクションをコピー
 3. LLMに貼り付け
 

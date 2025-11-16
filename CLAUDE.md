@@ -13,7 +13,7 @@
 - **ASTカタログ**: `./aaa_test_kanteen/catalog.json` / `catalog.md`
   - test-kanteen自身の全テスト（213テスト）の構造
   - 各テストの目的、アサーション、階層構造
-- **プロジェクト固有ガイド**: `./aaa_test_kanteen/TEST_KANTEEN_GUIDE.md`
+- **プロジェクト固有ガイド**: `./aaa_spec/TEST_KANTEEN_GUIDE.md`
   - test-kanteenのテスト戦略（3層構造: unit/integration/e2e）
   - 重要な観点5つ（AST解析の正確性、マルチフレームワーク対応など）
   - テスト規約（AAA pattern、命名規則など）
