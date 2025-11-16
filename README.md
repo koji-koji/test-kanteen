@@ -31,7 +31,7 @@ npm install test-kanteen
 #### テスト観点カタログ生成
 
 ```bash
-# 最もシンプルな使い方（デフォルト: **/*.test.ts, json+markdown出力）
+# 最もシンプルな使い方（デフォルト: **/*.{test,spec}.{js,jsx,ts,tsx}, json+markdown出力）
 npx kanteen
 
 # または明示的にanalyzeを指定
@@ -50,17 +50,17 @@ npx kanteen analyze --config kanteen.config.js
 #### 関数・クラスの抽出 🆕
 
 ```bash
-# 最もシンプルな使い方（デフォルト: **/*.{ts,tsx}, json+markdown出力）
+# 最もシンプルな使い方（デフォルト: **/*.{js,jsx,ts,tsx}, json+markdown出力）
 npx kanteen extract
 
 # 特定のパターンを指定
 npx kanteen extract "src/**/*.ts"
 
 # オプション
-npx kanteen extract "lib/**/*.{ts,tsx}" --output ./exports --format json
+npx kanteen extract "lib/**/*.{js,jsx,ts,tsx}" --output ./exports --format json
 ```
 
-**抽出対象**: 関数、クラス、メソッド（export/export default対応、.ts/.tsx両対応）
+**抽出対象**: 関数、クラス、メソッド（export/export default対応、.js/.jsx/.ts/.tsx対応）
 詳細: [Extract機能ガイド](./docs/EXTRACT_GUIDE.md)
 
 #### ランタイムカタログ生成 🆕
@@ -272,7 +272,7 @@ await reporter.writeToFile('./test-reports/github.md');
 
 ```javascript
 export default {
-  include: ['**/*.test.ts', '**/*.spec.ts'],
+  include: ['**/*.{test,spec}.{js,jsx,ts,tsx}'],
   exclude: ['**/node_modules/**'],
   framework: 'auto',
   reporters: ['json', 'markdown'],
