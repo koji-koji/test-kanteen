@@ -209,11 +209,11 @@ test-kanteenは、初回のanalyze実行時にLLM統合ガイドを自動生成�
 
 ```bash
 npx kanteen analyze "tests/**/*.test.ts"
-# → aaa_spec/TEST_KANTEEN_GUIDE.md が自動生成
+# → aaa_test_kanteen/TEST_KANTEEN_GUIDE.md が自動生成
 ```
 
 **クイックスタート**:
-1. 生成されたガイド `aaa_spec/TEST_KANTEEN_GUIDE.md` を開く
+1. 生成されたガイド `aaa_test_kanteen/TEST_KANTEEN_GUIDE.md` を開く
 2. 🤖マークのコピペ用メッセージをLLMに貼り付け
 3. LLMがtest-kanteenを理解し、テスト設計を支援開始
 
