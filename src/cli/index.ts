@@ -17,7 +17,7 @@ program
 program
   .command('analyze')
   .description('テストファイルを解析してカタログを生成')
-  .argument('[pattern]', 'テストファイルのパターン', '**/*.test.ts')
+  .argument('[pattern]', 'テストファイルのパターン', '**/*.{test,spec}.{js,jsx,ts,tsx}')
   .option('-c, --config <path>', '設定ファイルのパス')
   .option('-o, --output <path>', '出力先ディレクトリ', './aaa_test_kanteen')
   .option('-f, --format <formats>', '出力フォーマット (json,yaml,markdown)', 'json,markdown')
@@ -120,7 +120,7 @@ program
 program
   .command('extract')
   .description('ソースコードから関数・クラスを抽出')
-  .argument('[pattern]', 'ソースファイルのパターン', '**/*.{ts,tsx}')
+  .argument('[pattern]', 'ソースファイルのパターン', '**/*.{js,jsx,ts,tsx}')
   .option('-o, --output <path>', '出力先ディレクトリ', './aaa_test_kanteen/exports')
   .option('-f, --format <formats>', '出力フォーマット (json,markdown)', 'json,markdown')
   .option('-v, --verbose', '詳細な出力を表示')
@@ -494,7 +494,7 @@ function generateTypeScriptConfig(): string {
   return `import type { KanteenConfig } from 'test-kanteen';
 
 const config: KanteenConfig = {
-  include: ['**/*.test.ts', '**/*.spec.ts'],
+  include: ['**/*.{test,spec}.{js,jsx,ts,tsx}'],
   exclude: ['**/node_modules/**', '**/dist/**'],
   framework: 'auto',
   reporters: ['json', 'markdown'],
@@ -515,7 +515,7 @@ export default config;
 function generateJavaScriptConfig(): string {
   return `/** @type {import('test-kanteen').KanteenConfig} */
 const config = {
-  include: ['**/*.test.js', '**/*.spec.js'],
+  include: ['**/*.{test,spec}.{js,jsx,ts,tsx}'],
   exclude: ['**/node_modules/**', '**/dist/**'],
   framework: 'auto',
   reporters: ['json', 'markdown'],
