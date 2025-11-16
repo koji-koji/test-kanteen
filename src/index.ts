@@ -70,7 +70,7 @@ export async function parseTests(
   if (finalConfig.output && finalConfig.reporters) {
     await outputReports(catalog, finalConfig);
 
-    // 7. aaa_spec ガイド生成（初回のみ）
+    // 7. LLMガイド生成（初回のみ、outputDir配下に生成）
     await ensureAaaSpecGuide(finalConfig.output);
   }
 
@@ -142,13 +142,13 @@ export async function parseTestFile(filePath: string): Promise<TestCatalog> {
 }
 
 /**
- * aaa_spec/TEST_KANTEEN_GUIDE.md を生成（ファイルが存在しない場合のみ）
+ * TEST_KANTEEN_GUIDE.md を生成（ファイルが存在しない場合のみ）
+ * outputDir配下に配置
  */
 async function ensureAaaSpecGuide(outputDir: string): Promise<void> {
-  // aaa_spec ディレクトリのパス（outputDirと同階層）
-  const parentDir = path.dirname(path.resolve(outputDir));
-  const specDir = path.join(parentDir, 'aaa_spec');
-  const guidePath = path.join(specDir, 'TEST_KANTEEN_GUIDE.md');
+  // outputDir配下にガイドを配置
+  const resolvedOutputDir = path.resolve(outputDir);
+  const guidePath = path.join(resolvedOutputDir, 'TEST_KANTEEN_GUIDE.md');
 
   // ファイルが既に存在する場合はスキップ
   const exists = await fs
@@ -160,8 +160,8 @@ async function ensureAaaSpecGuide(outputDir: string): Promise<void> {
     return;
   }
 
-  // ディレクトリ作成
-  await fs.mkdir(specDir, { recursive: true });
+  // ディレクトリ作成（outputDirは既に存在するはずだが念のため）
+  await fs.mkdir(resolvedOutputDir, { recursive: true });
 
   // ガイドコンテンツ生成
   const guideContent = generateGuideContent();
