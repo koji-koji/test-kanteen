@@ -24,9 +24,7 @@ export class CatalogGenerator {
     const metadata = this.generateMetadata(options);
 
     // 各スイートにtotalTestsを追加
-    const suitesWithTotalTests = testSuites.map((suite) =>
-      this.addTotalTestsToSuite(suite)
-    );
+    const suitesWithTotalTests = testSuites.map((suite) => this.addTotalTestsToSuite(suite));
 
     const coverage = this.calculateCoverage(suitesWithTotalTests);
 
@@ -58,9 +56,7 @@ export class CatalogGenerator {
    */
   private addTotalTestsToSuite(suite: TestSuite): TestSuite {
     // ネストされたスイートにもtotalTestsを追加
-    const nestedSuites = suite.nestedSuites?.map((nested) =>
-      this.addTotalTestsToSuite(nested)
-    );
+    const nestedSuites = suite.nestedSuites?.map((nested) => this.addTotalTestsToSuite(nested));
 
     // このスイートのテスト数を再帰的に計算
     const totalTests = this.countTests({
@@ -115,5 +111,4 @@ export class CatalogGenerator {
     }
     return count;
   }
-
 }

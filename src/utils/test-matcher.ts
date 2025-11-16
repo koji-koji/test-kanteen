@@ -2,12 +2,7 @@
  * Test Matcher - Matches tests between AST and Runtime catalogs
  */
 
-import type {
-  TestCatalog,
-  TestCase,
-  RuntimeCatalog,
-  RuntimeTestCase,
-} from '../types';
+import type { TestCatalog, TestCase, RuntimeCatalog, RuntimeTestCase } from '../types';
 
 /**
  * Match confidence levels
@@ -198,9 +193,13 @@ export class TestMatcher {
       const commonParts = this.countCommonParts(astParts, runtimeParts);
 
       if (commonParts > 0) {
-        const partialScore = Math.floor((commonParts / Math.max(astParts.length, runtimeParts.length)) * 30);
+        const partialScore = Math.floor(
+          (commonParts / Math.max(astParts.length, runtimeParts.length)) * 30
+        );
         score += partialScore;
-        reasons.push(`Partial suite match: ${commonParts}/${Math.max(astParts.length, runtimeParts.length)} parts`);
+        reasons.push(
+          `Partial suite match: ${commonParts}/${Math.max(astParts.length, runtimeParts.length)} parts`
+        );
       } else {
         reasons.push(`Suite path mismatch: ${astSuitePath} vs ${runtimeSuitePath}`);
       }
@@ -221,7 +220,9 @@ export class TestMatcher {
         if (similarity > 0.7) {
           const partialScore = Math.floor(similarity * 30);
           score += partialScore;
-          reasons.push(`Partial test name match (likely test.each): ${Math.round(similarity * 100)}% similar`);
+          reasons.push(
+            `Partial test name match (likely test.each): ${Math.round(similarity * 100)}% similar`
+          );
         } else {
           reasons.push(`Test name mismatch: ${astName} vs ${runtimeName}`);
         }
@@ -337,8 +338,8 @@ export class TestMatcher {
         } else {
           matrix[i][j] = Math.min(
             matrix[i - 1][j - 1] + 1, // substitution
-            matrix[i][j - 1] + 1,     // insertion
-            matrix[i - 1][j] + 1      // deletion
+            matrix[i][j - 1] + 1, // insertion
+            matrix[i - 1][j] + 1 // deletion
           );
         }
       }

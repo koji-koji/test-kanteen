@@ -20,16 +20,8 @@ program
   .argument('[pattern]', 'テストファイルのパターン', '**/*.test.ts')
   .option('-c, --config <path>', '設定ファイルのパス')
   .option('-o, --output <path>', '出力先ディレクトリ', './aaa_test_kanteen')
-  .option(
-    '-f, --format <formats>',
-    '出力フォーマット (json,yaml,markdown)',
-    'json,markdown'
-  )
-  .option(
-    '-w, --framework <framework>',
-    'テストフレームワーク (jest,vitest,mocha,auto)',
-    'auto'
-  )
+  .option('-f, --format <formats>', '出力フォーマット (json,yaml,markdown)', 'json,markdown')
+  .option('-w, --framework <framework>', 'テストフレームワーク (jest,vitest,mocha,auto)', 'auto')
   .option(
     '-m, --mode <mode>',
     '出力モード (simple: テストスイートのみ, detailed: 全情報)',
@@ -130,11 +122,7 @@ program
   .description('ソースコードから関数・クラスを抽出')
   .argument('[pattern]', 'ソースファイルのパターン', '**/*.{ts,tsx}')
   .option('-o, --output <path>', '出力先ディレクトリ', './aaa_test_kanteen/exports')
-  .option(
-    '-f, --format <formats>',
-    '出力フォーマット (json,markdown)',
-    'json,markdown'
-  )
+  .option('-f, --format <formats>', '出力フォーマット (json,markdown)', 'json,markdown')
   .option('-v, --verbose', '詳細な出力を表示')
   .action(async (pattern: string, options) => {
     try {
@@ -166,10 +154,8 @@ program
           const exports = extractor.extract(parseResult);
 
           // 関数とクラス（メソッド含む）のみにフィルタ
-          const filtered = exports.filter(exp =>
-            exp.type === 'function' ||
-            exp.type === 'class' ||
-            exp.type === 'method'
+          const filtered = exports.filter(
+            (exp) => exp.type === 'function' || exp.type === 'class' || exp.type === 'method'
           );
 
           allExports.push(...filtered);
@@ -190,10 +176,13 @@ program
       console.log(`  - Total exports: ${allExports.length}`);
 
       // タイプ別の集計
-      const byType = allExports.reduce((acc, exp) => {
-        acc[exp.type] = (acc[exp.type] || 0) + 1;
-        return acc;
-      }, {} as Record<string, number>);
+      const byType = allExports.reduce(
+        (acc, exp) => {
+          acc[exp.type] = (acc[exp.type] || 0) + 1;
+          return acc;
+        },
+        {} as Record<string, number>
+      );
 
       console.log('\n  By type:');
       for (const [type, count] of Object.entries(byType)) {
@@ -238,9 +227,9 @@ program
             const relativePath = path.relative(process.cwd(), filePath);
 
             // 関数とクラスのみをグループ化
-            const functions = exports.filter(e => e.type === 'function');
-            const classes = exports.filter(e => e.type === 'class');
-            const methods = exports.filter(e => e.type === 'method');
+            const functions = exports.filter((e) => e.type === 'function');
+            const classes = exports.filter((e) => e.type === 'class');
+            const methods = exports.filter((e) => e.type === 'method');
 
             if (functions.length === 0 && classes.length === 0) continue;
 
@@ -266,10 +255,11 @@ program
                 markdown += `- 🏛️ **${cls.name}** (line ${cls.location.line})\n`;
 
                 // このクラスのメソッドを探す
-                const classMethods = methods.filter(m =>
-                  m.location.file === cls.location.file &&
-                  m.location.line > cls.location.line &&
-                  m.location.line < (cls.location.line + 200) // 簡易的な範囲チェック
+                const classMethods = methods.filter(
+                  (m) =>
+                    m.location.file === cls.location.file &&
+                    m.location.line > cls.location.line &&
+                    m.location.line < cls.location.line + 200 // 簡易的な範囲チェック
                 );
 
                 if (classMethods.length > 0) {
@@ -306,11 +296,7 @@ program
   .argument('<ast-catalog>', 'ASTカタログのパス (JSON)')
   .argument('<runtime-catalog>', 'ランタイムカタログのパス (JSON)')
   .option('-o, --output <path>', '出力先ディレクトリ', './test-kanteen-comparison')
-  .option(
-    '-f, --format <formats>',
-    '出力フォーマット (json,markdown)',
-    'json,markdown'
-  )
+  .option('-f, --format <formats>', '出力フォーマット (json,markdown)', 'json,markdown')
   .option('-v, --verbose', '詳細な出力を表示')
   .action(async (astCatalogPath: string, runtimeCatalogPath: string, options) => {
     try {
@@ -348,7 +334,9 @@ program
       console.log(`  - High Confidence: ${comparisonResult.statistics.highConfidenceMatches}`);
       console.log(`  - Medium Confidence: ${comparisonResult.statistics.mediumConfidenceMatches}`);
       console.log(`  - AST Only (not executed): ${comparisonResult.statistics.unmatchedAst}`);
-      console.log(`  - Runtime Only (dynamically generated): ${comparisonResult.statistics.unmatchedRuntime}`);
+      console.log(
+        `  - Runtime Only (dynamically generated): ${comparisonResult.statistics.unmatchedRuntime}`
+      );
 
       // 出力
       const outputPath = path.resolve(process.cwd(), options.output);
@@ -359,11 +347,7 @@ program
       for (const format of formats) {
         if (format === 'json') {
           const jsonPath = path.join(outputPath, 'comparison.json');
-          await fs.writeFile(
-            jsonPath,
-            JSON.stringify(comparisonResult, null, 2),
-            'utf-8'
-          );
+          await fs.writeFile(jsonPath, JSON.stringify(comparisonResult, null, 2), 'utf-8');
           console.log(`\n📄 JSON: ${jsonPath}`);
         } else if (format === 'markdown') {
           const mdPath = path.join(outputPath, 'comparison.md');
@@ -388,9 +372,17 @@ program
   .command('report')
   .description('カスタムレポートを生成')
   .argument('<type>', 'レポートタイプ (runtime, compare)')
-  .option('-i, --input <path>', 'Runtimeカタログのパス', './test-kanteen-runtime/runtime-catalog.json')
+  .option(
+    '-i, --input <path>',
+    'Runtimeカタログのパス',
+    './test-kanteen-runtime/runtime-catalog.json'
+  )
   .option('--ast <path>', 'ASTカタログのパス', './aaa_test_kanteen/catalog.json')
-  .option('--runtime <path>', 'Runtimeカタログのパス', './test-kanteen-runtime/runtime-catalog.json')
+  .option(
+    '--runtime <path>',
+    'Runtimeカタログのパス',
+    './test-kanteen-runtime/runtime-catalog.json'
+  )
   .option('-o, --output <path>', '出力先ファイルパス')
   .option('-v, --verbose', '詳細な出力を表示')
   .action(async (type: string, options) => {
@@ -419,7 +411,6 @@ program
           console.error(`   Make sure to run tests with kanteen reporter first.`);
           throw error;
         }
-
       } else if (type === 'compare') {
         // Compare+Runtimeレポート生成
         console.log('🔍 Generating compare+runtime report...\n');
@@ -438,11 +429,10 @@ program
           const matcher = new TestMatcher();
           const comparisonResult = matcher.compare(astCatalog, runtimeCatalog);
 
-          const markdown = generateCompareRuntimeReportMarkdown(
-            comparisonResult,
-            runtimeCatalog,
-            { astCatalogPath: options.ast, runtimeCatalogPath: options.runtime }
-          );
+          const markdown = generateCompareRuntimeReportMarkdown(comparisonResult, runtimeCatalog, {
+            astCatalogPath: options.ast,
+            runtimeCatalogPath: options.runtime,
+          });
 
           const outputPath = options.output || './test-reports/compare-runtime-report.md';
           const resolvedOutputPath = path.resolve(process.cwd(), outputPath);
@@ -458,7 +448,6 @@ program
           console.error(`   Make sure to run 'npx kanteen analyze' and tests first.`);
           throw error;
         }
-
       } else {
         console.error(`❌ Error: Unknown report type "${type}"`);
         console.log('\nAvailable types:');
@@ -628,19 +617,27 @@ function generateComparisonMarkdown(
   lines.push(`| AST Tests | ${comparisonResult.statistics.totalAstTests} |`);
   lines.push(`| Runtime Tests | ${comparisonResult.statistics.totalRuntimeTests} |`);
   lines.push(`| Perfect Matches | ${comparisonResult.statistics.perfectMatches} ✅ |`);
-  lines.push(`| High Confidence Matches | ${comparisonResult.statistics.highConfidenceMatches} 🟢 |`);
-  lines.push(`| Medium Confidence Matches | ${comparisonResult.statistics.mediumConfidenceMatches} 🟡 |`);
+  lines.push(
+    `| High Confidence Matches | ${comparisonResult.statistics.highConfidenceMatches} 🟢 |`
+  );
+  lines.push(
+    `| Medium Confidence Matches | ${comparisonResult.statistics.mediumConfidenceMatches} 🟡 |`
+  );
   lines.push(`| AST Only (Not Executed) | ${comparisonResult.statistics.unmatchedAst} ⚠️ |`);
-  lines.push(`| Runtime Only (Dynamically Generated) | ${comparisonResult.statistics.unmatchedRuntime} 🔵 |`);
+  lines.push(
+    `| Runtime Only (Dynamically Generated) | ${comparisonResult.statistics.unmatchedRuntime} 🔵 |`
+  );
   lines.push('');
 
   // Coverage率
-  const matchedTests = comparisonResult.statistics.perfectMatches +
+  const matchedTests =
+    comparisonResult.statistics.perfectMatches +
     comparisonResult.statistics.highConfidenceMatches +
     comparisonResult.statistics.mediumConfidenceMatches;
-  const coverageRate = comparisonResult.statistics.totalAstTests > 0
-    ? ((matchedTests / comparisonResult.statistics.totalAstTests) * 100).toFixed(1)
-    : '0.0';
+  const coverageRate =
+    comparisonResult.statistics.totalAstTests > 0
+      ? ((matchedTests / comparisonResult.statistics.totalAstTests) * 100).toFixed(1)
+      : '0.0';
 
   lines.push('### Test Execution Coverage');
   lines.push('');
@@ -669,7 +666,9 @@ function generateComparisonMarkdown(
   if (comparisonResult.runtimeOnly && comparisonResult.runtimeOnly.length > 0) {
     lines.push('## Runtime Only Tests (Dynamically Generated) 🔵');
     lines.push('');
-    lines.push('These tests were executed but not found in the AST (likely generated dynamically):');
+    lines.push(
+      'These tests were executed but not found in the AST (likely generated dynamically):'
+    );
     lines.push('');
 
     for (const test of comparisonResult.runtimeOnly) {
@@ -768,7 +767,9 @@ function generateComparisonMarkdown(
   if (comparisonResult.statistics.unmatchedRuntime > 0) {
     lines.push('### Dynamically Generated Tests 🔵');
     lines.push('');
-    lines.push(`${comparisonResult.statistics.unmatchedRuntime} tests appear to be dynamically generated. This is common with:`);
+    lines.push(
+      `${comparisonResult.statistics.unmatchedRuntime} tests appear to be dynamically generated. This is common with:`
+    );
     lines.push('');
     lines.push('- `test.each()` / `describe.each()`');
     lines.push('- Parameterized tests');
@@ -939,7 +940,9 @@ function generateCompareRuntimeReportMarkdown(
   if (comparisonResult.astOnly && comparisonResult.astOnly.length > 0) {
     lines.push('## ⚠️  Tests Not Executed (AST only)');
     lines.push('');
-    lines.push('これらのテストはコードに存在しますが、実行されませんでした（スキップまたは条件分岐）：');
+    lines.push(
+      'これらのテストはコードに存在しますが、実行されませんでした（スキップまたは条件分岐）：'
+    );
     lines.push('');
     comparisonResult.astOnly.forEach((test: any) => {
       lines.push(`- **${test.name}**`);
@@ -1036,11 +1039,17 @@ function generateCompareRuntimeReportMarkdown(
  */
 function getStatusIcon(status: string): string {
   switch (status) {
-    case 'passed': return '✅';
-    case 'failed': return '❌';
-    case 'skipped': return '⏭️';
-    case 'pending': return '⏸️';
-    case 'todo': return '📝';
-    default: return '❓';
+    case 'passed':
+      return '✅';
+    case 'failed':
+      return '❌';
+    case 'skipped':
+      return '⏭️';
+    case 'pending':
+      return '⏸️';
+    case 'todo':
+      return '📝';
+    default:
+      return '❓';
   }
 }

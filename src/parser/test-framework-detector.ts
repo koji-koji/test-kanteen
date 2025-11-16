@@ -64,7 +64,7 @@ export class TestFrameworkDetector {
    * ソースコードからフレームワークを検出
    */
   detectFromSource(source: string): FrameworkMetadata | null {
-    for (const [_name, metadata] of this.frameworks) {
+    for (const [, metadata] of this.frameworks) {
       // インポート文やパターンで検出
       for (const pattern of metadata.detectPatterns) {
         if (source.includes(pattern)) {
@@ -97,7 +97,7 @@ export class TestFrameworkDetector {
       if (node.type === 'ImportDeclaration') {
         const source = node.source.value as string;
 
-        for (const [_name, metadata] of this.frameworks) {
+        for (const [, metadata] of this.frameworks) {
           if (metadata.detectPatterns.some((pattern) => source.includes(pattern))) {
             return metadata;
           }

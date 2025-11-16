@@ -27,5 +27,7 @@ module.exports = {
       output: './test-kanteen-runtime',
       format: ['json', 'markdown']
     }]
-  ]
+  ],
+  // Disable parallel execution to avoid test interference
+  maxWorkers: 1
 };
