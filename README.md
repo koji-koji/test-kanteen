@@ -179,13 +179,9 @@ npx kanteen report compare --ast ./custom/catalog.json --runtime ./custom/runtim
 
 GitHub ActionsでAST生成とカスタムレポート出力を自動化できます。
 
-**ワークフローサンプル集**: [examples/workflows/README.md](./examples/workflows/README.md)
+**GitHub Actionsワークフローサンプル**: [examples/workflows/](./examples/workflows/)
 
-3種類のワークフローテンプレートを用意しています：
-
-1. **[kanteen-basic.yml](./examples/workflows/kanteen-basic.yml)** - 最もシンプルな基本セットアップ
-2. **[kanteen-pr-comment.yml](./examples/workflows/kanteen-pr-comment.yml)** - PRコメント機能付き
-3. **[kanteen-full.yml](./examples/workflows/kanteen-full.yml)** - フル機能版（推奨）
+すぐに使えるワークフローテンプレートを3種類用意しています（基本/PRコメント/フル機能）。
 
 **基本的な使い方**:
 ```yaml
@@ -204,13 +200,6 @@ GitHub ActionsでAST生成とカスタムレポート出力を自動化できま
     name: test-reports
     path: test-reports/
 ```
-
-**機能**:
-- ✅ ASTカタログ生成
-- ✅ テスト実行（Runtimeカタログ自動生成）
-- ✅ Compare+Runtimeレポート生成
-- ✅ PRへの自動コメント投稿
-- ✅ レポートをアーティファクトとして保存
 
 詳細: [CI/CD統合ガイド](./examples/workflows/README.md)
 
