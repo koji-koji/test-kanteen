@@ -1,4 +1,3 @@
-
 /**
  * テストフレームワークの種類
  */
@@ -33,7 +32,6 @@ export interface ReporterConfig {
   enabled: boolean;
   options?: Record<string, unknown>;
 }
-
 
 /**
  * Test Kanteenの設定

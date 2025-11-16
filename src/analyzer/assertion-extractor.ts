@@ -65,10 +65,7 @@ export class AssertionExtractor {
         }
 
         // expect().not.toBe() のようなチェーン
-        if (
-          object.type === 'MemberExpression' &&
-          property.type === 'Identifier'
-        ) {
+        if (object.type === 'MemberExpression' && property.type === 'Identifier') {
           return {
             type: 'expect-matcher-chain',
             matcher: property.name,
@@ -83,10 +80,7 @@ export class AssertionExtractor {
     }
 
     // assert.equal(...) パターン
-    if (
-      node.type === 'CallExpression' &&
-      node.callee.type === 'MemberExpression'
-    ) {
+    if (node.type === 'CallExpression' && node.callee.type === 'MemberExpression') {
       const object = node.callee.object;
       const property = node.callee.property;
 

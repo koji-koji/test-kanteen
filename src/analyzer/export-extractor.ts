@@ -3,13 +3,7 @@
  * ソースコードからエクスポートされた関数・クラスを抽出する
  */
 
-import type {
-  ASTNode,
-  ParseResult,
-  SourceLocation,
-  ExportInfo,
-  ExportKind,
-} from '../types';
+import type { ASTNode, ParseResult, SourceLocation, ExportInfo, ExportKind } from '../types';
 
 /**
  * エクスポート抽出器

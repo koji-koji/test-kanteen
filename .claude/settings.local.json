@@ -59,7 +59,12 @@
       "Bash(npm run kanteen:self-analyze:*)",
       "Bash(gh pr list:*)",
       "Bash(npx ts-node:*)",
-      "Bash(git cherry-pick:*)"
+      "Bash(git cherry-pick:*)",
+      "Bash(gh pr merge:*)",
+      "Bash(git mv:*)",
+      "Bash(git branch:*)",
+      "Bash(git revert:*)",
+      "Bash(npm run lint:*)"
     ],
     "deny": [],
     "ask": []
