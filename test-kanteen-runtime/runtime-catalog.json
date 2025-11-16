@@ -1,40 +1,40 @@
 {
   "metadata": {
     "version": "0.5.0",
-    "generatedAt": "2025-11-16T00:31:32.974Z",
-    "executionDate": "2025-11-16T00:31:31.229Z",
-    "totalDuration": 262,
+    "generatedAt": "2025-11-16T03:03:37.348Z",
+    "executionDate": "2025-11-16T03:03:35.596Z",
+    "totalDuration": 300,
     "sourceFiles": [
       "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
+      "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
       "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/ast-parser.test.ts",
       "/Users/koyama.koji/git/self/test-kanteen/tests/e2e/full-workflow.test.ts",
-      "/Users/koyama.koji/git/self/test-kanteen/tests/integration/aaa-spec-guide.test.ts",
-      "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
-      "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
       "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/test-analyzer.test.ts",
+      "/Users/koyama.koji/git/self/test-kanteen/tests/integration/aaa-spec-guide.test.ts",
+      "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
       "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/assertion-extractor.test.ts",
-      "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/jest-reporter.test.ts",
       "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts",
-      "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/source-loader.test.ts",
       "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/formatters.test.ts",
+      "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/jest-reporter.test.ts",
+      "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/source-loader.test.ts",
       "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/vitest-reporter.test.ts",
       "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/playwright-reporter.test.ts",
-      "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
-      "/Users/koyama.koji/git/self/test-kanteen/tests/integration/compare.test.ts",
       "/Users/koyama.koji/git/self/test-kanteen/tests/unit/utils/test-matcher.test.ts",
-      "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/catalog-generator.test.ts"
+      "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
+      "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/catalog-generator.test.ts",
+      "/Users/koyama.koji/git/self/test-kanteen/tests/integration/compare.test.ts"
     ],
     "framework": "jest",
     "toolVersion": "0.5.0"
   },
   "testSuites": [
     {
-      "id": "6400ec75-301b-4a0a-b953-71ee466c4c8a",
+      "id": "98f096bd-3418-43fe-b20a-1345335a64dc",
       "name": "parseTests",
       "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
       "tests": [
         {
-          "id": "42dfb258-04fc-4ffd-baa8-28e144435681",
+          "id": "6fc9a736-5572-4f85-9bfa-ba9b2a389f21",
           "name": "should parse test files and generate catalog",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
@@ -42,12 +42,12 @@
             "column": 0
           },
           "runtime": {
-            "duration": 19,
+            "duration": 17,
             "status": "passed"
           }
         },
         {
-          "id": "32b404ed-665a-40d9-aa17-79eaf9f0e9a8",
+          "id": "973fa969-938f-44c8-ad09-74dddafd66eb",
           "name": "should detect framework automatically",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
@@ -55,12 +55,12 @@
             "column": 0
           },
           "runtime": {
-            "duration": 23,
+            "duration": 24,
             "status": "passed"
           }
         },
         {
-          "id": "e93ecd9a-b40d-4fa3-b5d1-abf6d288a7ca",
+          "id": "e91097bc-e92f-4df6-ac17-010034e81bd2",
           "name": "should calculate coverage",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
@@ -73,8 +73,34 @@
           }
         },
         {
-          "id": "dabeb979-0695-4cb3-8431-14df4e8f6737",
+          "id": "b5fbdd8e-6825-4c51-93a6-d428e9a68076",
           "name": "should include source file paths",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 8,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "56a89281-d911-4c24-aef9-d039e747e8d2",
+          "name": "should output JSON format when configured",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 4,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "4b047cfc-5413-444e-8d76-09525d8ceffb",
+          "name": "should output Markdown format when configured",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
             "line": 0,
@@ -86,33 +112,7 @@
           }
         },
         {
-          "id": "ace05ce7-72a0-477c-907e-2ee3284996ca",
-          "name": "should output JSON format when configured",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 5,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "ad7752f5-0e23-4f48-83d6-fcfc49989709",
-          "name": "should output Markdown format when configured",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 5,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "d05aad5e-4f52-4795-9655-29633d26f238",
+          "id": "0634aafa-8e49-473d-b2c1-a21a84572df7",
           "name": "should output multiple formats when configured",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
@@ -125,7 +125,7 @@
           }
         },
         {
-          "id": "202ce6f9-0a6f-4837-a708-86e3d0978dde",
+          "id": "8e3d7093-e2d0-4696-bd4d-c087d0bd5c91",
           "name": "should handle glob patterns",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
@@ -133,12 +133,12 @@
             "column": 0
           },
           "runtime": {
-            "duration": 6,
+            "duration": 7,
             "status": "passed"
           }
         },
         {
-          "id": "b54974be-5f5d-4179-a031-6b376e3798f4",
+          "id": "09e49059-28c0-46ca-8373-71675600399b",
           "name": "should throw error for non-existent files",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
@@ -146,12 +146,12 @@
             "column": 0
           },
           "runtime": {
-            "duration": 2,
+            "duration": 1,
             "status": "passed"
           }
         },
         {
-          "id": "f4d7f3fd-5d58-40bb-9797-336ae4395147",
+          "id": "07aedb27-5894-4aed-ab08-c0bbb2bc4a7e",
           "name": "should respect exclude patterns",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
@@ -166,16 +166,16 @@
       ],
       "nestedSuites": [],
       "runtime": {
-        "duration": 71
+        "duration": 72
       }
     },
     {
-      "id": "f136fd0f-e188-4af3-9b8b-cc9dcc08c35e",
+      "id": "b07f60af-84e7-4e3b-b373-d158550d7baa",
       "name": "parseTestFile",
       "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
       "tests": [
         {
-          "id": "2d7af2be-88da-4eb9-87f1-be5b78399729",
+          "id": "4c51bb3d-2bf0-4e77-9af6-726adda78519",
           "name": "should parse single test file",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
@@ -188,58 +188,8 @@
           }
         },
         {
-          "id": "8bbe6dca-cd58-4f0f-9b0d-194416cd9db6",
+          "id": "b4cc8f84-90c8-4e55-a169-e69016e5e265",
           "name": "should extract all test information",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 1,
-            "status": "passed"
-          }
-        }
-      ],
-      "nestedSuites": [],
-      "runtime": {
-        "duration": 3
-      }
-    },
-    {
-      "id": "4c72e90a-24d7-4b04-b5e7-cadd3d6bf7a1",
-      "name": "end-to-end scenarios",
-      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
-      "tests": [
-        {
-          "id": "06173047-1107-409d-a96a-da0344eef7af",
-          "name": "should analyze edge case tests and generate correct catalog",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 3,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "da4a9016-9424-4584-b6fb-a7a518b3f414",
-          "name": "should generate multiple reporters with verbose output",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 3,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "a90ac25b-2498-41c5-93fb-7f05deaa5829",
-          "name": "should verify test catalog structure",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
             "line": 0,
@@ -253,16 +203,66 @@
       ],
       "nestedSuites": [],
       "runtime": {
-        "duration": 8
+        "duration": 4
       }
     },
     {
-      "id": "00b75597-fb6c-424a-9842-6bae66d1bb14",
+      "id": "64e6eba7-e417-4aaa-8df2-a964c5993430",
+      "name": "end-to-end scenarios",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
+      "tests": [
+        {
+          "id": "efcd68e7-e722-46a1-8c38-e62eb70341bb",
+          "name": "should analyze edge case tests and generate correct catalog",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 5,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "d2c97fab-cc48-4e5b-afba-9c705a46ab85",
+          "name": "should generate multiple reporters with verbose output",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 5,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "00616a00-4c92-42eb-9b5a-be3e5e21dc61",
+          "name": "should verify test catalog structure",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 1,
+            "status": "passed"
+          }
+        }
+      ],
+      "nestedSuites": [],
+      "runtime": {
+        "duration": 11
+      }
+    },
+    {
+      "id": "9588c45c-53fb-4808-bd20-7d366f9f1018",
       "name": "parseTests - error handling",
       "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
       "tests": [
         {
-          "id": "99a880a0-5b6e-4907-a714-ab61e8ad616f",
+          "id": "97416843-f866-40bf-a832-04bd8365439f",
           "name": "should handle invalid TypeScript syntax gracefully",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
@@ -270,12 +270,12 @@
             "column": 0
           },
           "runtime": {
-            "duration": 3,
+            "duration": 1,
             "status": "passed"
           }
         },
         {
-          "id": "c289c18b-6537-4dc4-b2b0-c3ba6679890f",
+          "id": "5f3493b2-4481-40bf-9a21-821b78f64637",
           "name": "should provide clear error message for unsupported framework",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
@@ -288,21 +288,8 @@
           }
         },
         {
-          "id": "a7a25d37-aace-46bd-ada6-c6c80a7a340c",
+          "id": "481b49ea-d1bf-4098-abbc-29e61a11e3a4",
           "name": "should handle circular dependencies gracefully",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 1,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "287820cc-f9e2-4b22-9633-bf5150a1f4c7",
-          "name": "should handle empty test files gracefully",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
             "line": 0,
@@ -314,7 +301,20 @@
           }
         },
         {
-          "id": "0b44f3de-86dc-474c-9525-76833704e4e6",
+          "id": "6917fbc4-2be6-411b-960d-4791a0afd7ab",
+          "name": "should handle empty test files gracefully",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 1,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "c0e76e2d-1bd2-437f-83cc-1c90f45c2013",
           "name": "should provide meaningful error message when no tests found",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
@@ -327,7 +327,7 @@
           }
         },
         {
-          "id": "d696cd03-d3b3-413b-aee7-c6f726cc6638",
+          "id": "7245e00b-1e8c-4c52-8d60-cb6e4f57d0ff",
           "name": "should handle malformed test structure",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/main-api.test.ts",
@@ -342,16 +342,287 @@
       ],
       "nestedSuites": [],
       "runtime": {
-        "duration": 8
+        "duration": 6
       }
     },
     {
-      "id": "28799052-e72b-4e6f-8bb8-5a58ed78b14d",
+      "id": "64b6eebd-91dc-41aa-9995-f924982fc36a",
+      "name": "extract",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
+      "tests": [
+        {
+          "id": "38a6db89-285c-4ac8-856b-0e211a2cf579",
+          "name": "should extract named function export",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 4,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "753e9203-a865-4124-b1c3-f72736795645",
+          "name": "should extract default function export",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "24aa8e3b-7d29-4010-acad-74a5cfb27718",
+          "name": "should extract async function export",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 1,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "c5ba1813-b451-4a67-bedd-c0d54d9308a2",
+          "name": "should extract class export",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "8955309a-fd36-47b8-8616-75107c06e7ca",
+          "name": "should extract class with public methods",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "5021bd21-185e-4aa4-bb5f-ae7d7bf0a033",
+          "name": "should not extract private methods",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 1,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "24123b1d-f768-4e8d-942b-d46f4b584be4",
+          "name": "should extract variable export",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "34fd5977-bf1e-4bd8-add0-28a74ea13e27",
+          "name": "should extract TypeScript interface export",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 1,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "69daa208-391e-4703-82a3-29fab3218aac",
+          "name": "should extract TypeScript type alias export",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "e4cd9938-f0fc-451b-9635-215fbb57cf2f",
+          "name": "should extract multiple exports",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "b9b747e9-7fbc-4e08-87f8-165fb1be4eac",
+          "name": "should extract export specifiers",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "946ab874-accc-4c6e-bbee-602ed611bc4e",
+          "name": "should include location information",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 1,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "7c41a5ae-49dd-48d7-949e-4406ec556f20",
+          "name": "should include function signature",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "89e1f2b1-e3be-4d73-b294-809228eba7e0",
+          "name": "should handle rest parameters",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "8df527f2-49cd-4d78-a98a-ed920af313c7",
+          "name": "should handle empty file",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "98a91f82-b5d5-419e-ada6-d5574c63bfbb",
+          "name": "should handle file with no exports",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 1,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "99cea1ce-26d4-4478-bc20-b184213a2830",
+          "name": "should extract arrow function export",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "2825e4a3-6472-48df-8949-38cd066b88d6",
+          "name": "should extract async arrow function export",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "a310e5d9-d0e6-4eec-8358-d34e9e1123ca",
+          "name": "should distinguish arrow functions from variables",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "3085b8f6-7515-452d-a265-5104242dff83",
+          "name": "should extract arrow functions in JSX files",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 1,
+            "status": "passed"
+          }
+        }
+      ],
+      "nestedSuites": [],
+      "runtime": {
+        "duration": 10
+      }
+    },
+    {
+      "id": "cd9e2493-4ccc-41cf-b9e4-fa5798629deb",
       "name": "parse",
       "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/ast-parser.test.ts",
       "tests": [
         {
-          "id": "762b2c2b-c45b-42b7-ab87-b610142de33d",
+          "id": "bb2bdbb1-e2db-4f31-95d0-ea0619095203",
           "name": "should parse simple JavaScript code",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/ast-parser.test.ts",
@@ -364,7 +635,7 @@
           }
         },
         {
-          "id": "e52b2c6e-357a-4beb-84bb-8a0257fc48f2",
+          "id": "bec45bfb-1d0b-4f63-8f64-a3932ba60516",
           "name": "should parse TypeScript code",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/ast-parser.test.ts",
@@ -377,7 +648,7 @@
           }
         },
         {
-          "id": "9fee16d5-829e-446b-9229-6c1f9d96f0e8",
+          "id": "b023da26-ae2c-4c83-8425-57553cb26175",
           "name": "should parse test file with describe and it",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/ast-parser.test.ts",
@@ -385,12 +656,12 @@
             "column": 0
           },
           "runtime": {
-            "duration": 3,
+            "duration": 1,
             "status": "passed"
           }
         },
         {
-          "id": "fe294aa2-a672-4917-9fc3-439c1f245a72",
+          "id": "a07e6144-e187-49a0-8805-881332ac58fd",
           "name": "should throw error for invalid syntax",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/ast-parser.test.ts",
@@ -398,7 +669,7 @@
             "column": 0
           },
           "runtime": {
-            "duration": 3,
+            "duration": 5,
             "status": "passed"
           }
         }
@@ -409,12 +680,12 @@
       }
     },
     {
-      "id": "a65c52df-c51f-4be2-a08a-4b90c0bebf71",
+      "id": "131a715f-deea-444c-9043-152cfa17f350",
       "name": "parseMultiple",
       "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/ast-parser.test.ts",
       "tests": [
         {
-          "id": "a41b3655-818c-4a5d-8b20-af6b56d80375",
+          "id": "9882d13e-61ac-4a7e-9f0a-57f44defa911",
           "name": "should parse multiple sources",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/ast-parser.test.ts",
@@ -433,12 +704,12 @@
       }
     },
     {
-      "id": "26aed410-658a-4e46-a096-303fd59a7f00",
+      "id": "ef2dd524-b829-4a27-9251-bf6e9e343f2b",
       "name": "isValidAST",
       "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/ast-parser.test.ts",
       "tests": [
         {
-          "id": "b528cb09-b1e1-475a-a94d-7e86930e9f1c",
+          "id": "5491cead-db7c-4b34-a239-cfa841a9a31b",
           "name": "should return true for valid AST",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/ast-parser.test.ts",
@@ -451,7 +722,7 @@
           }
         },
         {
-          "id": "6b372fef-fee7-4651-aadc-4cf165743824",
+          "id": "efc7617c-269d-4f9a-97e0-75fd5483f83c",
           "name": "should return false for invalid AST",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/ast-parser.test.ts",
@@ -459,23 +730,23 @@
             "column": 0
           },
           "runtime": {
-            "duration": 0,
+            "duration": 1,
             "status": "passed"
           }
         }
       ],
       "nestedSuites": [],
       "runtime": {
-        "duration": 0
+        "duration": 1
       }
     },
     {
-      "id": "aab3e47d-3a6b-4adc-9c45-261091d19598",
+      "id": "2cbb633b-13dc-488d-bb7d-0e85c9de6627",
       "name": "ASTParser - edge cases",
       "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/ast-parser.test.ts",
       "tests": [
         {
-          "id": "73317c1c-473c-4903-b83a-b215e70fddc9",
+          "id": "b7a3cf85-eabf-4e69-ab84-1f299ad6a55b",
           "name": "should handle empty file",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/ast-parser.test.ts",
@@ -488,7 +759,7 @@
           }
         },
         {
-          "id": "06a6b7dc-27af-4663-9aca-f49b19174dd2",
+          "id": "772e93e2-33ed-4afd-89e8-eba903482777",
           "name": "should handle very large files efficiently",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/ast-parser.test.ts",
@@ -496,12 +767,12 @@
             "column": 0
           },
           "runtime": {
-            "duration": 50,
+            "duration": 87,
             "status": "passed"
           }
         },
         {
-          "id": "c6159476-b678-4bb6-a562-6d1da6d790bb",
+          "id": "1140c5a3-1084-4d23-a925-2b7f63337410",
           "name": "should handle deep nesting (100+ levels)",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/ast-parser.test.ts",
@@ -516,16 +787,16 @@
       ],
       "nestedSuites": [],
       "runtime": {
-        "duration": 52
+        "duration": 89
       }
     },
     {
-      "id": "cabe89d0-24a5-403b-9461-c6ba64cdb1e3",
+      "id": "0bd85b1c-50cb-491c-a975-0fb719584196",
       "name": "E2E: Full Workflow",
       "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/e2e/full-workflow.test.ts",
       "tests": [
         {
-          "id": "e5250168-c386-4757-b0cf-c2d976fe4cbe",
+          "id": "6dfd3945-2a0f-41de-9534-fce60e65c6ed",
           "name": "should analyze test files and generate AST catalog",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/e2e/full-workflow.test.ts",
@@ -538,7 +809,7 @@
           }
         },
         {
-          "id": "3c1cbf97-0141-4b93-9f5e-20ba2dfd59cb",
+          "id": "8539b85c-46d4-4da1-bf35-1919e0be006f",
           "name": "should support multiple output formats",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/e2e/full-workflow.test.ts",
@@ -551,7 +822,7 @@
           }
         },
         {
-          "id": "54472b78-c971-424a-9493-90008cddc45d",
+          "id": "92e4b502-1897-4dc5-8445-59faa5edbbdb",
           "name": "should handle nested test suites correctly",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/e2e/full-workflow.test.ts",
@@ -559,12 +830,12 @@
             "column": 0
           },
           "runtime": {
-            "duration": 2,
+            "duration": 1,
             "status": "passed"
           }
         },
         {
-          "id": "66a20137-7f14-4379-825f-5f03a5dc2cdc",
+          "id": "03acde95-a478-4bbe-9737-6dba15fe6cd0",
           "name": "should detect framework automatically",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/e2e/full-workflow.test.ts",
@@ -577,7 +848,7 @@
           }
         },
         {
-          "id": "b15723f7-cb52-4d68-a313-6982432a77b4",
+          "id": "b2d74d55-30fd-4a4f-bc4e-8fc4ff8cf83a",
           "name": "should extract test assertions",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/e2e/full-workflow.test.ts",
@@ -592,16 +863,170 @@
       ],
       "nestedSuites": [],
       "runtime": {
-        "duration": 12
+        "duration": 11
       }
     },
     {
-      "id": "d7f85aa8-982e-4aee-bc58-881fb86ad263",
+      "id": "e61ce849-9d6f-46c3-8308-1e027846c20e",
+      "name": "analyze",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/test-analyzer.test.ts",
+      "tests": [
+        {
+          "id": "f6ebba44-cabd-475d-8c0b-da181de61fd6",
+          "name": "should analyze simple test suite",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/test-analyzer.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 1,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "a05114f2-b72d-4a6c-aa74-9626933a7491",
+          "name": "should handle nested describe blocks",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/test-analyzer.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 1,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "2beb001f-afd0-4f62-abe8-8588f311b944",
+          "name": "should extract beforeEach hooks",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/test-analyzer.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 2,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "ff68bf6d-5f7f-49ea-86d0-69dfec7c1d30",
+          "name": "should extract afterEach hooks",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/test-analyzer.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "8893e9bf-1e97-4f18-b6ed-8281ed51f149",
+          "name": "should handle multiple test cases in one suite",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/test-analyzer.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 1,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "fa0276b8-c330-4426-9cd2-1da584fa12d0",
+          "name": "should extract assertions from test cases",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/test-analyzer.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "41c3ecd9-f3c5-4f66-8680-d2a4162625bc",
+          "name": "should handle test with template literal name",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/test-analyzer.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "1f149798-cb48-4c19-a790-69fee092bea0",
+          "name": "should handle empty test suite",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/test-analyzer.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "09de1711-66f7-4fc1-9411-a1961fafb8da",
+          "name": "should handle deeply nested suites",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/test-analyzer.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "47844271-b4bc-41e3-a8ad-9f08b3f4f77d",
+          "name": "should work with test() instead of it()",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/test-analyzer.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "0d06848e-ff14-4155-8920-b8fd8697289b",
+          "name": "should include location information",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/test-analyzer.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        }
+      ],
+      "nestedSuites": [],
+      "runtime": {
+        "duration": 5
+      }
+    },
+    {
+      "id": "99d83b32-19cd-4a62-8e67-43d14dff788d",
       "name": "LLM Guide Generation",
       "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/aaa-spec-guide.test.ts",
       "tests": [
         {
-          "id": "711f859a-11f3-4273-84b8-ab1c936c4909",
+          "id": "8228b54a-105b-4efe-a7b7-08aedcb3b2de",
           "name": "should generate TEST_KANTEEN_GUIDE.md when analyzing tests",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/aaa-spec-guide.test.ts",
@@ -609,12 +1034,12 @@
             "column": 0
           },
           "runtime": {
-            "duration": 4,
+            "duration": 5,
             "status": "passed"
           }
         },
         {
-          "id": "0a2fe18d-2bee-4f26-b4f6-0843cc7622ff",
+          "id": "aa4f03c6-30ef-4e62-9187-3f035184df51",
           "name": "should not overwrite existing guide",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/aaa-spec-guide.test.ts",
@@ -622,12 +1047,12 @@
             "column": 0
           },
           "runtime": {
-            "duration": 2,
+            "duration": 3,
             "status": "passed"
           }
         },
         {
-          "id": "4f4f79db-3d73-4b7a-b7a5-5180a0405e47",
+          "id": "995944bf-5f1d-44e2-9466-5b17d15a1adb",
           "name": "should place guide in output directory alongside catalog files",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/aaa-spec-guide.test.ts",
@@ -635,12 +1060,12 @@
             "column": 0
           },
           "runtime": {
-            "duration": 2,
+            "duration": 1,
             "status": "passed"
           }
         },
         {
-          "id": "e54a06a5-b667-42bf-b3d6-467ea4ce9357",
+          "id": "71571c73-e749-424a-a5ba-b8b9c0197bad",
           "name": "should include all essential sections in guide",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/aaa-spec-guide.test.ts",
@@ -655,235 +1080,16 @@
       ],
       "nestedSuites": [],
       "runtime": {
-        "duration": 10
+        "duration": 11
       }
     },
     {
-      "id": "e2b3a4ff-15fd-4952-99df-5739806582ed",
-      "name": "extract",
-      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
-      "tests": [
-        {
-          "id": "3232be96-ddef-4e8a-a8ad-6cc1c3e2b065",
-          "name": "should extract named function export",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 2,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "9a6cecae-e872-41fd-9859-ad69d19ca171",
-          "name": "should extract default function export",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "6a1441c6-4016-4013-8159-a96d96aedb95",
-          "name": "should extract async function export",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "d76f3828-3c66-428f-9a85-32b9eefe253e",
-          "name": "should extract class export",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 1,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "5fb7297a-3e77-4c4b-b15a-e715a93cc5e6",
-          "name": "should extract class with public methods",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "109e4f1e-6b4f-4ff5-8279-1213de182f19",
-          "name": "should not extract private methods",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 3,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "bc285062-f8af-491a-ac18-4a63d9c68efa",
-          "name": "should extract variable export",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "bf8dad22-038f-4a02-9896-c03ced588100",
-          "name": "should extract TypeScript interface export",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 1,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "f217a3d5-1650-4f92-bd60-7964896e8d42",
-          "name": "should extract TypeScript type alias export",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "5a91315d-d0a5-48cc-a29d-d468a0bf95d3",
-          "name": "should extract multiple exports",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "5ab4b68f-3794-4caf-94cb-57c7b0a4ad85",
-          "name": "should extract export specifiers",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 1,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "398e76a3-5a40-4bd7-8d69-d9eb2f734b00",
-          "name": "should include location information",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "e8b8cc7b-768f-4870-91cc-2ea90acb0971",
-          "name": "should include function signature",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "0f296f7b-e2f6-496a-adbc-989cd69219e9",
-          "name": "should handle rest parameters",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 1,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "651bc784-0490-4cd6-8895-210495a28ee2",
-          "name": "should handle empty file",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "f7621c16-6b25-4021-abc7-579fdfb6aa25",
-          "name": "should handle file with no exports",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/export-extractor.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        }
-      ],
-      "nestedSuites": [],
-      "runtime": {
-        "duration": 9
-      }
-    },
-    {
-      "id": "a051fb13-9cf6-4ea8-9834-52efb6e651cc",
+      "id": "5a8bd18c-cc06-481c-be9c-ebbcb5b6b14f",
       "name": "detectFromSource",
       "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
       "tests": [
         {
-          "id": "7faf0e9e-296c-41e3-9241-e269ae367867",
+          "id": "55dfba02-972b-40df-9217-0640a72c41f9",
           "name": "should detect Jest from import",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
@@ -891,12 +1097,12 @@
             "column": 0
           },
           "runtime": {
-            "duration": 1,
+            "duration": 0,
             "status": "passed"
           }
         },
         {
-          "id": "3cef8291-7656-4023-90ce-53033d3aa190",
+          "id": "7c78789d-cadc-48c1-8669-71a953c08c17",
           "name": "should detect Jest from test identifiers",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
@@ -909,7 +1115,7 @@
           }
         },
         {
-          "id": "a3b7a99a-cc15-4e8b-ac11-534ae07675ab",
+          "id": "2e8cf424-df45-46c0-8033-666e92880b36",
           "name": "should detect Vitest from import",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
@@ -917,12 +1123,12 @@
             "column": 0
           },
           "runtime": {
-            "duration": 5,
+            "duration": 1,
             "status": "passed"
           }
         },
         {
-          "id": "cd711181-f578-4fec-8219-ff47dbd785d3",
+          "id": "1470ee35-7e42-49e2-ac3c-03368beb4724",
           "name": "should detect Mocha from patterns",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
@@ -935,7 +1141,7 @@
           }
         },
         {
-          "id": "42a4b808-41f1-4a9e-889e-d6d4b62fc826",
+          "id": "a20cd356-2107-4984-80df-23d9eb38f61d",
           "name": "should return null for unrecognized source",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
@@ -950,30 +1156,17 @@
       ],
       "nestedSuites": [],
       "runtime": {
-        "duration": 6
+        "duration": 1
       }
     },
     {
-      "id": "180ef6cc-fcc9-4336-ab60-5f2e7a9155c9",
+      "id": "f3d9d70a-989d-4567-b4f3-75f065a8b799",
       "name": "detectFromAST",
       "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
       "tests": [
         {
-          "id": "623b38aa-9394-4aa2-a0e5-5425310d0da4",
+          "id": "eca6dab7-245a-4924-bc3f-c067e1c96b54",
           "name": "should detect Jest from AST with import",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 1,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "0b566b05-bdcb-49bb-9a4d-ece3357bcbc5",
-          "name": "should detect Vitest from AST with import",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
             "line": 0,
@@ -985,8 +1178,8 @@
           }
         },
         {
-          "id": "6279c353-a3d9-48f3-a4f6-8808918be9f8",
-          "name": "should return null for AST without framework imports",
+          "id": "2d5dd31d-c742-4b6e-be24-21e26634dc8a",
+          "name": "should detect Vitest from AST with import",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
             "line": 0,
@@ -996,20 +1189,33 @@
             "duration": 1,
             "status": "passed"
           }
+        },
+        {
+          "id": "9647390c-d181-4f04-9537-f4ab6d8c7d11",
+          "name": "should return null for AST without framework imports",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 2,
+            "status": "passed"
+          }
         }
       ],
       "nestedSuites": [],
       "runtime": {
-        "duration": 2
+        "duration": 3
       }
     },
     {
-      "id": "a1e41b68-33af-4c7e-9cdb-df1a1d6d7ae7",
+      "id": "6c5b51af-e0f1-45f8-a93a-eaa521326814",
       "name": "autoDetect",
       "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
       "tests": [
         {
-          "id": "858246cc-b29e-4723-94a2-82a2dbc4780a",
+          "id": "8284b6f2-f8d9-4f36-8f0f-c08e00888b6d",
           "name": "should detect from source first",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
@@ -1022,7 +1228,7 @@
           }
         },
         {
-          "id": "95929e15-a555-47ac-9aee-fbd19c80dae8",
+          "id": "fa30accc-9d96-4095-9409-4c14e0a69dc3",
           "name": "should detect from AST if source detection fails",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
@@ -1030,12 +1236,12 @@
             "column": 0
           },
           "runtime": {
-            "duration": 1,
+            "duration": 0,
             "status": "passed"
           }
         },
         {
-          "id": "e4be43b4-d8ba-42a2-82a5-44f2eed3f236",
+          "id": "2587dc07-0f42-4f95-94ee-91f78c44734a",
           "name": "should return default Jest if all detection fails",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
@@ -1043,7 +1249,7 @@
             "column": 0
           },
           "runtime": {
-            "duration": 0,
+            "duration": 1,
             "status": "passed"
           }
         }
@@ -1054,12 +1260,12 @@
       }
     },
     {
-      "id": "f90fb57f-70d0-4c26-8a5a-646922a26862",
+      "id": "2399cc5e-9c6b-49df-bf5c-251f5d23ffca",
       "name": "getFramework",
       "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
       "tests": [
         {
-          "id": "5f4541af-cbd3-40e8-9823-439c77a99a83",
+          "id": "23caa456-fa55-43a8-8825-5de24946e8e3",
           "name": "should return Jest framework",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
@@ -1067,12 +1273,12 @@
             "column": 0
           },
           "runtime": {
-            "duration": 1,
+            "duration": 0,
             "status": "passed"
           }
         },
         {
-          "id": "c8cc0e57-4ba1-4231-9cb0-8ddfd3bc5806",
+          "id": "9837f9c0-8cba-4a5c-acfe-50d7523ce924",
           "name": "should return Vitest framework",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
@@ -1085,7 +1291,7 @@
           }
         },
         {
-          "id": "3db69bac-a2f4-4b5c-8d5f-d74c80a2227d",
+          "id": "15f57300-04b4-43e9-b51d-38fe8378af50",
           "name": "should return Mocha framework",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
@@ -1098,32 +1304,8 @@
           }
         },
         {
-          "id": "b5a0f1bf-afad-4cb5-840b-b3163929d1d1",
+          "id": "166a6faa-cb39-4f0d-97a0-c01cd7b51580",
           "name": "should return undefined for unknown framework",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        }
-      ],
-      "nestedSuites": [],
-      "runtime": {
-        "duration": 1
-      }
-    },
-    {
-      "id": "071850fe-1535-4309-a68c-eaf7c3c68b82",
-      "name": "getSupportedFrameworks",
-      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
-      "tests": [
-        {
-          "id": "6007b76b-f412-414f-bec1-a07c15c35693",
-          "name": "should return list of supported frameworks",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
             "line": 0,
@@ -1141,12 +1323,36 @@
       }
     },
     {
-      "id": "18a094d6-e16d-4076-9d74-b6dadf229674",
+      "id": "c0e86ae1-8f89-4472-b43f-84cac60a5477",
+      "name": "getSupportedFrameworks",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
+      "tests": [
+        {
+          "id": "6a750780-e499-4663-a482-0eb28f9d040b",
+          "name": "should return list of supported frameworks",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 1,
+            "status": "passed"
+          }
+        }
+      ],
+      "nestedSuites": [],
+      "runtime": {
+        "duration": 1
+      }
+    },
+    {
+      "id": "b52e3785-21e8-4d84-8cd2-cde45777561a",
       "name": "framework metadata",
       "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
       "tests": [
         {
-          "id": "96ad4440-f5ad-4613-bf41-03d216f304da",
+          "id": "87539f58-71d7-47f3-9e50-ad33cbe5d752",
           "name": "should have correct Jest identifiers",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
@@ -1159,7 +1365,7 @@
           }
         },
         {
-          "id": "63fc8e6e-c34f-43ca-a82a-cecc1452f216",
+          "id": "dfa51985-89a1-47c8-97af-ff9dc445d4c6",
           "name": "should have correct hook identifiers for Jest",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
@@ -1172,7 +1378,7 @@
           }
         },
         {
-          "id": "ea1b83db-8528-469a-9cda-d88f9f1d52e2",
+          "id": "a12bc605-d2bf-4070-b417-263cf678170d",
           "name": "should have correct Vitest identifiers",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
@@ -1185,7 +1391,7 @@
           }
         },
         {
-          "id": "5e4ab0e2-c39f-4248-93a4-85d4f79c536c",
+          "id": "72d805b1-e7e1-4042-8a5e-203d33801e2f",
           "name": "should have correct Mocha identifiers",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
@@ -1198,7 +1404,7 @@
           }
         },
         {
-          "id": "2dc85b09-f3dc-4ca3-ab6d-a6645346a478",
+          "id": "b0fc5cdd-91a9-4f92-8644-b8c207b7124e",
           "name": "should have correct Mocha hook identifiers",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/test-framework-detector.test.ts",
@@ -1217,166 +1423,12 @@
       }
     },
     {
-      "id": "cdfe7673-9f8d-40ee-aca9-68bb167b3892",
-      "name": "analyze",
-      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/test-analyzer.test.ts",
-      "tests": [
-        {
-          "id": "7f1e8151-7ae4-4b5a-98c2-e038b5fceba8",
-          "name": "should analyze simple test suite",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/test-analyzer.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 1,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "7c4c16ea-3f49-43b4-b2f9-7699a4ea49c0",
-          "name": "should handle nested describe blocks",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/test-analyzer.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "441560a2-d671-4626-b678-fe9b700567e8",
-          "name": "should extract beforeEach hooks",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/test-analyzer.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 1,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "3b39b8ed-adea-4339-a84c-2ebc8a6b009c",
-          "name": "should extract afterEach hooks",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/test-analyzer.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "6562a333-83b6-4201-be6e-e53e215d3ff5",
-          "name": "should handle multiple test cases in one suite",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/test-analyzer.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 3,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "169d821a-564f-4364-80a7-51697636b771",
-          "name": "should extract assertions from test cases",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/test-analyzer.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "09270590-9d1b-4166-9d46-a41eb2b4c1db",
-          "name": "should handle test with template literal name",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/test-analyzer.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 1,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "f732a68e-f8d5-40f8-94d6-8a46ada06487",
-          "name": "should handle empty test suite",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/test-analyzer.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "980d4de8-87c6-42aa-a9f2-6f123b7d3070",
-          "name": "should handle deeply nested suites",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/test-analyzer.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "75455ae6-9998-4423-a81c-f4eff113b9dd",
-          "name": "should work with test() instead of it()",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/test-analyzer.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "e49d3cb0-a32c-4ece-93de-dacfcb4a2a49",
-          "name": "should include location information",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/test-analyzer.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        }
-      ],
-      "nestedSuites": [],
-      "runtime": {
-        "duration": 6
-      }
-    },
-    {
-      "id": "5da33218-4956-4a04-a3c7-d9a0ca7cf692",
+      "id": "9ec88def-62dd-4441-ad15-841a1971281e",
       "name": "extract",
       "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/assertion-extractor.test.ts",
       "tests": [
         {
-          "id": "f046ae96-5158-4f86-8327-2f2cb70b19c5",
+          "id": "45270676-9381-49fb-af4c-5e4d330e08ee",
           "name": "should extract expect().toBe() assertion",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/assertion-extractor.test.ts",
@@ -1384,13 +1436,26 @@
             "column": 0
           },
           "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "99707eda-e1a8-41c9-bc72-853a55346917",
+          "name": "should extract expect().toEqual() assertion",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/assertion-extractor.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
             "duration": 1,
             "status": "passed"
           }
         },
         {
-          "id": "b65b8f01-5eaf-45e6-9fbf-7d0bd6a7ba11",
-          "name": "should extract expect().toEqual() assertion",
+          "id": "fbffe0f2-5e25-4915-8951-eb498ee9b702",
+          "name": "should extract expect().toThrow() assertion",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/assertion-extractor.test.ts",
             "line": 0,
@@ -1402,20 +1467,7 @@
           }
         },
         {
-          "id": "71a37ac4-1783-4e88-9644-2d8003b556c8",
-          "name": "should extract expect().toThrow() assertion",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/assertion-extractor.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 1,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "2f53340e-e472-451f-8f5a-c543b625ed8b",
+          "id": "c7b04c90-3211-49d9-ab4d-757a51e7f2c7",
           "name": "should extract expect().not.toBe() assertion",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/assertion-extractor.test.ts",
@@ -1428,21 +1480,8 @@
           }
         },
         {
-          "id": "fc40455b-fd03-46ca-ad0d-4b2fb468f273",
+          "id": "512c24e2-4ba8-4d4e-bd84-38d0be3fd2e9",
           "name": "should extract multiple assertions",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/assertion-extractor.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "09c24d2d-a1a2-4d72-98ca-6a7e57994d55",
-          "name": "should extract nested assertions in test function",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/assertion-extractor.test.ts",
             "line": 0,
@@ -1454,7 +1493,20 @@
           }
         },
         {
-          "id": "7a62ff11-e99a-425f-9f77-7bc1e3a765d5",
+          "id": "7d2d35bc-d392-4aa4-9c84-b6c9c77344dc",
+          "name": "should extract nested assertions in test function",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/assertion-extractor.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "4e84f3a0-4d75-431a-9a3a-9a93ccfe8fa2",
           "name": "should extract toBeGreaterThan assertion",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/assertion-extractor.test.ts",
@@ -1467,7 +1519,7 @@
           }
         },
         {
-          "id": "01f21111-6fc2-4606-8ca3-0ee9ada0d86e",
+          "id": "61ea9049-fcf4-4bbd-858c-b1593f6686f3",
           "name": "should extract toBeLessThan assertion",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/assertion-extractor.test.ts",
@@ -1475,12 +1527,12 @@
             "column": 0
           },
           "runtime": {
-            "duration": 0,
+            "duration": 1,
             "status": "passed"
           }
         },
         {
-          "id": "b575b4e9-56a1-43b4-802e-4cabe4b0c82e",
+          "id": "7342a89f-8255-4438-8c49-0eb43edbd0d7",
           "name": "should extract toBeTruthy/toBeFalsy assertions",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/assertion-extractor.test.ts",
@@ -1493,7 +1545,7 @@
           }
         },
         {
-          "id": "f03a0104-b119-47bf-a9b2-3ebc2ac64116",
+          "id": "9cf3e76b-6d9a-4bfc-90d9-1d7cad9d4ce0",
           "name": "should extract toBeDefined/toBeUndefined assertions",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/assertion-extractor.test.ts",
@@ -1506,7 +1558,7 @@
           }
         },
         {
-          "id": "fcd5bdd8-6fa6-43ca-a119-2ef223f9bed9",
+          "id": "cdd57ae7-f096-47f8-ae46-89f226820e1a",
           "name": "should extract toContain assertion",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/assertion-extractor.test.ts",
@@ -1514,12 +1566,12 @@
             "column": 0
           },
           "runtime": {
-            "duration": 1,
+            "duration": 0,
             "status": "passed"
           }
         },
         {
-          "id": "0ab63bbc-3e15-44c3-a2c0-cd093cbe29d2",
+          "id": "c682d86f-8bed-4554-b1eb-651fa7da5ebd",
           "name": "should extract toHaveLength assertion",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/assertion-extractor.test.ts",
@@ -1532,7 +1584,7 @@
           }
         },
         {
-          "id": "c7cbd642-a862-40e3-9146-1d10d5c9a51b",
+          "id": "fc5f41d5-5547-4f37-a9ec-4f60995a4182",
           "name": "should extract toMatch assertion",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/assertion-extractor.test.ts",
@@ -1540,12 +1592,12 @@
             "column": 0
           },
           "runtime": {
-            "duration": 0,
+            "duration": 1,
             "status": "passed"
           }
         },
         {
-          "id": "fb1542e0-357c-45bd-ac45-fc8e5df609fa",
+          "id": "9021d562-dda2-4576-b07f-51a332493d40",
           "name": "should include location information",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/assertion-extractor.test.ts",
@@ -1564,12 +1616,12 @@
       }
     },
     {
-      "id": "83a450da-8404-4237-b31d-3a5edbc46695",
+      "id": "4e3b50cb-1dd8-41dd-a048-c0458f4eb987",
       "name": "classifyAssertion",
       "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/assertion-extractor.test.ts",
       "tests": [
         {
-          "id": "60bc1fa3-067f-4d8a-993f-f1c6da250dbf",
+          "id": "d0fcdeb5-5925-4949-8957-36f2179ad2a7",
           "name": "should classify equality matchers",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/assertion-extractor.test.ts",
@@ -1582,7 +1634,7 @@
           }
         },
         {
-          "id": "538b5941-bfd9-4689-a18a-b4f6774cfb32",
+          "id": "7542006d-6a91-4d2d-ad3b-73b45bfdb5d6",
           "name": "should classify truthiness matchers",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/assertion-extractor.test.ts",
@@ -1595,7 +1647,7 @@
           }
         },
         {
-          "id": "de043d4c-fe9d-4aa4-b534-e985d67fa70c",
+          "id": "6977c27e-79d8-4f85-b084-9edbc154dc74",
           "name": "should classify comparison matchers",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/assertion-extractor.test.ts",
@@ -1608,7 +1660,7 @@
           }
         },
         {
-          "id": "2311d6d4-242e-4ab9-b019-c653e7855d57",
+          "id": "1c21c2c9-4a76-46ad-8ac9-06ccbf9c2248",
           "name": "should classify string matchers",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/assertion-extractor.test.ts",
@@ -1621,7 +1673,7 @@
           }
         },
         {
-          "id": "e5a7033c-f99b-467a-96b2-fcc1e9c0d526",
+          "id": "84239457-1ced-4437-af2e-ed3994ea8e4b",
           "name": "should classify array matchers",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/assertion-extractor.test.ts",
@@ -1634,7 +1686,7 @@
           }
         },
         {
-          "id": "51493afe-d741-40d5-afbd-91c39ab2d917",
+          "id": "46acc5b1-fc62-44bf-bcac-4fbabdb9b8bb",
           "name": "should classify error matchers",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/assertion-extractor.test.ts",
@@ -1647,7 +1699,7 @@
           }
         },
         {
-          "id": "3a698057-5a2d-4b2d-940e-57802f2e90af",
+          "id": "ca97a07c-6d25-4b30-8b1a-eb0d17f2813c",
           "name": "should classify mock matchers",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/assertion-extractor.test.ts",
@@ -1660,7 +1712,7 @@
           }
         },
         {
-          "id": "13661115-346e-44b9-b774-29d88006e51c",
+          "id": "e88aab41-e078-431d-b08e-886e94437cc0",
           "name": "should return \"other\" for unknown matchers",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/analyzer/assertion-extractor.test.ts",
@@ -1679,75 +1731,12 @@
       }
     },
     {
-      "id": "2b78dd55-fa68-45c2-be53-c93bd92954b2",
-      "name": "KanteenJestReporter Integration",
-      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/jest-reporter.test.ts",
-      "tests": [
-        {
-          "id": "355d5334-2482-449f-8a58-cde6f0a53ddd",
-          "name": "should capture test results and generate catalog",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/jest-reporter.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 13,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "f69b35db-a8d8-4296-94ed-233a4b505ed5",
-          "name": "should handle multiple test files",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/jest-reporter.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 1,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "db3a458e-8d74-40b6-8c6f-93abe090137a",
-          "name": "should capture error details",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/jest-reporter.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 1,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "ecb1c772-cdc4-4fbf-bf2d-e6a7ffac8f2d",
-          "name": "should handle tests without suite",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/jest-reporter.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 1,
-            "status": "passed"
-          }
-        }
-      ],
-      "nestedSuites": [],
-      "runtime": {
-        "duration": 16
-      }
-    },
-    {
-      "id": "f76dcfe1-a646-41b0-9b3b-fe3bd70a62bf",
+      "id": "d5c64613-d704-430d-b50a-09b0daf3f733",
       "name": "generate",
       "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts",
       "tests": [
         {
-          "id": "12ffa03c-8b68-43fb-9899-8e14d2a7f45c",
+          "id": "e5644079-fca2-405f-ae4a-93c4de8574af",
           "name": "should generate catalog as object",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts",
@@ -1760,7 +1749,7 @@
           }
         },
         {
-          "id": "a29a23a6-3a4e-4759-bbef-ba2ad4c836d1",
+          "id": "4059ce7d-3e85-4f68-97b1-0d7e26efb71a",
           "name": "should include all catalog properties",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts",
@@ -1779,12 +1768,12 @@
       }
     },
     {
-      "id": "79937198-41dc-41df-b947-0270386941db",
+      "id": "9aa511c1-b3a6-4a1f-bec8-d673cb4a924a",
       "name": "generatePretty",
       "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts",
       "tests": [
         {
-          "id": "f7c5c898-7ebe-4c96-9cd9-b4e258654302",
+          "id": "7e179f50-5a27-46d9-9690-9e88d7c752b6",
           "name": "should generate pretty formatted JSON string",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts",
@@ -1797,7 +1786,7 @@
           }
         },
         {
-          "id": "292aa36b-3cb6-47f5-8762-c80d21b7c041",
+          "id": "6b3b2831-632a-4d24-b88b-32e4564bb78d",
           "name": "should be valid JSON",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts",
@@ -1810,7 +1799,7 @@
           }
         },
         {
-          "id": "3fdf734d-5bfe-40dd-8554-fb067ff8ee7e",
+          "id": "df8daa1d-007a-447e-8530-9c0b7a3c3886",
           "name": "should contain catalog data",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts",
@@ -1829,12 +1818,12 @@
       }
     },
     {
-      "id": "16755ef8-39f2-4735-bf76-a8a55995443c",
+      "id": "26de7475-e8ab-4db3-931c-4ba243b60629",
       "name": "writeToFile",
       "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts",
       "tests": [
         {
-          "id": "a5fc218e-0286-46a4-b088-9c274c5052a5",
+          "id": "7fd4e6ba-8be5-4369-8bd1-621d5f24be19",
           "name": "should write JSON to file",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts",
@@ -1842,12 +1831,12 @@
             "column": 0
           },
           "runtime": {
-            "duration": 2,
+            "duration": 1,
             "status": "passed"
           }
         },
         {
-          "id": "8daabd75-0de8-490d-939c-ee1c35d2375a",
+          "id": "7e3314d7-65dd-4f0e-8e2d-ef20e3c73de1",
           "name": "should create directory if not exists",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts",
@@ -1860,7 +1849,7 @@
           }
         },
         {
-          "id": "e6637dc8-6b15-4b77-964d-a58291c82f48",
+          "id": "912bbc64-aa54-437b-b592-ece93d5ef051",
           "name": "should write valid JSON format",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts",
@@ -1868,7 +1857,7 @@
             "column": 0
           },
           "runtime": {
-            "duration": 0,
+            "duration": 1,
             "status": "passed"
           }
         }
@@ -1879,12 +1868,12 @@
       }
     },
     {
-      "id": "af358cac-31ce-45b2-a6ed-d2b0526e4033",
+      "id": "3c315f0d-43c3-4ad7-84fe-0f56556dba10",
       "name": "options",
       "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts",
       "tests": [
         {
-          "id": "b72723f1-f960-4aaa-a8e8-cd6ae25852e1",
+          "id": "8686a111-6c8e-41da-9be7-109977b8a643",
           "name": "should respect pretty format option",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts",
@@ -1897,247 +1886,10 @@
           }
         },
         {
-          "id": "152c8595-6ada-4d7c-bce6-059e84220384",
+          "id": "d216555f-9ca4-45b9-9ccf-ce33656830c3",
           "name": "should respect include options",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 1,
-            "status": "passed"
-          }
-        }
-      ],
-      "nestedSuites": [],
-      "runtime": {
-        "duration": 1
-      }
-    },
-    {
-      "id": "445ba1d3-62d0-4682-8608-def76b70906a",
-      "name": "error handling",
-      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts",
-      "tests": [
-        {
-          "id": "d89c7806-d75e-40a3-8c43-8d54ae5d5949",
-          "name": "should handle write permission errors gracefully",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 1,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "67917267-d62c-426f-88e6-532d068006ae",
-          "name": "should validate output path before writing",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 1,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "562b854f-76fe-4a98-88ee-eaf26d8100e1",
-          "name": "should handle empty output path",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "dbb39d9a-86ab-459d-827a-197aabbe76c0",
-          "name": "should handle very long file paths",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 1,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "68344ad2-45af-4ed3-84b4-570acde1a91c",
-          "name": "should handle concurrent writes to the same file",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 1,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "42241716-a2ae-4212-8326-6d348ea79c26",
-          "name": "should maintain data integrity when writing fails",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        }
-      ],
-      "nestedSuites": [],
-      "runtime": {
-        "duration": 4
-      }
-    },
-    {
-      "id": "c6acfa6e-c477-4c8b-a803-5b2f2f638a50",
-      "name": "loadFile",
-      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/source-loader.test.ts",
-      "tests": [
-        {
-          "id": "1878e84a-ad91-4b6b-b155-ac17e9e0ffa0",
-          "name": "should load existing file with both absolute and relative paths",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/source-loader.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 1,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "a72d780c-f494-4e07-b794-f7df3abed8b3",
-          "name": "should throw error for non-existent file",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/source-loader.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 2,
-            "status": "passed"
-          }
-        }
-      ],
-      "nestedSuites": [],
-      "runtime": {
-        "duration": 3
-      }
-    },
-    {
-      "id": "5af4474c-6301-4283-aa81-17049f3ec532",
-      "name": "loadFiles",
-      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/source-loader.test.ts",
-      "tests": [
-        {
-          "id": "32c3f6e8-1d31-4cba-a016-7eacaf5c13f7",
-          "name": "should load multiple files and skip invalid ones",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/source-loader.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 3,
-            "status": "passed"
-          }
-        }
-      ],
-      "nestedSuites": [],
-      "runtime": {
-        "duration": 3
-      }
-    },
-    {
-      "id": "1f348a57-f071-4539-b0b7-2811c5286d72",
-      "name": "loadByPattern",
-      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/source-loader.test.ts",
-      "tests": [
-        {
-          "id": "b278da31-f09e-4511-95a0-087025815bb0",
-          "name": "should load files matching glob patterns",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/source-loader.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 1,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "7c2b8758-b83f-4f47-bc1b-48ed43496e95",
-          "name": "should respect ignore patterns and default ignores",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/source-loader.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 5,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "93752db3-bbdc-4377-930b-947bde20bb76",
-          "name": "should use custom working directory when specified",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/source-loader.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 1,
-            "status": "passed"
-          }
-        }
-      ],
-      "nestedSuites": [],
-      "runtime": {
-        "duration": 7
-      }
-    },
-    {
-      "id": "a32593c1-adcd-4e8d-bd54-a4183b2bde41",
-      "name": "exists and getStats",
-      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/source-loader.test.ts",
-      "tests": [
-        {
-          "id": "39f6c85d-3dd7-4d09-82a3-f6bab6b248ed",
-          "name": "should check file existence for existing and non-existing files",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/source-loader.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "a8c19db9-b617-4b30-820c-aab49bad47ee",
-          "name": "should return file stats for files and directories",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/source-loader.test.ts",
             "line": 0,
             "column": 0
           },
@@ -2153,28 +1905,80 @@
       }
     },
     {
-      "id": "da9f3a5e-4e4b-40ff-9128-fbbe6a6fd2f6",
-      "name": "common functionality",
-      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/formatters.test.ts",
+      "id": "84b23bf6-e9a7-4b4b-b8ea-db8816001a8f",
+      "name": "error handling",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts",
       "tests": [
         {
-          "id": "c48ace18-ba57-4275-ab8e-8ba8dcc7f7d5",
-          "name": "should include all catalog properties in all formats",
+          "id": "9cc09503-ca93-4524-a55b-de4d5c625b1c",
+          "name": "should handle write permission errors gracefully",
           "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/formatters.test.ts",
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts",
             "line": 0,
             "column": 0
           },
           "runtime": {
-            "duration": 3,
+            "duration": 1,
             "status": "passed"
           }
         },
         {
-          "id": "fcb584f6-a7d4-4b3b-a8a8-9ee0f626e24e",
-          "name": "should handle nested test suites correctly in all formats",
+          "id": "3182c47a-4edb-4e93-9275-a5eecd7ded0a",
+          "name": "should validate output path before writing",
           "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/formatters.test.ts",
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 1,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "da634200-7331-40f7-adf2-85f192d6563b",
+          "name": "should handle empty output path",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "edf4f888-185d-48c7-a6f1-b1813bcfe4ab",
+          "name": "should handle very long file paths",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "608690c3-d2b6-48bb-aa85-605fa1d0bf8f",
+          "name": "should handle concurrent writes to the same file",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 1,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "c61c31b1-835c-4fd1-88c8-bd04b3bdae80",
+          "name": "should maintain data integrity when writing fails",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/json-reporter.test.ts",
             "line": 0,
             "column": 0
           },
@@ -2190,13 +1994,26 @@
       }
     },
     {
-      "id": "7191512f-c7b0-4411-a076-bc62e6b97fff",
-      "name": "JSONFormatter",
+      "id": "7aefa0e1-dd08-4b7c-b3d5-c5127c8d7448",
+      "name": "common functionality",
       "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/formatters.test.ts",
       "tests": [
         {
-          "id": "2443e83e-8855-4649-a924-5bbef86f1a53",
-          "name": "should format catalog as valid JSON with configurable options",
+          "id": "f8bde118-eaa4-487a-ab56-dea80630ed7f",
+          "name": "should include all catalog properties in all formats",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/formatters.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 3,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "bd061ec3-5018-4720-a65f-1422c8d7b685",
+          "name": "should handle nested test suites correctly in all formats",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/formatters.test.ts",
             "line": 0,
@@ -2206,10 +2023,21 @@
             "duration": 1,
             "status": "passed"
           }
-        },
+        }
+      ],
+      "nestedSuites": [],
+      "runtime": {
+        "duration": 4
+      }
+    },
+    {
+      "id": "d8e673b7-9edc-40a4-a46a-9396d6da9342",
+      "name": "JSONFormatter",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/formatters.test.ts",
+      "tests": [
         {
-          "id": "0ced0ff6-2761-443d-b4bc-9141ff8917e2",
-          "name": "should return catalog as object through toObject method",
+          "id": "10110d68-8985-4816-a403-995153615449",
+          "name": "should format catalog as valid JSON with configurable options",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/formatters.test.ts",
             "line": 0,
@@ -2219,20 +2047,33 @@
             "duration": 0,
             "status": "passed"
           }
+        },
+        {
+          "id": "62815b44-e44e-495d-99b5-91d1f750e0cd",
+          "name": "should return catalog as object through toObject method",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/formatters.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 2,
+            "status": "passed"
+          }
         }
       ],
       "nestedSuites": [],
       "runtime": {
-        "duration": 1
+        "duration": 2
       }
     },
     {
-      "id": "1c7c71c9-ba0c-4785-934e-a84b7b16be9e",
+      "id": "03020368-be42-4d52-be9c-5a1fc3548f1e",
       "name": "YAMLFormatter",
       "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/formatters.test.ts",
       "tests": [
         {
-          "id": "d7276c92-df0d-468c-8fb4-1171e89b9322",
+          "id": "3cfe088c-d24e-44a7-ae47-09773630b580",
           "name": "should format catalog as valid YAML with configurable options",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/formatters.test.ts",
@@ -2245,7 +2086,7 @@
           }
         },
         {
-          "id": "94d9dc9f-1f4f-4950-846a-37cdc6553961",
+          "id": "77a24e46-1067-4251-b98d-9333c229d451",
           "name": "should return YAML Document through toDocument method",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/formatters.test.ts",
@@ -2264,12 +2105,12 @@
       }
     },
     {
-      "id": "657d4ba5-d62e-46e9-a7b7-c36fb75d6dae",
+      "id": "d3234f5f-0bd6-4ae6-bf8c-9a1a01694a50",
       "name": "MarkdownFormatter",
       "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/formatters.test.ts",
       "tests": [
         {
-          "id": "37bee093-1b4f-4350-88bd-a77c2e1465b0",
+          "id": "7e08c126-c709-4a94-801b-69a8dd40ef0f",
           "name": "should format catalog as valid Markdown with proper structure",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/formatters.test.ts",
@@ -2277,12 +2118,12 @@
             "column": 0
           },
           "runtime": {
-            "duration": 0,
+            "duration": 1,
             "status": "passed"
           }
         },
         {
-          "id": "081b5451-ced0-4ea8-a3cf-c60997370d0e",
+          "id": "d86d70e1-794f-41a5-aa4a-8ca69b645def",
           "name": "should use correct indentation levels for nested suites",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/formatters.test.ts",
@@ -2297,16 +2138,227 @@
       ],
       "nestedSuites": [],
       "runtime": {
-        "duration": 0
+        "duration": 1
       }
     },
     {
-      "id": "52ccd57c-71c2-4dab-a7d6-086338e1af25",
+      "id": "68537a89-8f56-4975-a46a-7348f3bd9c1d",
+      "name": "KanteenJestReporter Integration",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/jest-reporter.test.ts",
+      "tests": [
+        {
+          "id": "a1e473b6-e56b-4234-aec3-d366e48543c7",
+          "name": "should capture test results and generate catalog",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/jest-reporter.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 15,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "30b0a56d-70cb-4dd0-a37d-b24829740e9c",
+          "name": "should handle multiple test files",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/jest-reporter.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 1,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "d768fd66-9a55-43a6-a773-c1cc3f1f29e9",
+          "name": "should capture error details",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/jest-reporter.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 1,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "d589c6c2-bf56-4557-b7e2-dfe9619f8a02",
+          "name": "should handle tests without suite",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/jest-reporter.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 1,
+            "status": "passed"
+          }
+        }
+      ],
+      "nestedSuites": [],
+      "runtime": {
+        "duration": 18
+      }
+    },
+    {
+      "id": "ff694804-73a5-446b-a4bf-60c09abbc6a6",
+      "name": "loadFile",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/source-loader.test.ts",
+      "tests": [
+        {
+          "id": "42a1291d-95ce-4036-8c97-dbfff45bf28b",
+          "name": "should load existing file with both absolute and relative paths",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/source-loader.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "245f6ce5-bdcb-4969-922e-5ba5f0ba0dbb",
+          "name": "should throw error for non-existent file",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/source-loader.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 3,
+            "status": "passed"
+          }
+        }
+      ],
+      "nestedSuites": [],
+      "runtime": {
+        "duration": 3
+      }
+    },
+    {
+      "id": "e780060e-275c-471a-a819-dbf4aa141cfc",
+      "name": "loadFiles",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/source-loader.test.ts",
+      "tests": [
+        {
+          "id": "e595856e-f1f4-486a-9a7d-d46788d53ba6",
+          "name": "should load multiple files and skip invalid ones",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/source-loader.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 3,
+            "status": "passed"
+          }
+        }
+      ],
+      "nestedSuites": [],
+      "runtime": {
+        "duration": 3
+      }
+    },
+    {
+      "id": "bcf7a0c3-f19a-4bbc-9bea-8d7e641557ab",
+      "name": "loadByPattern",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/source-loader.test.ts",
+      "tests": [
+        {
+          "id": "083df365-cf86-48b4-a0fc-71f4b076eefb",
+          "name": "should load files matching glob patterns",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/source-loader.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 2,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "70e74a9a-44f5-4bd2-9da6-a3af65f0dd9a",
+          "name": "should respect ignore patterns and default ignores",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/source-loader.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 5,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "461fa46b-2972-44fd-8a99-a5f40a46df34",
+          "name": "should use custom working directory when specified",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/source-loader.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        }
+      ],
+      "nestedSuites": [],
+      "runtime": {
+        "duration": 7
+      }
+    },
+    {
+      "id": "a393f7af-436b-44b2-aa86-52c524535d94",
+      "name": "exists and getStats",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/source-loader.test.ts",
+      "tests": [
+        {
+          "id": "c5994e87-7ee3-4acc-b97f-9a90a698a65d",
+          "name": "should check file existence for existing and non-existing files",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/source-loader.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 1,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "96e404cf-e484-4ec2-a970-18fb9c78b785",
+          "name": "should return file stats for files and directories",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/parser/source-loader.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        }
+      ],
+      "nestedSuites": [],
+      "runtime": {
+        "duration": 1
+      }
+    },
+    {
+      "id": "15b2bbb4-4da7-42bc-b873-7a3c266cfb62",
       "name": "KanteenVitestReporter Integration",
       "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/vitest-reporter.test.ts",
       "tests": [
         {
-          "id": "adfde359-fcac-4416-a072-13e384e89e70",
+          "id": "f8562aa4-ff8d-4099-9a36-a0641b914e54",
           "name": "should capture test results and generate catalog",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/vitest-reporter.test.ts",
@@ -2319,7 +2371,7 @@
           }
         },
         {
-          "id": "e0e04114-2750-488c-963b-84b14b71ce41",
+          "id": "deed53cf-322b-4c47-a859-1e31ba57f987",
           "name": "should handle multiple test files",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/vitest-reporter.test.ts",
@@ -2327,12 +2379,12 @@
             "column": 0
           },
           "runtime": {
-            "duration": 1,
+            "duration": 0,
             "status": "passed"
           }
         },
         {
-          "id": "183e3597-d568-4e18-9fe9-d40660ab83fe",
+          "id": "e4181728-d2d2-4a8c-ad9f-ff09e31a6a0e",
           "name": "should capture error details",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/vitest-reporter.test.ts",
@@ -2345,8 +2397,21 @@
           }
         },
         {
-          "id": "7ec8e3fa-d314-4930-9f2a-610a8979bbb5",
+          "id": "2692f675-f6c4-4f29-be4f-b7272df681d8",
           "name": "should handle tests without nested suite",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/vitest-reporter.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "f5bd681b-33b6-46a3-a78e-26d1859adb86",
+          "name": "should handle different test statuses",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/vitest-reporter.test.ts",
             "line": 0,
@@ -2356,12 +2421,75 @@
             "duration": 1,
             "status": "passed"
           }
+        }
+      ],
+      "nestedSuites": [],
+      "runtime": {
+        "duration": 4
+      }
+    },
+    {
+      "id": "799ab5fd-2233-413c-b040-a298b03d1612",
+      "name": "KanteenPlaywrightReporter Integration",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/playwright-reporter.test.ts",
+      "tests": [
+        {
+          "id": "280244aa-6250-40e8-83f8-956e810ab2b1",
+          "name": "should capture test results and generate catalog",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/playwright-reporter.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 3,
+            "status": "passed"
+          }
         },
         {
-          "id": "9b38f778-a4a0-4e06-9737-5ee1b059d283",
+          "id": "f78f4de1-a665-481b-bc57-6c7d817abd8b",
+          "name": "should handle multiple test files",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/playwright-reporter.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 1,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "96bd7fe1-5e29-4492-a30e-bf911a6b3222",
+          "name": "should capture error details",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/playwright-reporter.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "d0d2597d-d17a-411b-a76a-673570a9acea",
+          "name": "should handle tests without suite",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/playwright-reporter.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 1,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "f4d80a74-1aa8-491a-b2bd-c527e637c3a1",
           "name": "should handle different test statuses",
           "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/vitest-reporter.test.ts",
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/playwright-reporter.test.ts",
             "line": 0,
             "column": 0
           },
@@ -2377,41 +2505,15 @@
       }
     },
     {
-      "id": "a943d3a4-9671-4d69-8144-fe102aae4706",
-      "name": "KanteenPlaywrightReporter Integration",
-      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/playwright-reporter.test.ts",
+      "id": "0a4591d6-58a6-46ab-8fc8-c8efdc852b11",
+      "name": "compare",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/utils/test-matcher.test.ts",
       "tests": [
         {
-          "id": "57e69fcc-9e43-4f9b-87f6-381002f34761",
-          "name": "should capture test results and generate catalog",
+          "id": "9ab60fb4-5d2d-44d0-b8ec-c5453f5c2271",
+          "name": "should match identical tests perfectly",
           "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/playwright-reporter.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 3,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "422055bd-ccb9-4975-bfe0-3c9e8c78764f",
-          "name": "should handle multiple test files",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/playwright-reporter.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "26a0b47b-85b1-42ea-8be2-25bf6b628c4d",
-          "name": "should capture error details",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/playwright-reporter.test.ts",
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/utils/test-matcher.test.ts",
             "line": 0,
             "column": 0
           },
@@ -2421,10 +2523,36 @@
           }
         },
         {
-          "id": "4d7f265d-ad49-439b-bdf2-208d9dbe7000",
-          "name": "should handle tests without suite",
+          "id": "8fcc69f1-2812-4841-b58b-c06245e0260d",
+          "name": "should detect runtime-only tests (dynamically generated)",
           "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/playwright-reporter.test.ts",
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/utils/test-matcher.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "ba98eb3f-a78f-4a79-8b5c-bd7ca6841499",
+          "name": "should detect AST-only tests (not executed)",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/utils/test-matcher.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "aac30beb-dc07-4a3a-ac85-4e51af9796a3",
+          "name": "should handle file path normalization",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/utils/test-matcher.test.ts",
             "line": 0,
             "column": 0
           },
@@ -2434,186 +2562,10 @@
           }
         },
         {
-          "id": "8f21d8eb-bfa4-412b-93cf-dc8cf23bfccb",
-          "name": "should handle different test statuses",
+          "id": "4b04b798-9661-41ee-92c6-4a1e819dceb3",
+          "name": "should calculate statistics correctly",
           "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/reporters/playwright-reporter.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        }
-      ],
-      "nestedSuites": [],
-      "runtime": {
-        "duration": 5
-      }
-    },
-    {
-      "id": "3f6511f1-d7cf-4a46-ae53-5dad92c9637d",
-      "name": "generate",
-      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
-      "tests": [
-        {
-          "id": "3ec71475-b157-45e7-b377-b36647e066cc",
-          "name": "should generate Markdown string",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "b460707a-6db5-4b76-af1e-9fabd4534db9",
-          "name": "should include header",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "5c3d3f04-b677-4b93-9484-97474df81363",
-          "name": "should include metadata section",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "25e5b86a-6290-40af-9fae-acb49bfed8d0",
-          "name": "should include coverage section",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "9b6e8e48-93f0-45fd-9ee5-a0c6a7e9bcec",
-          "name": "should include test suites section",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 1,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "7885f093-3502-433a-b45c-61202eda1e8b",
-          "name": "should include test structure",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "48f2c0be-aef7-4210-b21e-b329878ab9e8",
-          "name": "should use Jest-style hierarchical format",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        }
-      ],
-      "nestedSuites": [],
-      "runtime": {
-        "duration": 1
-      }
-    },
-    {
-      "id": "5878df34-1487-4554-91ce-c383f391ba28",
-      "name": "nested test suites",
-      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
-      "tests": [
-        {
-          "id": "eeac4db5-350a-4cd8-a481-f6f6eb52cc93",
-          "name": "should include nested suites",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "f2f6730f-e7f6-49ac-afcb-f6b4abd051e3",
-          "name": "should use correct indentation levels",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        }
-      ],
-      "nestedSuites": [],
-      "runtime": {
-        "duration": 0
-      }
-    },
-    {
-      "id": "bb1bce89-5a0b-47c9-98d8-6839ff81d801",
-      "name": "writeToFile",
-      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
-      "tests": [
-        {
-          "id": "771653d9-9fe3-4dc8-b493-e4e3745d9f3b",
-          "name": "should write Markdown to file",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 2,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "7677469e-2198-4299-a1e4-e3ffdf45cedc",
-          "name": "should create directory if not exists",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/utils/test-matcher.test.ts",
             "line": 0,
             "column": 0
           },
@@ -2629,175 +2581,12 @@
       }
     },
     {
-      "id": "accf39e2-7687-4a40-9275-a96e15ed245c",
-      "name": "options",
-      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
-      "tests": [
-        {
-          "id": "688fe6bd-f5ad-4da6-b734-93a8d901aa10",
-          "name": "should respect include metadata option",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "d7659d57-8eaf-4eac-8530-d33eab878fc0",
-          "name": "should respect include aspects option",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 1,
-            "status": "passed"
-          }
-        }
-      ],
-      "nestedSuites": [],
-      "runtime": {
-        "duration": 1
-      }
-    },
-    {
-      "id": "3e0d6e8a-a3c7-4c1b-91b7-804f3deaa348",
-      "name": "Compare Functionality Integration",
-      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/compare.test.ts",
-      "tests": [
-        {
-          "id": "26d765d8-74a3-49ce-8a68-10daf64265f6",
-          "name": "should compare AST and Runtime catalogs successfully",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/compare.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 1,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "45b1f006-9e83-473c-9a18-f8dddf0c90f2",
-          "name": "should handle empty catalogs",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/compare.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "ace4536c-5ba1-499c-93d4-99b2b564a5bf",
-          "name": "should handle all tests executed scenario",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/compare.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        }
-      ],
-      "nestedSuites": [],
-      "runtime": {
-        "duration": 1
-      }
-    },
-    {
-      "id": "c180817e-2446-42a4-9ea8-63af726a4a69",
-      "name": "compare",
-      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/utils/test-matcher.test.ts",
-      "tests": [
-        {
-          "id": "6adf7214-ca82-4423-bfad-407fa1ce911a",
-          "name": "should match identical tests perfectly",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/utils/test-matcher.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "5c3a386a-e61b-4eaa-a459-8ecb3d47585c",
-          "name": "should detect runtime-only tests (dynamically generated)",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/utils/test-matcher.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 1,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "79d2cb93-7172-461c-8efd-df1d7dec9fa2",
-          "name": "should detect AST-only tests (not executed)",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/utils/test-matcher.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "59a37dff-d394-4f02-ba31-5c49ecdcc6ee",
-          "name": "should handle file path normalization",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/utils/test-matcher.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        },
-        {
-          "id": "435b453c-7fd8-4bc5-ac1c-d53f01117671",
-          "name": "should calculate statistics correctly",
-          "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/utils/test-matcher.test.ts",
-            "line": 0,
-            "column": 0
-          },
-          "runtime": {
-            "duration": 0,
-            "status": "passed"
-          }
-        }
-      ],
-      "nestedSuites": [],
-      "runtime": {
-        "duration": 1
-      }
-    },
-    {
-      "id": "3983ac47-bfa5-423a-9a10-1b06f49055b2",
+      "id": "eec496b2-6d0f-430a-be17-70be75f3cb84",
       "name": "configuration",
       "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/utils/test-matcher.test.ts",
       "tests": [
         {
-          "id": "a4a67be1-e0d2-4131-a551-c25e85bd2361",
+          "id": "c29f73ac-40f2-4fc9-953e-f6f347798a9f",
           "name": "should respect custom confidence thresholds",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/utils/test-matcher.test.ts",
@@ -2810,7 +2599,7 @@
           }
         },
         {
-          "id": "132ad5ed-7f85-4408-9431-52372db12c72",
+          "id": "6d5b804d-7806-41f7-9114-208e2073bc3f",
           "name": "should support case-sensitive matching",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/utils/test-matcher.test.ts",
@@ -2829,12 +2618,12 @@
       }
     },
     {
-      "id": "10968948-4c91-4ce1-af28-fe0134143602",
+      "id": "a385202a-2448-43bb-b8b4-1bc7033f53e0",
       "name": "edge cases",
       "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/utils/test-matcher.test.ts",
       "tests": [
         {
-          "id": "72e8f58d-7439-4659-81ba-4ea28a46803b",
+          "id": "9e68a5f3-dff0-4f52-9f84-7d9b4cad45a0",
           "name": "should handle empty catalogs",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/utils/test-matcher.test.ts",
@@ -2847,7 +2636,7 @@
           }
         },
         {
-          "id": "8cdc7613-1069-4516-a052-f0a6acd4feea",
+          "id": "82238b64-43b6-478d-9477-1e4c0bca3c66",
           "name": "should handle nested test suites",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/utils/test-matcher.test.ts",
@@ -2866,15 +2655,15 @@
       }
     },
     {
-      "id": "337beffe-23a4-4cd6-8e38-b18ca4c45b38",
+      "id": "2d3ccc64-bd4c-4168-aa7d-576c3299610f",
       "name": "generate",
-      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/catalog-generator.test.ts",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
       "tests": [
         {
-          "id": "ac5b4197-fa68-4163-af91-04242b8bd4b4",
-          "name": "should generate catalog with metadata",
+          "id": "46809cf1-255b-4c55-a773-c818bbe587d2",
+          "name": "should generate Markdown string",
           "location": {
-            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/catalog-generator.test.ts",
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
             "line": 0,
             "column": 0
           },
@@ -2884,8 +2673,208 @@
           }
         },
         {
-          "id": "53c6d806-71ca-4d91-aa18-27e522507320",
-          "name": "should calculate coverage information",
+          "id": "d4839e7b-673c-45f2-8bf1-d2baa8004863",
+          "name": "should include header",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "df1d50b3-48f8-4332-85c3-da77752e9afc",
+          "name": "should include metadata section",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "c5d7b7a8-82cc-47e8-bba5-48e1725b656e",
+          "name": "should include coverage section",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "68512822-02ab-4b39-9d37-b2e1f4b53e58",
+          "name": "should include test suites section",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "6d6d299f-0f2f-47fd-aad9-7fb9b6bc7973",
+          "name": "should include test structure",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "eab5107e-b7fa-4596-954d-920b839a32e4",
+          "name": "should use Jest-style hierarchical format",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        }
+      ],
+      "nestedSuites": [],
+      "runtime": {
+        "duration": 0
+      }
+    },
+    {
+      "id": "23fcc877-7a4a-4d82-8c10-208da9dfba47",
+      "name": "nested test suites",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
+      "tests": [
+        {
+          "id": "6601f781-c704-41c4-93f6-e7394f63e0b0",
+          "name": "should include nested suites",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "b06fd42b-04b4-4f3c-8c00-7ebd51f36ec7",
+          "name": "should use correct indentation levels",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        }
+      ],
+      "nestedSuites": [],
+      "runtime": {
+        "duration": 0
+      }
+    },
+    {
+      "id": "3dc84188-53a6-4371-9f00-899c4a9b486b",
+      "name": "writeToFile",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
+      "tests": [
+        {
+          "id": "bb16b103-9ba9-455e-bb30-4a17f169ac3f",
+          "name": "should write Markdown to file",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 1,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "5cd3e2a8-8c61-4e2b-99e3-832c26403d32",
+          "name": "should create directory if not exists",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        }
+      ],
+      "nestedSuites": [],
+      "runtime": {
+        "duration": 1
+      }
+    },
+    {
+      "id": "0ad76090-6600-4398-91b0-c55707174a44",
+      "name": "options",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
+      "tests": [
+        {
+          "id": "b01f1170-3369-48a4-bc82-0dd5d693ff22",
+          "name": "should respect include metadata option",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "ed2c827a-4a15-4187-9e79-087697bcc52b",
+          "name": "should respect include aspects option",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/reporter/markdown-reporter.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        }
+      ],
+      "nestedSuites": [],
+      "runtime": {
+        "duration": 0
+      }
+    },
+    {
+      "id": "03b2b4cc-dde3-4d9a-8715-f4b45b1c2575",
+      "name": "generate",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/catalog-generator.test.ts",
+      "tests": [
+        {
+          "id": "8b67f881-9478-4939-95a2-20a5ed740ce0",
+          "name": "should generate catalog with metadata",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/catalog-generator.test.ts",
             "line": 0,
@@ -2897,7 +2886,20 @@
           }
         },
         {
-          "id": "ce38e4c8-eaf3-4540-849b-fc6e9d517b3d",
+          "id": "7cede08e-2e38-4a91-a2c9-903fe48ee240",
+          "name": "should calculate coverage information",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/catalog-generator.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "137de7ff-09ec-4917-89af-c4fa7c76febc",
           "name": "should handle nested test suites",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/catalog-generator.test.ts",
@@ -2910,7 +2912,7 @@
           }
         },
         {
-          "id": "7dcf9aef-0b52-4727-830f-deada25516f4",
+          "id": "2d06c063-5acc-470c-b54d-bacaf65dc014",
           "name": "should add totalTests field to each test suite",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/catalog-generator.test.ts",
@@ -2923,7 +2925,7 @@
           }
         },
         {
-          "id": "7968d4fe-7196-4bdb-a91b-a20853161014",
+          "id": "aaa2b668-0e6f-48d5-b2b1-38a643ff1313",
           "name": "should calculate totalTests correctly for nested suites",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/catalog-generator.test.ts",
@@ -2936,7 +2938,7 @@
           }
         },
         {
-          "id": "7f120a30-f04b-4b61-be85-c7f153abcccd",
+          "id": "4aaf861d-7e13-4d04-ac95-8b87df13fd23",
           "name": "should calculate totalTests for deeply nested suites",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/catalog-generator.test.ts",
@@ -2949,7 +2951,7 @@
           }
         },
         {
-          "id": "d8e7e415-c7d3-4bb3-b315-b68a0e837fcf",
+          "id": "68e596b0-7c7c-4a09-a9a2-8a7cda781fae",
           "name": "should handle suite with no tests but nested suites",
           "location": {
             "file": "/Users/koyama.koji/git/self/test-kanteen/tests/unit/generator/catalog-generator.test.ts",
@@ -2966,21 +2968,71 @@
       "runtime": {
         "duration": 1
       }
+    },
+    {
+      "id": "79c94665-3d73-453d-a541-2862668340ee",
+      "name": "Compare Functionality Integration",
+      "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/compare.test.ts",
+      "tests": [
+        {
+          "id": "a5320fa0-63cd-4b49-b56b-dda1a523afa5",
+          "name": "should compare AST and Runtime catalogs successfully",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/compare.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 1,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "3a6a551c-679b-4ff6-aebd-cf091679b71e",
+          "name": "should handle empty catalogs",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/compare.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        },
+        {
+          "id": "09b5d407-e600-4d54-b242-d315424dff55",
+          "name": "should handle all tests executed scenario",
+          "location": {
+            "file": "/Users/koyama.koji/git/self/test-kanteen/tests/integration/compare.test.ts",
+            "line": 0,
+            "column": 0
+          },
+          "runtime": {
+            "duration": 0,
+            "status": "passed"
+          }
+        }
+      ],
+      "nestedSuites": [],
+      "runtime": {
+        "duration": 1
+      }
     }
   ],
   "executionSummary": {
-    "totalTests": 188,
-    "passed": 188,
+    "totalTests": 192,
+    "passed": 192,
     "failed": 0,
     "skipped": 0,
     "pending": 0,
     "todo": 0,
-    "totalDuration": 262,
-    "startTime": "2025-11-16T00:31:31.229Z",
-    "endTime": "2025-11-16T00:31:32.974Z"
+    "totalDuration": 300,
+    "startTime": "2025-11-16T03:03:35.596Z",
+    "endTime": "2025-11-16T03:03:37.348Z"
   },
   "coverage": {
-    "totalTests": 188,
+    "totalTests": 192,
     "totalSuites": 45
   }
 }

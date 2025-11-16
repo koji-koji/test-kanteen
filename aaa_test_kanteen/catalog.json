@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "generatedAt": "2025-11-16T00:31:32.438Z",
+    "generatedAt": "2025-11-16T03:03:36.877Z",
     "version": "0.1.0",
     "toolVersion": "0.1.0",
     "framework": "jest",
@@ -10,12 +10,12 @@
   },
   "testSuites": [
     {
-      "id": "095d4f02-8596-4f2a-8550-c84b97756449",
+      "id": "2af7c179-8251-4212-af84-0d71a5e70a9d",
       "name": "Assertions",
       "filePath": "/Users/koyama.koji/git/self/test-kanteen/tests/tmp/e2e/assertions.test.ts",
       "tests": [
         {
-          "id": "c494ac1e-496a-444e-a0d3-7671b09d280a",
+          "id": "e0016844-47df-42a6-abf7-e231f4c77b74",
           "name": "should have multiple assertions",
           "assertions": [
             {

@@ -64,7 +64,8 @@
       "Bash(git mv:*)",
       "Bash(git branch:*)",
       "Bash(git revert:*)",
-      "Bash(npm run lint:*)"
+      "Bash(npm run lint:*)",
+      "Bash(gh issue create --title \"extract機能：export const での関数定義（アロー関数）が抽出されない\" --body \"$(cat <<''EOF''\n## 問題\n\n`extract`コマンドで、`export const`を使ったアロー関数が抽出されません。\n\n## 再現方法\n\n以下のようなコードがある場合：\n\n```typescript\n// ✅ 正常に抽出される\nexport function regularFunc(a: number, b: number): number {\n  return a + b;\n}\n\n// ❌ 抽出されない\nexport const arrowFunc = (a: number, b: number): number => a * b;\n\n// ✅ 正常に抽出される\nexport default function defaultFunc(x: number): number {\n  return x * 2;\n}\n```\n\n```bash\nnpx kanteen extract \"src/**/*.ts\"\n```\n\nを実行すると、`arrowFunc`が抽出結果に含まれません。\n\n## 期待される動作\n\n`export const arrowFunc = ...`のようなアロー関数も、通常の関数と同様に抽出されるべきです。\n\n## 現在の動作\n\n- `regularFunc`: ✅ 抽出される（type: \"function\"）\n- `arrowFunc`: ❌ 抽出されない\n- `defaultFunc`: ✅ 抽出される（type: \"function\"）\n\n## 影響範囲\n\n- TypeScript/JavaScript両方で発生\n- JSX/TSXファイルでも同様（例: `export const Button = () => <div>...</div>`）\n\n## 技術詳細\n\n`src/analyzer/export-extractor.ts:230`の`extractVariables`メソッドが、変数の初期化式（`init`）を解析していないため、すべての`export const`を`type: ''variable''`として扱っています。\n\n### 修正案\n\n1. `extractVariables`で`declaration.init`を確認\n2. `init.type === ''ArrowFunctionExpression''`の場合、`extractFunction`相当の処理を実行\n3. 型を`''function''`に設定し、シグネチャを抽出\n\n## 参考\n\n検証コード: v0.7.2で確認済み\n\n```bash\n# テストケース\necho ''export const test = () => 42;'' > test.ts\nnpx kanteen extract test.ts\n# → testが抽出されない\n```\nEOF\n)\")"
     ],
     "deny": [],
     "ask": []
