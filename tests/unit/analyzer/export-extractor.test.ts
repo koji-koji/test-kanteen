@@ -295,5 +295,90 @@ describe('ExportExtractor', () => {
 
       expect(exports).toHaveLength(0);
     });
+
+    it('should extract arrow function export', () => {
+      const source = `
+        export const arrowFunc = (a, b) => a + b;
+      `;
+
+      const parseResult = parser.parse(source, 'test.ts');
+      const exports = extractor.extract(parseResult);
+
+      expect(exports).toHaveLength(1);
+      expect(exports[0]).toMatchObject({
+        name: 'arrowFunc',
+        type: 'function',
+        kind: 'named',
+        isExported: true,
+        isPublic: true,
+        isAsync: false,
+      });
+      expect(exports[0].signature).toBe('(a, b)');
+    });
+
+    it('should extract async arrow function export', () => {
+      const source = `
+        export const asyncArrow = async (x) => {
+          return x * 2;
+        };
+      `;
+
+      const parseResult = parser.parse(source, 'test.ts');
+      const exports = extractor.extract(parseResult);
+
+      expect(exports).toHaveLength(1);
+      expect(exports[0]).toMatchObject({
+        name: 'asyncArrow',
+        type: 'function',
+        kind: 'named',
+        isExported: true,
+        isPublic: true,
+        isAsync: true,
+      });
+      expect(exports[0].signature).toBe('(x)');
+    });
+
+    it('should distinguish arrow functions from variables', () => {
+      const source = `
+        export const func = () => 42;
+        export const notFunc = 42;
+        export const alsoNotFunc = { value: 100 };
+      `;
+
+      const parseResult = parser.parse(source, 'test.ts');
+      const exports = extractor.extract(parseResult);
+
+      expect(exports).toHaveLength(3);
+
+      const func = exports.find(e => e.name === 'func');
+      const notFunc = exports.find(e => e.name === 'notFunc');
+      const alsoNotFunc = exports.find(e => e.name === 'alsoNotFunc');
+
+      expect(func?.type).toBe('function');
+      expect(notFunc?.type).toBe('variable');
+      expect(alsoNotFunc?.type).toBe('variable');
+    });
+
+    it('should extract arrow functions in JSX files', () => {
+      const source = `
+        export const Button = () => <button>Click</button>;
+        export const Greeting = ({ name }) => <h1>Hello {name}</h1>;
+      `;
+
+      const parseResult = parser.parse(source, 'test.jsx');
+      const exports = extractor.extract(parseResult);
+
+      expect(exports).toHaveLength(2);
+      expect(exports[0]).toMatchObject({
+        name: 'Button',
+        type: 'function',
+        kind: 'named',
+      });
+      expect(exports[1]).toMatchObject({
+        name: 'Greeting',
+        type: 'function',
+        kind: 'named',
+      });
+    });
   });
 });

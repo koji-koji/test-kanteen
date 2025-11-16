@@ -232,15 +232,35 @@ export class ExportExtractor {
 
     for (const declaration of node.declarations) {
       if (declaration.id && declaration.id.type === 'Identifier') {
-        exports.push({
-          name: declaration.id.name,
-          type: 'variable',
-          kind,
-          filePath,
-          location: this.getLocation(declaration, filePath),
-          isExported: true,
-          isPublic: true,
-        });
+        const name = declaration.id.name;
+        const init = declaration.init;
+
+        // アロー関数の場合は関数として扱う
+        if (init && init.type === 'ArrowFunctionExpression') {
+          const isAsync = init.async === true;
+          exports.push({
+            name,
+            type: 'function',
+            kind,
+            filePath,
+            location: this.getLocation(declaration, filePath),
+            isExported: true,
+            isPublic: true,
+            isAsync,
+            signature: this.extractFunctionSignature(init),
+          });
+        } else {
+          // 通常の変数として扱う
+          exports.push({
+            name,
+            type: 'variable',
+            kind,
+            filePath,
+            location: this.getLocation(declaration, filePath),
+            isExported: true,
+            isPublic: true,
+          });
+        }
       }
     }
 
