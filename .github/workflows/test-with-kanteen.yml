@@ -13,14 +13,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       # 1. AST catalog generation
       - name: Generate AST catalog
@@ -28,7 +31,7 @@ jobs:
 
       # 2. Run tests (generates runtime catalog automatically)
       - name: Run tests
-        run: npm test
+        run: pnpm test
         continue-on-error: true
         id: test
 
