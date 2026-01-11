@@ -62,6 +62,7 @@
   "volta": {
     "node": "20.11.0"
   },
+  "packageManager": "pnpm@10.12.4",
   "dependencies": {
     "@typescript-eslint/parser": "^7.0.0",
     "@typescript-eslint/typescript-estree": "^7.0.0",
